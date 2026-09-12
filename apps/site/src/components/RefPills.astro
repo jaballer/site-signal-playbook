@@ -1,0 +1,69 @@
+---
+import { hrefFor } from "../lib/links.ts";
+import { getEntry } from "../lib/playbook.ts";
+
+interface Props {
+  label?: string;
+  signals?: string[];
+  diagnostics?: string[];
+  questions?: string[];
+  plays?: string[];
+  audit?: string[];
+  pages?: string[];
+}
+
+const {
+  label = "Go deeper:",
+  signals = [],
+  diagnostics = [],
+  questions = [],
+  plays = [],
+  audit = [],
+  pages = [],
+} = Astro.props;
+
+// References are validated when content loads, so every id here exists.
+const pills = [
+  ...questions.map((id) => ({
+    href: hrefFor("question", id),
+    text: getEntry("questions", id).question,
+    tone: "acc",
+  })),
+  ...plays.map((id) => ({
+    href: hrefFor("play", id),
+    text: getEntry("plays", id).title,
+    tone: "acc",
+  })),
+  ...audit.map((id) => ({
+    href: hrefFor("audit", id),
+    text: `Audit: ${getEntry("audit", id).title}`,
+    tone: "",
+  })),
+  ...signals.map((id) => ({
+    href: hrefFor("signal", id),
+    text: getEntry("signals", id).title,
+    tone: "",
+  })),
+  ...diagnostics.map((id) => ({
+    href: hrefFor("diagnostic", id),
+    text: `Diagnostic: ${getEntry("diagnostics", id).title}`,
+    tone: "warn",
+  })),
+  ...pages.map((id) => ({
+    href: hrefFor("page", id),
+    text: getEntry("pages", id).navLabel,
+    tone: "",
+  })),
+];
+---
+
+{pills.length > 0 && (
+  <div class="refs">
+    {label && <span>{label}</span>}
+    {pills.map((p) => (
+      <a class:list={["pill", p.tone]} href={p.href}>
+        {p.text}
+      </a>
+    ))}
+  </div>
+)}

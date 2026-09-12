@@ -1,0 +1,25 @@
+{
+  "name": "@site-signal/site",
+  "private": true,
+  "type": "module",
+  "description": "The browsable playbook. Renders /content through @site-signal/playbook.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/react": "^6.0.5",
+    "@site-signal/playbook": "*",
+    "astro": "^7.3.2",
+    "marked": "^18.0.13",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0"
+  }
+}

@@ -1,0 +1,22 @@
+---
+import type { Page } from "@site-signal/playbook";
+import Blocks from "./Blocks.astro";
+import Md from "./Md.astro";
+
+interface Props {
+  page: Page;
+  /** The overview gets the large display heading. */
+  hero?: boolean;
+}
+
+const { page, hero = false } = Astro.props;
+---
+
+<header class:list={["page-head", { hero }]}>
+  <div class="eyebrow">{page.eyebrow}</div>
+  <h1 class={hero ? "display" : "title"}>{page.heading}</h1>
+  <p class="lede">
+    <Md text={page.lede} />
+  </p>
+</header>
+<Blocks blocks={page.blocks} />

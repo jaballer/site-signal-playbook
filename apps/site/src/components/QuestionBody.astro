@@ -1,0 +1,49 @@
+---
+import type { Question } from "@site-signal/playbook";
+import { script } from "../lib/markdown.ts";
+import Md from "./Md.astro";
+import RefPills from "./RefPills.astro";
+import CopyButton from "./react/CopyButton.tsx";
+
+interface Props {
+  question: Question;
+}
+
+const { question: q } = Astro.props;
+---
+
+<div class="want">
+  <b>What they expect to see:</b> <Md text={q.expect} />
+</div>
+<div class="cols">
+  <div>
+    <div class="eyebrow">Steps</div>
+    <ol class="steps">
+      {q.steps.map((step) => (
+        <li>
+          <Md text={step} />
+        </li>
+      ))}
+    </ol>
+  </div>
+  <div>
+    <div class="eyebrow">How to read it</div>
+    <ul class="reads">
+      {q.read.map((line) => (
+        <li>
+          <Md text={line} />
+        </li>
+      ))}
+    </ul>
+    <div class="callout">
+      <b>Before you start:</b> <Md text={q.beforeYouStart} />
+    </div>
+  </div>
+</div>
+<div class="say">
+  <p>
+    <b>Say it like:</b> <Fragment set:html={script(q.script)} />
+  </p>
+  <CopyButton client:visible text={q.script} />
+</div>
+<RefPills signals={q.signals} diagnostics={q.diagnostics} questions={q.related} pages={q.pages} />

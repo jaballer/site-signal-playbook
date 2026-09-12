@@ -1,0 +1,13 @@
+---
+import { blockMarkdown, inline } from "../lib/markdown.ts";
+
+interface Props {
+  text: string;
+  /** Render paragraphs and lists instead of a single inline run. */
+  block?: boolean;
+}
+
+const { text, block = false } = Astro.props;
+---
+
+<Fragment set:html={block ? blockMarkdown(text) : inline(text)} />

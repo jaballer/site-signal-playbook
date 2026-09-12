@@ -1,0 +1,72 @@
+---
+import Md from "../../components/Md.astro";
+import RefPills from "../../components/RefPills.astro";
+import Base from "../../layouts/Base.astro";
+import { hrefFor } from "../../lib/links.ts";
+import { getEntry, getPlaybook } from "../../lib/playbook.ts";
+
+export function getStaticPaths() {
+  return getPlaybook().signals.map((s) => ({ params: { id: s.id } }));
+}
+
+const pb = getPlaybook();
+const signal = getEntry("signals", Astro.params.id as string);
+const layer = getEntry("layers", signal.layer);
+const usedIn = {
+  questions: pb.questions.filter((q) => q.signals?.includes(signal.id)).map((q) => q.id),
+  plays: pb.plays.filter((p) => p.moves.includes(signal.id)).map((p) => p.id),
+  audit: pb.audit.filter((a) => a.signals.includes(signal.id)).map((a) => a.id),
+};
+---
+
+<Base title={signal.title} section="signals">
+  <a class="back" href={hrefFor("page", "signals")}>
+    ← Signal catalog
+  </a>
+  <header class="page-head">
+    <div class="eyebrow">
+      <a href={hrefFor("layer", layer.id)}>{layer.name}</a>
+    </div>
+    <h1 class="title">{signal.title}</h1>
+    <p class="lede">
+      <Md text={signal.question} />
+    </p>
+  </header>
+  <div class="item">
+    <dl class="fields">
+      <dt>Definition</dt>
+      <dd>
+        <Md text={signal.definition} />
+      </dd>
+      <dt>Source</dt>
+      <dd>
+        <Md text={signal.source} />
+      </dd>
+      <dt>How to capture</dt>
+      <dd>
+        <Md text={signal.capture} />
+      </dd>
+      <dt>How to read it</dt>
+      <dd>
+        <Md text={signal.read} />
+      </dd>
+      <dt>Used in phases</dt>
+      <dd>
+        {signal.phases.map((id) => (
+          <a class="pill" href={hrefFor("phase", id)}>
+            {getEntry("phases", id).title}
+          </a>
+        ))}
+      </dd>
+    </dl>
+    <div class="lesson">
+      <b>Field note:</b> <Md text={signal.body} />
+    </div>
+    <RefPills
+      label="Used in:"
+      questions={usedIn.questions}
+      plays={usedIn.plays}
+      audit={usedIn.audit}
+    />
+  </div>
+</Base>

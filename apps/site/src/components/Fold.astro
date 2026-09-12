@@ -1,0 +1,33 @@
+---
+import { pad } from "../lib/links.ts";
+import Md from "./Md.astro";
+
+interface Props {
+  id: string;
+  n: number;
+  title: string;
+  /** Inline Markdown shown under the title. */
+  subtitle: string;
+  badges: Array<{ text: string; tone?: "acc" | "warn" }>;
+}
+
+const { id, n, title, subtitle, badges } = Astro.props;
+---
+
+<details class="fold" id={id}>
+  <summary>
+    <span class="rn">{pad(n)}</span>
+    <span class="rq">{title}</span>
+    <span class="rwho">
+      <Md text={subtitle} />
+    </span>
+    <span class="rbox">
+      {badges.map((b) => (
+        <span class:list={["pill", b.tone]}>{b.text}</span>
+      ))}
+    </span>
+  </summary>
+  <div class="rbody">
+    <slot />
+  </div>
+</details>

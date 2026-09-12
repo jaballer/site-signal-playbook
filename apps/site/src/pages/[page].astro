@@ -1,0 +1,17 @@
+---
+import PageView from "../components/PageView.astro";
+import Base from "../layouts/Base.astro";
+import { getEntry, getPlaybook } from "../lib/playbook.ts";
+
+export function getStaticPaths() {
+  return getPlaybook()
+    .pages.filter((page) => page.id !== "overview")
+    .map((page) => ({ params: { page: page.id } }));
+}
+
+const page = getEntry("pages", Astro.params.page as string);
+---
+
+<Base title={page.navLabel} section={page.id}>
+  <PageView page={page} />
+</Base>

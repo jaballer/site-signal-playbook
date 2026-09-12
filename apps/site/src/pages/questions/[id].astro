@@ -1,0 +1,29 @@
+---
+import Md from "../../components/Md.astro";
+import QuestionBody from "../../components/QuestionBody.astro";
+import Base from "../../layouts/Base.astro";
+import { hrefFor } from "../../lib/links.ts";
+import { getEntry, getPlaybook } from "../../lib/playbook.ts";
+
+export function getStaticPaths() {
+  return getPlaybook().questions.map((q) => ({ params: { id: q.id } }));
+}
+
+const q = getEntry("questions", Astro.params.id as string);
+---
+
+<Base title={q.question} section="questions">
+  <a class="back" href={hrefFor("page", "questions")}>
+    ← Leader questions
+  </a>
+  <header class="page-head">
+    <div class="eyebrow">Leader question · {q.timebox}</div>
+    <h1 class="title">{q.question}</h1>
+    <p class="lede">
+      <Md text={q.askedBy} />
+    </p>
+  </header>
+  <div class="item">
+    <QuestionBody question={q} />
+  </div>
+</Base>

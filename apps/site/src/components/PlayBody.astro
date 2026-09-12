@@ -1,0 +1,38 @@
+---
+import type { Play } from "@site-signal/playbook";
+import Md from "./Md.astro";
+import RefPills from "./RefPills.astro";
+
+interface Props {
+  play: Play;
+  /** The fold summary already shows "when"; standalone pages repeat it in the body. */
+  showWhen?: boolean;
+}
+
+const { play: p, showWhen = false } = Astro.props;
+---
+
+{showWhen && (
+  <div class="want">
+    <b>Run it when:</b> <Md text={p.when} />
+  </div>
+)}
+<div class="cols">
+  <div>
+    <div class="eyebrow">What we do</div>
+    <ol class="steps">
+      {p.steps.map((step) => (
+        <li>
+          <Md text={step} />
+        </li>
+      ))}
+    </ol>
+  </div>
+  <div>
+    <div class="eyebrow">What it should move</div>
+    <RefPills label="" signals={p.moves} />
+    <div class="callout warn">
+      <b>Watch out:</b> <Md text={p.watchOut} />
+    </div>
+  </div>
+</div>

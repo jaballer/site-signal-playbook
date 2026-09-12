@@ -1,0 +1,43 @@
+---
+order: 3
+navLabel: Engagement model
+eyebrow: Engagement model
+heading: From audit to renewal, in six phases
+lede: "The sequence carries most of the value: diagnose before proposing, baseline before changing anything, plan in revenue, ship in sprints, report the whole chain, and renew on results. Pick a phase for its checklist and deliverables. Ticks are saved in this browser."
+blocks:
+  - type: phases
+  - type: collection
+    collection: offers
+    heading: Offers
+    intro: Four standard offers, each designed to lead into the next. Standard scopes keep delivery repeatable and margins predictable; custom work is priced as an add-on to one of these, not as a fifth offer.
+  - type: panels
+    items:
+      - eyebrow: Pricing
+        title: Price on scope and revenue at stake, not hours
+        text: The audit's opportunity model is the pricing argument for the program. A fee that's a small fraction of the expected-case upside is an easy decision; a fee that isn't needs a smaller scope, not a discount.
+      - eyebrow: Qualification
+        title: Say no to programs that can't show results
+        text: Before proposing a program, confirm there's search demand in the category, access to analytics and the CMS, developer time for technical fixes, and a CRM that records lead source. Missing any of these, sell the audit and the fix first.
+  - type: table
+    heading: Who does what
+    columns:
+      - Area
+      - Agency
+      - Client
+    rows:
+      - - "**Strategy**"
+        - Audit, roadmap, quarterly review, and the revenue case
+        - Marketing leader sets priorities, approves the roadmap and owns the target
+      - - "**Content**"
+        - Keyword and prompt sets, briefs, on-page work, refreshes
+        - Subject-matter experts for input and review; content approvals
+      - - "**Technical**"
+        - Crawl, rendering, schema and migration specifications
+        - Developers implement changes through their release process
+      - - "**Off-site**"
+        - Review, list, community and digital PR programs
+        - Customer access for reviews; spokespeople and data for PR
+      - - "**Analytics**"
+        - Measurement setup, scorecard and monthly report
+        - Marketing ops maintains CRM source fields and pipeline reports
+---

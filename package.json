@@ -1,0 +1,26 @@
+{
+  "name": "site-signal-playbook",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "dev": "npm run dev -w @site-signal/site",
+    "build": "npm run validate && npm run build -w @site-signal/site",
+    "preview": "npm run preview -w @site-signal/site",
+    "check": "npm run check -w @site-signal/playbook && npm run check -w @site-signal/site",
+    "validate": "node --disable-warning=ExperimentalWarning packages/playbook/src/cli/validate.ts",
+    "export": "node --disable-warning=ExperimentalWarning packages/playbook/src/cli/export.ts",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^1.0.0",
+    "typescript": "^6.0.3"
+  }
+}

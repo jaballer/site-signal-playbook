@@ -1,0 +1,81 @@
+---
+import "../styles/global.css";
+import ThemeToggle from "../components/react/ThemeToggle.tsx";
+import { hrefFor } from "../lib/links.ts";
+import { getPlaybook } from "../lib/playbook.ts";
+import { site } from "../site.ts";
+
+interface Props {
+  title: string;
+  /** Id of the chapter page this view belongs to, for the active nav state. */
+  section: string;
+  description?: string;
+}
+
+const { title, section, description } = Astro.props;
+const nav = getPlaybook().pages.map((page) => ({
+  id: page.id,
+  label: page.navLabel,
+  href: hrefFor("page", page.id),
+}));
+const fullTitle = title === site.name ? site.name : `${title} · ${site.name}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+    <script is:inline define:vars={{ key: site.storageKeys.theme }}>
+      try {
+        const saved = localStorage.getItem(key);
+        if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div class="topbar">
+      <nav class="topbar-links" aria-label="Chapters">
+        {nav.map((item) => (
+          <a href={item.href} aria-current={item.id === section ? "page" : undefined}>
+            {item.label}
+          </a>
+        ))}
+      </nav>
+      <ThemeToggle client:load compact />
+    </div>
+    <div class="shell">
+      <nav class="side" aria-label="Chapters">
+        <a class="brand" href={hrefFor("page", "overview")}>
+          {site.name}
+          <small>
+            {site.tagline} · {site.version}
+          </small>
+        </a>
+        <div class="links">
+          {nav.map((item) => (
+            <a href={item.href} aria-current={item.id === section ? "page" : undefined}>
+              {item.label}
+            </a>
+          ))}
+        </div>
+        <div class="foot-controls">
+          <ThemeToggle client:load />
+        </div>
+      </nav>
+      <main>
+        <div class="page">
+          <slot />
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

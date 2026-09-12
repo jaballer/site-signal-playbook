@@ -1,0 +1,31 @@
+---
+import AuditBody from "../../components/AuditBody.astro";
+import Md from "../../components/Md.astro";
+import Base from "../../layouts/Base.astro";
+import { hrefFor } from "../../lib/links.ts";
+import { getEntry, getPlaybook } from "../../lib/playbook.ts";
+
+export function getStaticPaths() {
+  return getPlaybook().audit.map((a) => ({ params: { id: a.id } }));
+}
+
+const pillar = getEntry("audit", Astro.params.id as string);
+---
+
+<Base title={`Audit: ${pillar.title}`} section="audit">
+  <a class="back" href={hrefFor("page", "audit")}>
+    ← Audit
+  </a>
+  <header class="page-head">
+    <div class="eyebrow">
+      Audit pillar {pillar.order} · {pillar.checks.length} checks
+    </div>
+    <h1 class="title">{pillar.title}</h1>
+    <p class="lede">
+      <Md text={pillar.question} />
+    </p>
+  </header>
+  <div class="item">
+    <AuditBody pillar={pillar} />
+  </div>
+</Base>

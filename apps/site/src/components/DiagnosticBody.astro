@@ -1,0 +1,24 @@
+---
+import type { Diagnostic } from "@site-signal/playbook";
+import Md from "./Md.astro";
+
+interface Props {
+  diagnostic: Diagnostic;
+}
+
+const { diagnostic: d } = Astro.props;
+---
+
+<div class="callout warn">
+  <b>What this looks like in the field:</b> <Md text={d.inTheField} />
+</div>
+<div class="flow">
+  {d.steps.map((step) => (
+    <div class="step">
+      <b>{step.title}</b>
+      <p>
+        <Md text={step.detail} />
+      </p>
+    </div>
+  ))}
+</div>

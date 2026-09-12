@@ -1,0 +1,27 @@
+---
+import PlayBody from "../../components/PlayBody.astro";
+import Base from "../../layouts/Base.astro";
+import { hrefFor } from "../../lib/links.ts";
+import { getEntry, getPlaybook } from "../../lib/playbook.ts";
+
+export function getStaticPaths() {
+  return getPlaybook().plays.map((p) => ({ params: { id: p.id } }));
+}
+
+const play = getEntry("plays", Astro.params.id as string);
+---
+
+<Base title={play.title} section="plays">
+  <a class="back" href={hrefFor("page", "plays")}>
+    ← Plays
+  </a>
+  <header class="page-head">
+    <div class="eyebrow">
+      Play · Effort {play.effort} · First signal: {play.firstSignal}
+    </div>
+    <h1 class="title">{play.title}</h1>
+  </header>
+  <div class="item">
+    <PlayBody play={play} showWhen />
+  </div>
+</Base>

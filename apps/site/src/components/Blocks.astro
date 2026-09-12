@@ -1,0 +1,348 @@
+---
+import type { Block } from "@site-signal/playbook";
+import { inline } from "../lib/markdown.ts";
+import { hrefFor } from "../lib/links.ts";
+import { getPlaybook } from "../lib/playbook.ts";
+import AuditBody from "./AuditBody.astro";
+import DiagnosticBody from "./DiagnosticBody.astro";
+import Fold from "./Fold.astro";
+import Md from "./Md.astro";
+import PlayBody from "./PlayBody.astro";
+import QuestionBody from "./QuestionBody.astro";
+import PhaseChecklist, { type PhaseView } from "./react/PhaseChecklist.tsx";
+import SignalCatalog, { type SignalCard } from "./react/SignalCatalog.tsx";
+
+interface Props {
+  blocks: Block[];
+}
+
+const { blocks } = Astro.props;
+const pb = getPlaybook();
+
+const phaseViews: PhaseView[] = pb.phases.map((p) => ({
+  id: p.id,
+  order: p.order,
+  title: p.title,
+  when: p.when,
+  whyHtml: inline(p.body),
+  checklistHtml: p.checklist.map(inline),
+  deliverablesHtml: p.deliverables.map(inline),
+}));
+
+const layerOrder = new Map(pb.layers.map((l) => [l.id, l.order]));
+const signalCards: SignalCard[] = [...pb.signals]
+  .sort(
+    (a, b) => layerOrder.get(a.layer)! - layerOrder.get(b.layer)! || a.title.localeCompare(b.title),
+  )
+  .map((s) => ({
+    id: s.id,
+    title: s.title,
+    layer: s.layer,
+    phases: s.phases,
+    question: s.question,
+    href: hrefFor("signal", s.id),
+    searchText: [s.id, s.title, s.question, s.definition, s.source, s.capture, s.read, s.body]
+      .join(" ")
+      .toLowerCase(),
+  }));
+---
+
+{blocks.map((b) => (
+  <section class="block">
+    {"heading" in b && b.heading && <h2>{b.heading}</h2>}
+    {"intro" in b && b.intro && (
+      <p>
+        <Md text={b.intro} />
+      </p>
+    )}
+
+    {b.type === "markdown" && (
+      <div class="prose">
+        <Md text={b.text} block />
+      </div>
+    )}
+
+    {b.type === "panels" && (
+      <div class:list={["grid", b.items.length === 2 ? "g2" : "g3"]}>
+        {b.items.map((item) => (
+          <div class="panel">
+            {item.eyebrow && <div class="eyebrow">{item.eyebrow}</div>}
+            <h3>{item.title}</h3>
+            <p>
+              <Md text={item.text} />
+            </p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {b.type === "strip" && (
+      <>
+        {b.label && <div class="eyebrow">{b.label}</div>}
+        <div class="loop">
+          {b.items.map((item, i) => (
+            <div>
+              <span class="n">{i + 1}</span>
+              <b>{item.title}</b>
+              <span class="t">
+                <Md text={item.text} />
+              </span>
+            </div>
+          ))}
+        </div>
+        {b.footnote && (
+          <div class="chain-base">
+            <Md text={b.footnote} />
+          </div>
+        )}
+      </>
+    )}
+
+    {b.type === "thesis" && (
+      <div class="thesis">
+        <div class="q">{b.mark}</div>
+        <p>
+          <b>
+            <Md text={b.title} />
+          </b>{" "}
+          <Md text={b.text} />
+        </p>
+      </div>
+    )}
+
+    {b.type === "table" && (
+      <>
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                {b.columns.map((c) => (
+                  <th>{c}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {b.rows.map((row) => (
+                <tr>
+                  {row.map((cell) => (
+                    <td>
+                      <Md text={cell} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {b.after && (
+          <p>
+            <Md text={b.after} />
+          </p>
+        )}
+      </>
+    )}
+
+    {b.type === "ledger" && (
+      <div class="ledger">
+        {[b.left, b.right].map((side, i) => (
+          <div class={i === 0 ? "lia" : "ass"}>
+            <h3>{side.title}</h3>
+            <ul>
+              {side.items.map((item) => (
+                <li>
+                  <Md text={item} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {b.type === "flow" && (
+      <div class="flow">
+        {b.items.map((item) => (
+          <div class="step">
+            <b>{item.title}</b>
+            <p>
+              <Md text={item.text} />
+            </p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {b.type === "scorecard" && (
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>North-star metric</th>
+              <th>Leading indicators</th>
+              <th>Health checks</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pb.layers.map((l) => (
+              <tr>
+                <td>
+                  <a class="pill acc" href={hrefFor("layer", l.id)}>
+                    {l.name}
+                  </a>
+                </td>
+                <td>
+                  <Md text={l.northStar} />
+                </td>
+                <td>
+                  <Md text={l.leading} />
+                </td>
+                <td>
+                  <Md text={l.health} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+
+    {b.type === "phases" && <PhaseChecklist client:load phases={phaseViews} />}
+
+    {b.type === "signals" && (
+      <SignalCatalog
+        client:load
+        signals={signalCards}
+        layers={pb.layers.map((l) => ({ id: l.id, label: l.name }))}
+        phases={pb.phases.map((p) => ({ id: p.id, label: p.title }))}
+      />
+    )}
+
+    {b.type === "note" && (
+      <div class="foot">
+        <Md text={b.text} />
+      </div>
+    )}
+
+    {b.type === "collection" && b.collection === "questions" && (
+      <div class="folds">
+        {pb.questions.map((q) => (
+          <Fold
+            id={q.id}
+            n={q.order}
+            title={q.question}
+            subtitle={q.askedBy}
+            badges={[{ text: q.timebox }]}
+          >
+            <QuestionBody question={q} />
+            <a class="open-page" href={hrefFor("question", q.id)}>
+              Open as a page →
+            </a>
+          </Fold>
+        ))}
+      </div>
+    )}
+
+    {b.type === "collection" && b.collection === "audit" && (
+      <div class="folds">
+        {pb.audit.map((a) => (
+          <Fold
+            id={a.id}
+            n={a.order}
+            title={a.title}
+            subtitle={a.question}
+            badges={[{ text: `${a.checks.length} checks` }]}
+          >
+            <AuditBody pillar={a} />
+            <a class="open-page" href={hrefFor("audit", a.id)}>
+              Open as a page →
+            </a>
+          </Fold>
+        ))}
+      </div>
+    )}
+
+    {b.type === "collection" && b.collection === "plays" && (
+      <div class="folds">
+        {pb.plays.map((p) => (
+          <Fold
+            id={p.id}
+            n={p.order}
+            title={p.title}
+            subtitle={p.when}
+            badges={[
+              { text: `Effort ${p.effort}` },
+              { text: `First signal: ${p.firstSignal}`, tone: "acc" },
+            ]}
+          >
+            <PlayBody play={p} />
+            <a class="open-page" href={hrefFor("play", p.id)}>
+              Open as a page →
+            </a>
+          </Fold>
+        ))}
+      </div>
+    )}
+
+    {b.type === "collection" && b.collection === "diagnostics" && (
+      <div class="folds">
+        {pb.diagnostics.map((d) => (
+          <Fold
+            id={d.id}
+            n={d.order}
+            title={d.title}
+            subtitle={`Start with: ${d.steps[0].title}`}
+            badges={[{ text: `${d.steps.length} checks` }]}
+          >
+            <DiagnosticBody diagnostic={d} />
+            <a class="open-page" href={hrefFor("diagnostic", d.id)}>
+              Open as a page →
+            </a>
+          </Fold>
+        ))}
+      </div>
+    )}
+
+    {b.type === "collection" && b.collection === "principles" && (
+      <div class="grid g2">
+        {pb.principles.map((p) => (
+          <div class="panel" id={p.id}>
+            <h3>{p.title}</h3>
+            <Md text={p.body} block />
+          </div>
+        ))}
+      </div>
+    )}
+
+    {b.type === "collection" && b.collection === "offers" && (
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>Offer</th>
+              <th>What the client gets</th>
+              <th>Length</th>
+              <th>Leads into</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pb.offers.map((o) => (
+              <tr id={`offer-${o.id}`}>
+                <td>
+                  <b>{o.name}</b>
+                </td>
+                <td>
+                  <Md text={o.includes} />
+                </td>
+                <td>{o.length}</td>
+                <td>
+                  <Md text={o.leadsInto} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+  </section>
+))}

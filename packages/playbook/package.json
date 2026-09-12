@@ -1,0 +1,20 @@
+{
+  "name": "@site-signal/playbook",
+  "private": true,
+  "type": "module",
+  "description": "Schemas, loader and validation for the playbook content in /content. Shared by the site, exports and future tools.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./paths": "./src/paths.ts"
+  },
+  "scripts": {
+    "check": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "yaml": "^2.9.1",
+    "zod": "^4.6.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0"
+  }
+}

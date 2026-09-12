@@ -1,0 +1,23 @@
+---
+import DiagnosticBody from "../../components/DiagnosticBody.astro";
+import Base from "../../layouts/Base.astro";
+import { hrefFor } from "../../lib/links.ts";
+import { getEntry, getPlaybook } from "../../lib/playbook.ts";
+
+export function getStaticPaths() {
+  return getPlaybook().diagnostics.map((d) => ({ params: { id: d.id } }));
+}
+
+const diagnostic = getEntry("diagnostics", Astro.params.id as string);
+---
+
+<Base title={diagnostic.title} section="diagnostics">
+  <a class="back" href={hrefFor("page", "diagnostics")}>
+    ← Diagnostics
+  </a>
+  <header class="page-head">
+    <div class="eyebrow">Diagnostic flow · {diagnostic.steps.length} checks, in order</div>
+    <h1 class="title">{diagnostic.title}</h1>
+  </header>
+  <DiagnosticBody diagnostic={diagnostic} />
+</Base>

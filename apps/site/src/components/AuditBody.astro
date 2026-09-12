@@ -1,0 +1,39 @@
+---
+import type { AuditPillar } from "@site-signal/playbook";
+import Md from "./Md.astro";
+import RefPills from "./RefPills.astro";
+
+interface Props {
+  pillar: AuditPillar;
+}
+
+const { pillar } = Astro.props;
+---
+
+<div class="tw">
+  <table>
+    <thead>
+      <tr>
+        <th>Check</th>
+        <th>How to check</th>
+        <th>Fail looks like</th>
+      </tr>
+    </thead>
+    <tbody>
+      {pillar.checks.map((c) => (
+        <tr>
+          <td>
+            <b>{c.check}</b>
+          </td>
+          <td>
+            <Md text={c.how} />
+          </td>
+          <td>
+            <Md text={c.fail} />
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<RefPills label="Signals:" signals={pillar.signals} />

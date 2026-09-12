@@ -1,0 +1,12 @@
+---
+import PageView from "../components/PageView.astro";
+import Base from "../layouts/Base.astro";
+import { getEntry } from "../lib/playbook.ts";
+import { site } from "../site.ts";
+
+const page = getEntry("pages", "overview");
+---
+
+<Base title={site.name} section="overview" description={page.lede}>
+  <PageView page={page} hero />
+</Base>
