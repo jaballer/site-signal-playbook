@@ -4,71 +4,85 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-The whole project is one file, `site-signal-playbook.html`. It's a self-contained playbook for measuring revenue and performance on a SaaS marketing website, written for the technical owner who works with marketing stakeholders. It has no build step, package manager, tests, linter or git repo. To view it, open the file in a browser:
+The whole project is one file, `site-signal-playbook.html`. It's the operating playbook for an SEO and AI search agency working on B2B marketing websites. The owner runs the agency on it.
+
+It covers:
+- the questions leadership asks, with step-by-step answers
+- the engagement model and service offers
+- a six-pillar audit and a play library
+- diagnostics, reporting, a signal catalog, measurement setup, and principles
+
+There's no build step, package manager, tests or linter. The project is a git repo, so earlier versions are in git history. To view the page:
 
 ```bash
 open site-signal-playbook.html
 ```
 
-The only external dependency is Google Fonts (Bricolage Grotesque, IBM Plex Sans and IBM Plex Mono), and each font has a system fallback. Don't add other CDNs or external assets. Anything new should be inlined.
+The only external dependency is Google Fonts, and every font has a system fallback. Don't add other CDNs or external assets.
+
+## Writing level
+
+Write for marketers, executives and account strategists. Use plain procedural steps with menu paths in GA4, Search Console and standard SEO tools. Don't write API request bodies, dimension or metric field names, or SQL; offer those as an optional appendix only if asked. Avoid made-up statistics. Name tools as examples ("Ahrefs, Semrush or similar"), never as requirements.
 
 ## File layout
 
 The file has three parts, in this order:
 
-1. **`<head>` plus the top of `<body>`.** A minimal reset lives in `<head>`. The page's real `<title>`, font `<link>` and main `<style>` block sit at the top of `<body>`.
+1. **`<head>` plus the top of `<body>`.** A minimal reset lives in `<head>`. The page's real `<title>`, font link, main `<style>` block, and a one-line early theme script sit at the top of `<body>`.
 2. **Static HTML chapters.** Each chapter is a `<section class="chapter" id="...">` inside `<main>`. Only the section with `.active` is shown.
 3. **One inline `<script>`.** It holds the data arrays and the render code.
 
-Some content is plain HTML and some is generated from data. Check which kind you're editing before you change it:
+Some chapter content is plain HTML and some is generated from data:
 
 | Chapter (section id) | Where the content lives |
 |---|---|
-| `overview`, `questions`, `contract`, `diagnostics`, `reporting`, `app` | Hand-written HTML in the section |
-| `recipes` | Intro and the five-step loop are HTML. The recipe cards come from the `RECIPES` array, rendered into `#recipeList` |
-| `phases` | `PHASES` array. Rendered into `#phaseTabs` / `#phaseBody` |
-| `catalog` | `METRICS` array, plus the `L` (layers) and `P` (phases) lookup maps. Rendered into `#cards` |
-| `lessons` | `LESSONS` array. Rendered into `#lessonGrid` |
+| `overview`, `reporting`, `measurement` | Hand-written HTML |
+| `diagnostics` | Hand-written HTML: tab buttons with `data-d`, and `.diag#d1`–`#d4` panels. Tab labels are repeated in the `DIAGS` map. |
+| `recipes` (nav label "Leader questions") | Intro HTML, plus the `RECIPES` array rendered into `#recipeList` |
+| `engagement` | `PHASES` array rendered into `#phaseTabs` / `#phaseBody`. The Offers and Who-does-what tables are HTML. |
+| `audit` | `AUDIT` array rendered into `#auditList`. The scoring table and "From checks to findings" are HTML. |
+| `plays` | `PLAYS` array rendered into `#playList`. The prioritization model is HTML. |
+| `catalog` | `METRICS` array plus the `L` layer map, rendered into `#cards` |
+| `principles` | `LESSONS` array rendered into `#lessonGrid` |
 
-### Routing and nav
-- `CHAPTERS` is the single list of `[id, label]` pairs. It builds both the desktop sidebar (`#navlinks`) and the mobile top bar's scrolling link row (`#topbarLinks` inside `#topbar`). The mobile bar appears below 820px.
-- Navigation uses the URL hash (`show(location.hash)`). To add a chapter, add a `<section class="chapter" id="x">` and a matching `CHAPTERS` entry. An unknown hash falls back to `overview`.
+### Routing
+- `CHAPTERS` lists `[id, label]` pairs. It builds the desktop sidebar (`#navlinks`) and the mobile top bar's link row (`#topbarLinks`). The mobile bar appears below 820px.
 - Deep links take the form `#chapter/target`, handled by `openTarget()`:
-  - `#recipes/<recipe id>` opens that recipe.
+  - `#recipes/<id>`, `#audit/<id>` and `#plays/<id>` open the `<details class="fold">` whose element id is `<chapter>-<id>`.
   - `#catalog/<signal id>` clears the filters and opens that card.
-  - `#diagnostics/d1` (or `d2`, `d3`) selects that tab.
-- The first `show()` call is at the very end of the script, so everything it can open already exists when a deep link loads.
+  - `#diagnostics/d1` (through `d4`) selects that tab.
+- The first `show()` call is at the very end of the script, after everything it can open has rendered.
 
 ### Data shapes
-- **`METRICS` entries are positional arrays:** `[id, title, layerKey, phases[], question, definition, source, howToCapture, howToRead, fieldNote]`.
-  - `layerKey` must be a key of `L`: `rev`, `acq`, `eng`, `ai`, `perf` or `int`.
-  - Phase filter buttons are built only from `P`, which currently covers phases 2–5. If you tag a signal with phase 1 or 6, add that phase to `P` too, or no filter will match it.
-- **`PHASES` entries:** `{n, t, w, why, items[], deliv[]}`.
-- **`LESSONS` entries:** `[title, body]`.
-- **`RECIPES` entries:** `{id, q, who, box, want, steps[], read[], check, say, signals?, diags?, related?, links?}`.
-  - The recipes are standard procedures for the questions a marketer or executive asks. They're written for that audience: GA4 and Search Console menu paths in plain steps, not API queries or field names. Keep them at that level.
+- **`METRICS`:** positional arrays, `[id, title, layerKey, phases[], question, definition, source, howToCapture, howToRead, fieldNote]`.
+  - `layerKey` must be a key of `L`: `found`, `content`, `vis`, `ai`, `traffic`, `rev` or `int`. The scorecard table in Overview lists the same seven layers by name, so keep the two in sync.
+  - `phases` are 1-based indexes into `PHASES`. The phase filter buttons are built from whichever phases the signals actually use.
+- **`PHASES`:** `{n, t, w, why, items[], deliv[]}`.
+- **`RECIPES`:** `{id, q, who, box, want, steps[], read[], check, say, signals?, diags?, related?, links?}`.
   - `box` is the timebox, and `check` renders as "Before you start".
-  - In `say`, each `[placeholder]` is highlighted on the page, and the Copy button copies the raw string.
-  - `signals` are catalog ids; unknown ones are dropped silently. `diags` are keys of `DIAGS`. `related` are other recipe ids. `links` are `[href, label]` pairs.
-  - Recipe 00 ("Can we trust these numbers?") is the prerequisite that the other recipes link back to.
-- All strings go into `innerHTML` through template literals, so they're HTML. Use entities for a literal `&` or `<`. Inline tags like `<code>` render as markup.
+  - In `say`, each `[placeholder]` is highlighted, and the Copy button copies the raw string.
+  - `diags` are `DIAGS` keys, `related` are recipe ids, and `links` are `[href, label]` pairs.
+- **`AUDIT`:** `{id, name, q, signals[], checks: [[check, howToCheck, failLooksLike]]}`.
+- **`PLAYS`:** `{id, name, when, effort, signal, steps[], moves[], watch}`. `signal` is the time to first signal, and `moves` are catalog ids.
+- **`LESSONS`:** `[title, body]`.
+- **Links between them:** `signals` and `moves` must be catalog ids, and unknown ids are dropped silently. After adding or renaming a signal, check in the console that every reference still resolves.
+- **HTML strings:** everything is rendered through `innerHTML`, so strings are HTML. Inside double-quoted JS strings, use single-quoted attributes (`<a href='#plays'>`).
 
-### Checklist persistence
-- Phase checklist state is saved in `localStorage` under the key `ssp-checks`.
-- Each item's key is `phaseIndex-itemIndex`, based on array position. Inserting, deleting or reordering items in `PHASES` shifts which saved checkmarks attach to which items.
-- The sidebar progress count adds up every truthy key, including keys for items that no longer exist.
+### State
+- The phase checklist is saved in `localStorage` under `ssp-checks-v2`, keyed `phaseIndex-itemIndex` by position. Reordering or inserting `PHASES` items shifts which saved ticks attach to which items. The progress count only includes items that currently exist.
+- The theme choice is saved under `ssp-theme`. With no saved choice, the page follows the OS setting and leaves `data-theme` unset. Clicking a `.theme-btn` sets `data-theme` on `<html>`.
 
 ## Styling conventions
-- All colors come from CSS custom properties: `--ink*`, `--ground`, `--surface*`, `--line`, `--accent*`, and `--good` / `--warn` / `--crit` with their `-soft` variants.
-- The light palette is on `:root`. The dark palette is defined **twice**, identically: once under `@media (prefers-color-scheme: dark)` scoped to `:root:not([data-theme="light"])`, and once under `:root[data-theme="dark"]`. When you change a dark token, change both copies.
-- **Theme toggle:** with no saved choice, the page follows the OS setting and leaves `data-theme` unset. Clicking a `.theme-btn` sets `data-theme` on `<html>` and saves it in `localStorage` under `ssp-theme`.
-  - There are two buttons, kept in sync by `renderTheme()`: one with a text label at the bottom of the sidebar, and one icon-only button in the mobile top bar.
-  - A one-line script right after the main `<style>` applies the saved theme before any content renders, which prevents a flash of the wrong theme. Keep it above the markup.
-- Fonts use `--sans`, `--mono` and `--display`. The corner radius is `--r`.
+- All colors come from CSS custom properties. The light palette is on `:root`.
+- The dark palette is defined **twice**, identically: once under `@media (prefers-color-scheme: dark)` scoped to `:root:not([data-theme="light"])`, and once under `:root[data-theme="dark"]`. When you change a dark token, change both copies.
 - Wide tables go inside a `.tw` wrapper, which scrolls horizontally, so the page body never does.
-- Reusable pieces: `.panel`, `.grid.g2` / `.g3`, `.pill` (`.acc` / `.good` / `.warn` / `.crit`), `.callout` (`.warn`), `.thesis`, `.ledger`, `.flow` + `.step` (auto-numbered with a CSS counter), `.eyebrow`, `.lede`.
+- Reusable pieces:
+  - `.panel`, `.grid.g2` / `.g3`, `.pill` (`.acc` / `.good` / `.warn` / `.crit`), `.callout` (`.warn`), `.thesis`, `.ledger`
+  - `.flow` + `.step` (auto-numbered), `.loop` (numbered strip), `.chain-base`
+  - `.fold` (accordion card used by recipes, audit and plays)
+  - `.eyebrow`, `.lede`
 
 ## Content consistency
-The Overview's prose quotes counts that must match the data: "Nine chapters" (every chapter except Overview), "a 48-signal catalog" (the length of `METRICS`), "six-phase", and "six layers" (the keys of `L`). If you add or remove signals, chapters, phases or layers, update that copy as well.
-
-The footer states the Core Web Vitals thresholds (LCP, INP, CLS, TTFB). The `lcp`, `inp`, `cls` and `ttfb` catalog entries repeat them, so keep both places in sync.
+- The Overview says "Nine chapters" (every chapter except Overview) and names each one. Update it when chapters change.
+- The signal count renders automatically into `[data-count="signals"]`.
+- The Core Web Vitals thresholds appear in the `cwv` signal and in the Principles footer. Keep them in sync.

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Repeatable revenue and performance measurement playbook for SaaS marketing websites.">
+<meta name="description" content="The operating playbook for an SEO and AI search agency: how to audit, plan, execute and report visibility, traffic and pipeline for B2B marketing websites.">
 <style>
 :root{color-scheme:light dark}
 body{margin:0;font:14px system-ui,-apple-system,"Segoe UI",sans-serif;background:#F3F5F7}
@@ -74,8 +74,8 @@ section.chapter.active{display:block}
 .g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
 .panel h3{margin-bottom:6px}
-.grid+h2,.tw+h2,.ledger+h2,.flow+h2{margin-top:34px}
-h2+p{margin-top:.4em}
+.grid+h2,.tw+h2,.ledger+h2,.flow+h2,.folds+h2,.phase-body+h2,.chain-base+h2,.thesis+h2,p+h3,.tw+h3,.grid+h3{margin-top:34px}
+h2+p,h3+p{margin-top:.4em}
 .panel p:last-child{margin-bottom:0}
 .thesis{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:16px 18px;border-left:3px solid var(--accent);background:var(--surface);border-radius:0 var(--r) var(--r) 0;margin:22px 0}
 .thesis .q{font-family:var(--display);font-size:2rem;color:var(--accent);line-height:1}
@@ -85,7 +85,6 @@ table{border-collapse:collapse;width:100%;font-size:.9rem;background:var(--surfa
 th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:500;background:var(--surface-2)}
 tr:last-child td{border-bottom:0}
-td.num{font-variant-numeric:tabular-nums;text-align:right}
 .pill{display:inline-block;font-family:var(--mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface-2);white-space:nowrap}
 .pill.good{background:var(--good-soft);color:var(--good);border-color:transparent}
 .pill.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
@@ -112,11 +111,10 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
 .filters button{all:unset;cursor:pointer;font-family:var(--mono);font-size:.74rem;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2)}
 .filters button.on{background:var(--ink);color:var(--ground);border-color:var(--ink)}
 .filters button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.filters .sep{width:1px;height:18px;background:var(--line);margin:0 4px}
 .filters input{font:inherit;font-size:.88rem;padding:6px 10px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);color:var(--ink);min-width:200px;flex:1}
 .count{font-family:var(--mono);font-size:.74rem;color:var(--ink-3);margin:4px 0 12px}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;align-items:start}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0;scroll-margin-top:70px}
 .card:hover{border-color:var(--ink-3)}
 .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .card .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
@@ -136,7 +134,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
 .step b{display:block;font-family:var(--display);font-size:1rem}
 .step p{margin:3px 0 0;font-size:.92rem;color:var(--ink-2);max-width:none}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.tabs button{all:unset;cursor:pointer;padding:7px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);font-size:.9rem;font-weight:500}
+.tabs button{all:unset;cursor:pointer;padding:7px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);font-size:.9rem;font-weight:500;scroll-margin-top:70px}
 .tabs button.on{background:var(--ink);color:var(--ground);border-color:var(--ink)}
 .tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .diag{display:none}.diag.on{display:block}
@@ -156,17 +154,21 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
 .loop .n{font-family:var(--mono);font-size:.68rem;color:var(--ink-3)}
 .loop b{display:block;font-family:var(--display);font-size:.98rem;margin-top:2px}
 .loop span:last-child{display:block;font-size:.82rem;color:var(--ink-2);margin-top:3px;line-height:1.4}
-.recipe{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px;scroll-margin-top:70px}
-.recipe>summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:3px 14px;align-items:center;padding:14px 16px}
-.recipe>summary::-webkit-details-marker{display:none}
-.recipe>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--r)}
-.recipe>summary:hover .rq{color:var(--accent-ink)}
-.recipe .rn{font-family:var(--mono);font-size:.72rem;color:var(--ink-3);grid-row:1/span 2}
-.recipe .rq{font-family:var(--display);font-weight:700;font-size:1.06rem}
-.recipe .rwho{grid-column:2;font-size:.86rem;color:var(--ink-2)}
-.recipe .rbox{grid-column:3;grid-row:1/span 2}
-.recipe[open]>summary{border-bottom:1px solid var(--line)}
+.loop+.chain-base{margin-top:-18px}
+.chain-base{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;font-size:.88rem;color:var(--ink-2);margin-bottom:24px}
+.chain-base b{font-family:var(--display);color:var(--ink)}
+.fold{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px;scroll-margin-top:70px}
+.fold>summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:3px 14px;align-items:center;padding:14px 16px}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--r)}
+.fold>summary:hover .rq{color:var(--accent-ink)}
+.fold .rn{font-family:var(--mono);font-size:.72rem;color:var(--ink-3);grid-row:1/span 2}
+.fold .rq{font-family:var(--display);font-weight:700;font-size:1.06rem}
+.fold .rwho{grid-column:2;font-size:.86rem;color:var(--ink-2)}
+.fold .rbox{grid-column:3;grid-row:1/span 2;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.fold[open]>summary{border-bottom:1px solid var(--line)}
 .rbody{padding:16px 18px 18px}
+.rbody .tw{margin:0}
 .want{background:var(--accent-soft);border-radius:var(--r);padding:10px 12px;margin-bottom:16px;font-size:.94rem}
 .want b{color:var(--accent-ink)}
 .rbody .cols{display:grid;grid-template-columns:1.15fr .85fr;gap:26px}
@@ -183,7 +185,6 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
 .deep{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:14px;font-size:.84rem;color:var(--ink-3)}
 .deep a.pill{text-decoration:none}
 .deep a.pill:hover{border-color:var(--ink-3);color:var(--ink)}
-.card{scroll-margin-top:70px}
 .topbar{display:none}
 @media (max-width:820px){
   .shell{grid-template-columns:1fr}
@@ -198,8 +199,8 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
   .thesis{grid-template-columns:1fr}
   .ledger{grid-template-columns:1fr}
   .ledger>div+div{border-left:0;border-top:1px solid var(--line)}
-  .recipe>summary{grid-template-columns:auto minmax(0,1fr)}
-  .recipe .rbox{grid-column:2;grid-row:auto;justify-self:start}
+  .fold>summary{grid-template-columns:auto minmax(0,1fr)}
+  .fold .rbox{grid-column:2;grid-row:auto;flex-direction:row;flex-wrap:wrap;align-items:flex-start}
   .rbody .cols{grid-template-columns:1fr;gap:12px}
 }
 @media (prefers-reduced-motion:no-preference){.card,.phases button{transition:border-color .15s}}
@@ -209,7 +210,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
 <div class="topbar" id="topbar"><div class="topbar-links" id="topbarLinks"></div></div>
 <div class="shell">
 <nav class="side" id="sidenav">
-  <div class="brand">Site Signal Playbook<small>SaaS marketing site · v1</small></div>
+  <div class="brand">Site Signal Playbook<small>SEO + AI search · v2</small></div>
   <div id="navlinks"></div>
   <div class="status">Engagement checklist<br><b id="progress">0 / 0</b> items done</div>
 </nav>
@@ -219,210 +220,216 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
 <!-- ============ OVERVIEW ============ -->
 <section class="chapter active" id="overview">
   <div class="hero">
-    <div class="eyebrow">Revenue &amp; performance measurement</div>
-    <h1>A marketing site is a 24/7 salesperson. Most of them work unsupervised.</h1>
-    <p class="lede">This is the information you have to gather before a marketing website can be managed as an asset instead of tolerated as a liability: what it's asked, what it answers, what it costs the visitor, and whether the numbers reporting all of that can be trusted. Written as a repeatable process for a technical owner working with marketing stakeholders.</p>
+    <div class="eyebrow">SEO and AI search visibility</div>
+    <h1>Search has two front doors now: the results page and the AI answer.</h1>
+    <p class="lede">This is the operating playbook for an SEO and AI search agency working on B2B marketing websites. It covers how we diagnose where a site stands, decide what's worth doing, ship it in the right order, and report the result in terms a CMO and a CFO both accept. It's written as repeatable procedure, so every client gets the same rigor no matter who runs the account.</p>
   </div>
 
   <div class="grid g3">
-    <div class="panel"><div class="eyebrow">Who it's for</div><h3>The technical owner</h3><p>The engineer who holds the site, and usually the tracking, the SEO and the reporting too. This defines the scope on day one instead of discovering it in month nine.</p></div>
-    <div class="panel"><div class="eyebrow">What it answers</div><h3>The room's questions</h3><p>How did they find us, where did they enter, what was the journey, where did they drop off, what converts, are we tracking everything, what's their intent, and what are AI assistants sending and saying?</p></div>
-    <div class="panel"><div class="eyebrow">What's in it</div><h3>Nine chapters</h3><p>Answer recipes for the questions leaders ask, the analyst-level question map, a six-phase sequence, a 48-signal catalog with capture specs, the tracking contract, three diagnostic flows, a reporting model, transferable patterns, and notes toward a health app.</p></div>
+    <div class="panel"><div class="eyebrow">Who it's for</div><h3>The account team, and the client's marketing leader</h3><p>Strategists and analysts use it to run every engagement the same way. Marketing leaders use it to see what they're buying, what they'll get, and when.</p></div>
+    <div class="panel"><div class="eyebrow">What it answers</div><h3>The four questions every SEO buyer asks</h3><p>Are we visible where buyers look? Are we beating competitors there? Is it producing pipeline? What should we do next, and what will it return?</p></div>
+    <div class="panel"><div class="eyebrow">What's in it</div><h3>Nine chapters</h3><p>Leader questions with step-by-step answers, the engagement model and offers, a six-pillar audit, a play library, four diagnostic flows, the reporting model, a <span data-count="signals">38</span>-signal catalog, measurement foundations, and the principles behind all of it.</p></div>
   </div>
 
-  <h2>Asset or liability</h2>
-  <p>The difference is rarely design. It's whether the site's behaviour is observable, attributable and fast enough to close. The same page can sit on either side of this line.</p>
+  <h2>The value chain</h2>
+  <p>Every engagement works the same chain, in order. When a number moves, it's diagnosed in the link where it moved, not blamed on "SEO".</p>
+  <div class="loop">
+    <div><span class="n">1</span><b>Foundations</b><span>Can Google and AI crawlers reach, render and understand the site?</span></div>
+    <div><span class="n">2</span><b>Authority</b><span>Does the site have the best page for each topic, and credibility beyond its own domain?</span></div>
+    <div><span class="n">3</span><b>Visibility</b><span>Do we appear for buyers' questions, in results pages and AI answers, against competitors?</span></div>
+    <div><span class="n">4</span><b>Traffic</b><span>Does that visibility turn into qualified visits, including from AI assistants?</span></div>
+    <div><span class="n">5</span><b>Pipeline</b><span>Do those visits become leads and opportunities sales accepts?</span></div>
+  </div>
+  <div class="chain-base"><b>Integrity</b> sits under all five: can every number in the report be trusted this month?</div>
+
+  <div class="thesis"><div class="q">&ldquo;</div><p><b>Clicks are no longer a complete measure of search performance.</b> When an AI answer resolves a question on the results page, the brand it cites still wins the buyer's attention, and the brand it leaves out loses it without a trace in analytics. A program that measures only clicks will under-report its wins and miss its losses.</p></div>
+
+  <h2>The scorecard</h2>
+  <p>Seven layers, each with one north-star metric. Leading indicators show whether the work is landing before the north star moves; health checks catch problems before they reach the report.</p>
+  <div class="tw"><table>
+    <tr><th>Layer</th><th>North-star metric</th><th>Leading indicators</th><th>Health checks</th></tr>
+    <tr><td><span class="pill acc">Foundations</span></td><td>Priority pages indexed, readable without JavaScript and open to AI crawlers</td><td>Index coverage, Core Web Vitals on money-page templates, schema validity</td><td>Crawl errors, CDN bot rules, migration risk</td></tr>
+    <tr><td><span class="pill acc">Content &amp; authority</span></td><td>Priority topics with a competitive page at every buyer stage</td><td>Decaying pages recovered, relevant referring domains, presence on cited sources</td><td>Cannibalization, thin pages, stale facts</td></tr>
+    <tr><td><span class="pill acc">Search visibility</span></td><td>Non-branded share of voice on priority topics</td><td>Non-branded impressions and clicks, priority keywords in the top 10</td><td>CTR at stable positions, AI Overviews on priority terms</td></tr>
+    <tr><td><span class="pill acc">AI visibility</span></td><td>Citation share on the priority prompt set</td><td>Mention share against competitors, answer accuracy</td><td>Entity consistency, AI crawler hits</td></tr>
+    <tr><td><span class="pill acc">Traffic</span></td><td>Engaged organic and AI-referred sessions on priority pages</td><td>AI referral conversion rate, sessions by buyer stage</td><td>Channel grouping, branded split</td></tr>
+    <tr><td><span class="pill acc">Pipeline</span></td><td>Search-sourced pipeline against target</td><td>Leads by landing page, lead-to-opportunity rate</td><td>CRM original-source coverage</td></tr>
+    <tr><td><span class="pill acc">Integrity</span></td><td>Reports issued without a data caveat</td><td>Change log kept, key events stable</td><td>Duplicate tags, internal traffic, brand-term list</td></tr>
+  </table></div>
+
+  <h2>Commodity SEO or a revenue-grade program</h2>
+  <p>Clients have usually bought the first kind before. The second is what this playbook exists to deliver, and the difference is visible in the first month.</p>
   <div class="ledger">
-    <div class="lia"><h3>Liability</h3><ul>
-      <li>Every form fires the same event, so no one can say which surface produces leads</li>
-      <li>Conversion numbers move and nobody can tell demand from a tagging change</li>
-      <li>New modules ship with no instrumentation; coverage decays release by release</li>
-      <li>Third-party scripts accumulate faster than they retire; nobody owns the budget</li>
-      <li>The conversion path carries seconds of avoidable delay that no one has timed</li>
-      <li>AI assistants answer questions about the product from third-party sites</li>
-      <li>Reporting is a monthly scramble that produces numbers nobody acts on</li>
+    <div class="lia"><h3>Commodity SEO</h3><ul>
+      <li>Reports traffic and rankings, and goes quiet when AI answers cut clicks</li>
+      <li>Tracks keywords nobody mapped to a page, a buyer stage or a competitor</li>
+      <li>Publishes on a content calendar instead of against gaps competitors are winning</li>
+      <li>Treats AI visibility as a buzzword, or ignores it</li>
+      <li>Can't say which pages produce pipeline</li>
+      <li>Ships fixes in bulk, so nothing can be credited</li>
+      <li>Reports numbers without checking the tracking first</li>
     </ul></div>
-    <div class="ass"><h3>Asset</h3><ul>
-      <li>Every conversion names its form, its page and the CTA that sent it</li>
-      <li>Every number has a change log behind it, so a decline can be believed or dismissed</li>
-      <li>Instrumentation is a release checklist item with a named owner</li>
-      <li>Third parties are inventoried, classed and budgeted against load time</li>
-      <li>The conversion path is timed stage by stage and improved on purpose</li>
-      <li>The site is the entity AI assistants cite, with schema and machine-readable copy to match</li>
-      <li>A standing weekly view the team reads without being asked</li>
+    <div class="ass"><h3>Revenue-grade program</h3><ul>
+      <li>Reports the whole chain from visibility to pipeline, with AI answers next to results pages</li>
+      <li>Maps every priority topic to a page, a buyer stage and a competitor benchmark</li>
+      <li>Puts content where demand exists and competitors are beatable</li>
+      <li>Measures citation share on a fixed prompt set, monthly, against competitors</li>
+      <li>Ties landing pages to leads and opportunities</li>
+      <li>Ships in sequenced sprints, with the expected impact written down first</li>
+      <li>Starts every report with an integrity check</li>
     </ul></div>
   </div>
-
-  <div class="thesis"><div class="q">&ldquo;</div><p><b>Generic event names are an executive problem, not a developer problem.</b> Renaming an event takes minutes; the discipline is naming it from the reporting question backward. <code>form_submit</code> answers nothing. <code>form_submit</code> carrying form variant, page and source CTA answers <em>which form, on which page, from which CTA</em> with no dashboard formula at all.</p></div>
 
   <h2>How to use this</h2>
-  <p>When a leader asks something, open <b>Recipes</b>: each one is a step-by-step procedure with a sentence ready for the report. Use <b>Questions</b> to align with stakeholders on what they actually want to know, then work <b>Phases</b> and tick the checklist as you go; it persists in your browser. Use the <b>Signal catalog</b> to scope a layer and copy capture specs into the client's tracking plan. When a number looks wrong, open <b>Diagnostics</b> before opening a ticket. <b>Reporting</b> is the shape of the standing deliverable, and <b>App notes</b> lists the parts mechanical enough to become software.</p>
-
-  <h2>The six layers</h2>
-  <div class="tw"><table>
-    <tr><th>Layer</th><th>Question it answers</th><th>Primary source</th><th>Typical owner</th></tr>
-    <tr><td><span class="pill acc">Revenue</span></td><td>Which forms, CTAs and pages produce pipeline?</td><td>Analytics events + CRM / MAP</td><td>Marketing ops + web</td></tr>
-    <tr><td><span class="pill acc">Acquisition</span></td><td>Where does qualified traffic come from, and is search health holding?</td><td>Analytics channels, Search Console</td><td>SEO / content</td></tr>
-    <tr><td><span class="pill acc">Engagement</span></td><td>What do visitors do between landing and converting?</td><td>Analytics engagement, interaction events</td><td>Content</td></tr>
-    <tr><td><span class="pill acc">AI &amp; intent</span></td><td>Why are they here, and what are AI assistants sending and saying?</td><td>Behavioural segments, referrer groups, server logs, citation panel</td><td>SEO / content + web</td></tr>
-    <tr><td><span class="pill acc">Performance</span></td><td>Is the site fast where conversions happen?</td><td>Field CWV data, lab runs, network traces</td><td>Web engineer</td></tr>
-    <tr><td><span class="pill acc">Integrity</span></td><td>Can the numbers above be trusted this week?</td><td>Tag manager history, tag assistant, volume vs. change log</td><td>Web engineer (nobody else will)</td></tr>
-  </table></div>
+  <p><b>New prospect:</b> run the <a href="#audit">Audit</a>, and use <a href="#recipes">Leader questions</a> to frame the conversation. <b>Won the deal:</b> work the <a href="#engagement">Engagement model</a> and tick the checklist as you go; it's saved in this browser. <b>Choosing what to do:</b> rank candidates with <a href="#plays">Plays</a>. <b>A number moved unexpectedly:</b> open <a href="#diagnostics">Diagnostics</a> before anyone opens a ticket. <b>Month end:</b> <a href="#reporting">Reporting</a> is the shape of the deliverable. The <a href="#catalog">Signal catalog</a> and <a href="#measurement">Measurement</a> are the reference underneath all of it.</p>
 </section>
 
-<!-- ============ RECIPES ============ -->
+<!-- ============ LEADER QUESTIONS ============ -->
 <section class="chapter" id="recipes">
-  <div class="eyebrow">Answer recipes</div>
-  <h2>The questions leaders ask, and how to answer them</h2>
-  <p class="lede">Step-by-step procedures for what a marketer, executive or leader expects the website to tell them. Each recipe covers who asks, what they expect to see, where to find it in GA4 and Search Console, how to read it, and a sentence to adapt for the report. On a new client, start with 00.</p>
-  <div class="eyebrow" style="margin-top:22px">Every recipe runs the same loop</div>
+  <div class="eyebrow">Leader questions</div>
+  <h2>The questions leadership asks, and how to answer them</h2>
+  <p class="lede">Step-by-step procedures for what a CMO, CEO or CFO expects a search program to tell them. Each covers who asks, what they expect to see, where to find it, how to read it, and a sentence to adapt for the report. On a new client, start with 00.</p>
+  <div class="eyebrow" style="margin-top:22px">Every answer runs the same loop</div>
   <div class="loop">
     <div><span class="n">1</span><b>Trust</b><span>Is the number real? Check the tracking before reading it.</span></div>
-    <div><span class="n">2</span><b>Split</b><span>Never report a total alone. Break it down by form, page, channel or device.</span></div>
-    <div><span class="n">3</span><b>Compare</b><span>Against the prior period, last year, or similar pages. Not a sitewide average.</span></div>
-    <div><span class="n">4</span><b>Explain</b><span>Line the change up against what shipped: site, tags, campaigns.</span></div>
+    <div><span class="n">2</span><b>Split</b><span>Never report a total alone. Branded from non-branded, by topic, by page, by engine.</span></div>
+    <div><span class="n">3</span><b>Compare</b><span>Against last year, the baseline, and named competitors.</span></div>
+    <div><span class="n">4</span><b>Explain</b><span>Line the change up against what shipped, Google updates and results-page changes.</span></div>
     <div><span class="n">5</span><b>Act</b><span>One change, an expected result, and a re-check next period.</span></div>
   </div>
-  <div id="recipeList"></div>
+  <div class="folds" id="recipeList"></div>
 </section>
 
-<!-- ============ QUESTIONS ============ -->
-<section class="chapter" id="questions">
-  <div class="eyebrow">Stakeholder questions</div>
-  <h2>The questions the room actually asks</h2>
-  <p class="lede">These are the analyst-level questions a marketing lead and the technical owner work through together. Each maps to signals in the catalog and to the instrumentation that has to exist before it can be answered at all. Where the default analytics setup can't answer it, the gap is named rather than papered over. For the leader-level versions with step-by-step procedures, see <a href="#recipes">Recipes</a>.</p>
-  <div class="tw"><table>
-    <tr><th>Question</th><th>Answered by</th><th>Instrumentation required</th><th>Gap to watch</th></tr>
-    <tr><td><b>What did people search for when they found us?</b></td><td>Search Console queries by landing page; branded vs non-branded split; landing pages for AI referrals on the assistant side</td><td>Search Console verified on the property, full retention window</td><td>Query data is thresholded, so long-tail is hidden; AI assistants pass no prompt at all — infer from landing page and referrer</td></tr>
-    <tr><td><b>What results showed up?</b></td><td>Search-appearance report (rich results, FAQ, video, sitelinks); average position per query; AI-answer citation checks</td><td>Schema on the templates that should earn rich results: FAQ, Article, Product / SoftwareApplication, Organization with <code>sameAs</code></td><td>There is no first-party view of an AI answer — run a fixed prompt panel on a schedule and log whether you're cited</td></tr>
-    <tr><td><b>Where did they enter the site?</b></td><td>Landing pages by channel, with entrances, engagement and conversions per page</td><td>Internal traffic excluded; cross-domain configured so a form or campaign host doesn't invent entrances</td><td>Campaign pages on a separate host split the picture until cross-domain is clean</td></tr>
-    <tr><td><b>What was their journey? What's the funnel?</b></td><td>Path exploration from landing page; funnel Landing → key page → <code>cta_click</code> → <code>form_submit</code>, with drop-off per step</td><td>The three core events with position and variant params; key pages grouped by content type</td><td>Platform funnels are session-scoped and coarse; anything path-level beyond a few steps wants a warehouse export</td></tr>
-    <tr><td><b>How engaged were they?</b></td><td>Engagement rate, engaged sessions per user, average engagement time by template; scroll and video events on content</td><td>Enhanced measurement on; content grouping in the data layer</td><td>Compare templates against each other, never against a site-wide average</td></tr>
-    <tr><td><b>What did they click, and where did they go?</b></td><td><code>cta_click</code> by position and page; internal-link clicks by nav region; next-page from path exploration</td><td>One click handler with <code>nav_region</code> and <code>cta_position</code> params; an interaction-coverage audit per template</td><td>If an element isn't in the tracking plan it isn't tracked — and coverage decays with every new module</td></tr>
-    <tr><td><b>Where did they drop off, and what's the bounce rate?</b></td><td>Exit rate per key page; funnel step abandonment; bounce rate read as the inverse of engagement rate, by landing page</td><td>Key events defined so that "engaged" means something specific</td><td>A high bounce on a page that answers one question can be healthy; read it with time on page</td></tr>
-    <tr><td><b>What are the key events, and where do people convert?</b></td><td>Key events: form submissions by variant, demo booking, gated access, pricing view, contact click; conversion pages ranked by submissions and by assists</td><td>Key events marked in the analytics admin; thank-you URLs carrying a form identifier</td><td>Marking clicks as conversions inflates the number the room is looking at</td></tr>
-    <tr><td><b>What are the most important pages?</b></td><td>Pages ranked three ways — entrances, conversions, and assists (pages seen in converting sessions) — with field performance data joined to that set</td><td>Content groups; funnels with the page as a step</td><td>The most-visited page is rarely the most important; the assist ranking is the one that changes roadmaps</td></tr>
-    <tr><td><b>Are we tracking every interaction a user can have?</b></td><td>Interaction coverage: per template, the interactive elements that exist versus the events that actually fire</td><td>A tracking plan per template; a tag-assistant walkthrough after each release</td><td>This is the question that quietly answers itself as "no" over time unless it's a release gate</td></tr>
-    <tr><td><b>How many clicked the CTA on this page, and how many submitted?</b></td><td><code>cta_click</code> → <code>form_submit</code> for one page, by source CTA</td><td>Source CTA carried onto the form via hidden field or a persisted campaign cookie</td><td>Directional in a blended dashboard; exact only from a warehouse join</td></tr>
-    <tr><td><b>What's their intent — research, buying, support?</b></td><td>Behaviour-defined segments: pricing / integrations / security signal buying; blog / glossary signal research; docs / login / status signal an existing customer. Plus query-intent classes from search data</td><td>Content groups by intent class; a logged-in or customer-domain signal to separate customers from prospects</td><td>Intent is inferred, never observed — keep the segment definitions written down and stable so trends mean something</td></tr>
-    <tr><td><b>Is it AI traffic, and what are the AI engines showing?</b></td><td>AI-referral sessions with landing page and conversion rate; AI crawler hits from server logs; a recurring AI-answer citation panel; a GEO readiness score</td><td>A channel group for assistant referrers; server-log access; a robots policy that deliberately allows retrieval bots; entity schema and machine-readable copy</td><td>Volume is usually small and intent unusually high, so judge it on conversion rate, not sessions</td></tr>
-  </table></div>
-
-  <div class="callout"><b>Two audiences, one site.</b> Humans arrive through search results and links; LLM agents arrive through retrieval bots and cite whatever they can parse. The same work serves both: entity-complete <code>Organization</code> schema with <code>sameAs</code>, populated author pages with <code>Person</code> schema, <code>Product</code> or <code>SoftwareApplication</code> on product and pricing pages, <code>QAPage</code> on FAQ children, an <code>llms.txt</code> plus a full-text companion, and a robots policy that allows retrieval bots and makes a deliberate decision about training crawlers instead of inheriting a default.</div>
-</section>
-
-<!-- ============ PHASES ============ -->
-<section class="chapter" id="phases">
-  <div class="eyebrow">Engagement sequence</div>
-  <h2>Six phases, in order</h2>
-  <p class="lede">The order carries most of the value: baseline before changing anything, integrity checks before reporting a decline, handoff written from day one. Click a phase for its checklist and deliverables.</p>
+<!-- ============ ENGAGEMENT MODEL ============ -->
+<section class="chapter" id="engagement">
+  <div class="eyebrow">Engagement model</div>
+  <h2>From audit to renewal, in six phases</h2>
+  <p class="lede">The sequence carries most of the value: diagnose before proposing, baseline before changing anything, plan in revenue, ship in sprints, report the whole chain, and renew on results. Click a phase for its checklist and deliverables. Ticks are saved in this browser.</p>
   <div class="phases" id="phaseTabs"></div>
   <div class="phase-body" id="phaseBody"></div>
-</section>
 
-<!-- ============ CATALOG ============ -->
-<section class="chapter" id="catalog">
-  <div class="eyebrow">Signal catalog</div>
-  <h2>What to capture, and how</h2>
-  <p class="lede">Each card opens to its definition, source, capture spec, how to read it, and the field note behind it. Filter by layer or phase, or search for an event or metric name.</p>
-  <div class="filters" id="layerFilters"></div>
-  <div class="filters" id="phaseFilters"></div>
-  <div class="filters"><input id="search" type="search" placeholder="Search signals, events, params… e.g. form_submit, TTFB, UTM"></div>
-  <div class="count" id="count"></div>
-  <div class="cards" id="cards"></div>
-</section>
-
-<!-- ============ CONTRACT ============ -->
-<section class="chapter" id="contract">
-  <div class="eyebrow">Tracking contract</div>
-  <h2>The event taxonomy every site should ship with</h2>
-  <p class="lede">Three events, one UTM convention, one persistence cookie, and a short list of custom dimensions cover nearly every question in chapter two. Define them once, then never invent a new event inside a template.</p>
-
-  <h3>Core events</h3>
+  <h2>Offers</h2>
+  <p>Four standard offers, each designed to lead into the next. Standard scopes keep delivery repeatable and margins predictable; custom work is priced as an add-on to one of these, not as a fifth offer.</p>
   <div class="tw"><table>
-    <tr><th>Event</th><th>Fires when</th><th>Required params</th><th>Question it answers</th></tr>
-    <tr><td><code>cta_click</code></td><td>Any primary CTA click — header, hero, in-content, footer</td><td><code>cta_text</code>, <code>cta_variant</code>, <code>cta_position</code>, <code>page_location</code>, <code>post_slug</code></td><td>Which CTA position and which page drive demand?</td></tr>
-    <tr><td><code>form_submit</code></td><td>Thank-you page view, or the form provider's success callback</td><td><code>form_variant</code>, <code>form_location</code>, <code>source_cta</code>, <code>utm_campaign</code></td><td>Which form converts, and is a decline uniform or concentrated?</td></tr>
-    <tr><td><code>gated_access</code></td><td>A gated asset is unlocked (video, report, webinar replay)</td><td><code>asset_id</code>, <code>source</code>, <code>cookie_status</code>, <code>is_new_cookie</code></td><td>Is this a new lead, a returning lead, or a campaign click?</td></tr>
+    <tr><th>Offer</th><th>What the client gets</th><th>Length</th><th>Leads into</th></tr>
+    <tr><td><b>Search &amp; AI visibility audit</b></td><td>Six-pillar audit, competitor benchmark, AI prompt panel, opportunity model, and the top ten findings with the plays that fix them</td><td>2 weeks, fixed scope</td><td>90-day program</td></tr>
+    <tr><td><b>90-day program</b></td><td>Baseline, measurement setup, a funded roadmap, three sprints of execution, monthly reports and the first quarterly review</td><td>3 months</td><td>Retainer</td></tr>
+    <tr><td><b>Retainer</b></td><td>Monthly sprints, monthly report, quarterly review and re-plan, ongoing prompt panel and competitor tracking</td><td>Ongoing, committed quarterly</td><td>Expansion: new topics, markets or off-site programs</td></tr>
+    <tr><td><b>Migration protection</b></td><td>Pre-launch benchmark, redirect map, staging crawl, launch-day checks and four weeks of monitoring</td><td>Tied to the launch date</td><td>Audit or 90-day program</td></tr>
   </table></div>
-
-  <h3>Lead-journey status (bridges sessions without a warehouse)</h3>
-  <p>Event-based analytics has no idea that this asset download and that form submission three weeks ago are the same person. A small first-party cookie with a five-value status field closes most of that gap for a fraction of the cost of a warehouse.</p>
-  <div class="tw"><table>
-    <tr><th><code>cookie_status</code></th><th>Meaning</th><th>Attribution use</th></tr>
-    <tr><td><code>new_cookie</code></td><td>Just submitted a form, received the cookie</td><td>Net-new lead</td></tr>
-    <tr><td><code>returning_cookie</code></td><td>Already held a cookie from a prior submission</td><td>Returning-lead engagement</td></tr>
-    <tr><td><code>direct_cookie</code></td><td>Cookie from a prior direct-access link</td><td>Email / nurture engagement</td></tr>
-    <tr><td><code>new_direct_cookie</code></td><td>Arrived via campaign link and received the cookie</td><td>Campaign attribution</td></tr>
-    <tr><td><code>no_cookie</code></td><td>Cookies blocked or cleared</td><td>Denominator hygiene</td></tr>
-  </table></div>
-
-  <h3>Internal CTA UTM convention</h3>
-  <p>Internal CTAs that point at a conversion page on another host carry a fixed pattern: <code>utm_campaign</code> identifies the CTA's location and role, <code>utm_content</code> identifies the offer. Keep this strictly separate from external campaign UTMs — internal clicks tagged as campaigns pollute channel attribution, and the fix after the fact is a migration, not a setting.</p>
-  <div class="tw"><table>
-    <tr><th>CTA</th><th>Pattern</th></tr>
-    <tr><td>Global header</td><td><code>?utm_source=website&amp;utm_medium=cta&amp;utm_campaign=global_header&amp;utm_content=bookdemo</code></td></tr>
-    <tr><td>Homepage hero</td><td><code>?utm_source=website&amp;utm_medium=cta&amp;utm_campaign=page_home_hero&amp;utm_content=bookdemo</code></td></tr>
-    <tr><td>Blog post footer</td><td><code>?utm_source=website&amp;utm_medium=cta&amp;utm_campaign=post_footer&amp;utm_content=bookdemo&amp;post={slug}</code></td></tr>
-  </table></div>
-
-  <h3>Custom dimensions to register (event scope)</h3>
-  <p><code>form_variant</code>, <code>cta_position</code>, <code>post_slug</code>, <code>asset_id</code>, <code>source</code>, <code>cookie_status</code>, <code>is_new_cookie</code>, <code>content_group</code>, <code>logged_in</code>. Register them the day the events ship — dimensions do not backfill, so a week's delay is a week of unusable data.</p>
-
-  <h3>Persistence and hygiene</h3>
   <div class="grid g2">
-    <div class="panel"><h3>Campaign persistence cookie</h3><p>A first-party cookie holding the URL-encoded original landing URL, so a visitor who reads three pages before submitting still carries attribution. A tag-manager variable decodes it for reporting and hidden-field injection.</p></div>
-    <div class="panel"><h3>Internal traffic exclusion</h3><p>Exclude on CMS login state via a data-layer variable, not an IP list. Anyone testing in a clean browser bypasses it, so give contractors a QA cookie or a staging container and say so in writing.</p></div>
-    <div class="panel"><h3>One analytics module</h3><p>Route every call through a single module — a generic <code>trackEvent()</code> with platform fallbacks, retry with backoff, and a promise result. Templates never call the analytics global directly, so the contract survives redesigns.</p></div>
-    <div class="panel"><h3>Change log as audit trail</h3><p>Name every tag-manager version for the intervention it makes. When the work never touches the repo, that history <em>is</em> the engineering record — and the thing that lets you tell a real decline from a tagging artifact.</p></div>
+    <div class="panel"><div class="eyebrow">Pricing</div><h3>Price on scope and revenue at stake, not hours</h3><p>The audit's opportunity model is the pricing argument for the program. A fee that's a small fraction of the expected-case upside is an easy decision; a fee that isn't needs a smaller scope, not a discount.</p></div>
+    <div class="panel"><div class="eyebrow">Qualification</div><h3>Say no to programs that can't show results</h3><p>Before proposing a program, confirm there's search demand in the category, access to analytics and the CMS, developer time for technical fixes, and a CRM that records lead source. Missing any of these, sell the audit and the fix first.</p></div>
   </div>
+
+  <h2>Who does what</h2>
+  <div class="tw"><table>
+    <tr><th>Area</th><th>Agency</th><th>Client</th></tr>
+    <tr><td><b>Strategy</b></td><td>Audit, roadmap, quarterly review, and the revenue case</td><td>Marketing leader sets priorities, approves the roadmap and owns the target</td></tr>
+    <tr><td><b>Content</b></td><td>Keyword and prompt sets, briefs, on-page work, refreshes</td><td>Subject-matter experts for input and review; content approvals</td></tr>
+    <tr><td><b>Technical</b></td><td>Crawl, rendering, schema and migration specifications</td><td>Developers implement changes through their release process</td></tr>
+    <tr><td><b>Off-site</b></td><td>Review, list, community and digital PR programs</td><td>Customer access for reviews; spokespeople and data for PR</td></tr>
+    <tr><td><b>Analytics</b></td><td>Measurement setup, scorecard and monthly report</td><td>Marketing ops maintains CRM source fields and pipeline reports</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ AUDIT ============ -->
+<section class="chapter" id="audit">
+  <div class="eyebrow">Audit framework</div>
+  <h2>Six pillars, scored with evidence</h2>
+  <p class="lede">The audit answers one question: what's stopping this site from being the answer buyers find, in search results and in AI assistants, and what is fixing it worth? Every check is scored Pass, Watch or Fail with evidence. The fails then become a short, ranked list of findings with revenue attached.</p>
+  <div class="tw"><table>
+    <tr><th>Score</th><th>Means</th><th>What to write</th></tr>
+    <tr><td><span class="pill good">Pass</span></td><td>Meets the standard on every priority page or template</td><td>One line of evidence. Don't pad the report with passes.</td></tr>
+    <tr><td><span class="pill warn">Watch</span></td><td>Partly meets it, or is fine now but at risk</td><td>What would turn it into a fail, and when to re-check</td></tr>
+    <tr><td><span class="pill crit">Fail</span></td><td>Blocks visibility, traffic or trustworthy measurement on priority pages</td><td>Evidence, affected pages, revenue at stake, and the play that fixes it</td></tr>
+  </table></div>
+  <div class="folds" id="auditList"></div>
+
+  <h2>From checks to findings</h2>
+  <p>Nobody buys a checklist. The audit is presented as the ten findings that matter, in order.</p>
+  <div class="flow">
+    <div class="step"><b>Group fails into findings</b><p>Several failed checks usually share one cause: a template, a rendering approach, a missing page type. One cause, one finding.</p></div>
+    <div class="step"><b>Attach revenue at stake</b><p>Use the opportunity model: the leads the affected topics or pages could produce, as a range.</p></div>
+    <div class="step"><b>Rate confidence and effort</b><p>How sure is the diagnosis, and what does the fix take across agency and client?</p></div>
+    <div class="step"><b>Rank and cut to ten</b><p>Blockers first, then by revenue at stake × confidence ÷ effort. Everything else goes in an appendix.</p></div>
+    <div class="step"><b>Name the play and the owner</b><p>Each finding maps to a play, an owner and a first step. That mapping is the bridge from audit to proposal.</p></div>
+  </div>
+</section>
+
+<!-- ============ PLAYS ============ -->
+<section class="chapter" id="plays">
+  <div class="eyebrow">Play library</div>
+  <h2>The standard plays, and how to choose between them</h2>
+  <p class="lede">Every roadmap is built from the same plays. Each lists when to run it, what we do, which signals it should move, and how long before the first signal shows. Candidates are ranked with the model below, so the roadmap is argued in revenue rather than best practice.</p>
+  <div class="thesis"><div class="q">×</div><p><b>Priority = revenue at stake × confidence ÷ effort.</b> Blockers to crawling, indexing or honest measurement go first regardless of score, because they cap the return on everything else.</p></div>
+  <div class="grid g3">
+    <div class="panel"><div class="eyebrow">Revenue at stake</div><h3>From the opportunity model</h3><p>Leads the play could add or protect over 12 months, multiplied by lead value. Use the expected case, and show the range.</p></div>
+    <div class="panel"><div class="eyebrow">Confidence</div><h3>How sure is the diagnosis?</h3><p>High (0.9): direct evidence and a precedent. Medium (0.6): a reasonable inference. Low (0.3): a bet worth testing small.</p></div>
+    <div class="panel"><div class="eyebrow">Effort</div><h3>Both sides of the table</h3><p>S: under a week of combined effort. M: one to four weeks. L: more than a month, or ongoing. Count client approvals and developer time.</p></div>
+  </div>
+  <h2>Plays</h2>
+  <div class="folds" id="playList"></div>
 </section>
 
 <!-- ============ DIAGNOSTICS ============ -->
 <section class="chapter" id="diagnostics">
   <div class="eyebrow">Diagnostic flows</div>
-  <h2>When a number looks wrong</h2>
-  <p class="lede">Three situations that recur on every marketing site. Each is a fixed order of checks, because the cheapest checks are the ones that most often end the investigation — and because the expensive ones produce confident wrong answers when run first.</p>
+  <h2>When a number moves the wrong way</h2>
+  <p class="lede">Four situations that recur on every account. Each is a fixed order of checks, because the cheapest checks most often end the investigation, and because the expensive ones produce confident wrong answers when run first.</p>
   <div class="tabs" id="diagTabs">
-    <button class="on" data-d="d1">Conversions are down</button>
-    <button data-d="d2">Core Web Vitals collapsed</button>
-    <button data-d="d3">Form submit feels slow</button>
+    <button class="on" data-d="d1">Organic traffic dropped</button>
+    <button data-d="d2">AI visibility dropped</button>
+    <button data-d="d3">Leads fell, traffic didn't</button>
+    <button data-d="d4">Pages dropped out of the index</button>
   </div>
 
   <div class="diag on" id="d1">
-    <div class="callout warn"><b>What this looks like in the field:</b> leadership arrives with a single aggregate — "form conversions are down by a third, we missed the quarter." Split by form, the picture usually inverts: a newly added popup is growing while two page-embedded forms fall away, and the aggregate is just the net. Meanwhile click-event volume spikes on exactly the days the tag container was published. Both facts are invisible in the aggregate, and both change what you should fix.</div>
+    <div class="callout warn"><b>What this looks like in the field:</b> leadership sees organic sessions down year over year and asks whether SEO stopped working. Split apart, it's several smaller stories. Branded demand softened with the market. A group of informational queries gained AI Overviews and lost clicks at stable rankings. One template lost indexing after a release. And part of the "drop" is a tracking change in GA4.</div>
     <div class="flow">
-      <div class="step"><b>Validate the baseline before the decline</b><p>Overlay daily event volume on the change log — tag publishes, plugin installs, deploys. Spikes within one to three days of a change are testing or duplicate firing, not demand. Caveat any decline whose baseline window contains them.</p></div>
-      <div class="step"><b>Check for duplicate firing</b><p>Run tag assistant on the conversion and thank-you pages: tags reported as firing twice mean conversions are double-counted after every publish. In the network tab, count instances of the analytics loader and each third-party tag per page.</p></div>
-      <div class="step"><b>Break the aggregate by form variant</b><p>Split by form identifier or thank-you query string. A uniform decline points at a sitewide cause — performance, tracking, consent. A concentrated one points at specific source pages, and those are two entirely different investigations.</p></div>
-      <div class="step"><b>Split traffic loss from conversion-rate loss</b><p>For each declining variant: sessions to its host pages versus submissions per session. Traffic loss is a channel and SEO question; conversion-rate loss is a page question — copy, competing CTAs, form load, a new popup stealing the click.</p></div>
-      <div class="step"><b>Test for cannibalization</b><p>Count users who submitted <em>any</em> form. If that's flat while the mix shifted toward a new surface, nothing was lost — it moved, and the "decline" is a reporting artifact of looking at one form.</p></div>
-      <div class="step"><b>Only then look at performance and the CRM</b><p>Form error logging, server logs for the form endpoint, and CRM-side sync failures. All real causes, all worth instrumenting, and all rarely the first one.</p></div>
+      <div class="step"><b>Confirm it's real, and where it's measured</b><p>Compare Search Console clicks with GA4 organic sessions for the same period. If Search Console is flat and GA4 fell, the cause is tracking or consent, not search.</p></div>
+      <div class="step"><b>Split branded from non-branded</b><p>A branded decline is a brand and demand question. Only a non-branded decline belongs to the search program.</p></div>
+      <div class="step"><b>Find the pages and queries that lost clicks</b><p>In Search Console, compare periods on the Pages and Queries tabs and sort by clicks lost. Declines are almost always concentrated.</p></div>
+      <div class="step"><b>Separate ranking loss from click loss</b><p>For the losing queries, did position fall, or did CTR fall at the same position? Stable position with falling CTR points to AI Overviews or new results-page features. Look at the results page.</p></div>
+      <div class="step"><b>Check the timeline</b><p>Line the drop up against Google's Search Status Dashboard, site releases, migrations, and robots or CDN changes.</p></div>
+      <div class="step"><b>Check the losing pages for technical regressions</b><p>Indexing status, canonicals, noindex tags, rendering and internal links on the pages that fell.</p></div>
+      <div class="step"><b>Report the components, then the plan</b><p>Present the drop as its parts, each with an owner and a response, rather than one number and one explanation.</p></div>
     </div>
   </div>
 
   <div class="diag" id="d2">
-    <div class="callout warn"><b>What this looks like in the field:</b> the field-data report shows mobile "good" URLs falling from most of the site to zero inside two weeks, then staying there for a month while nobody notices. Several deployments sit in that window — a new popup, a security plugin, two tracking scripts — and the caching plugin turns out to have been left in safe mode, meaning every trace you take is measuring an unoptimized site rather than the one you thought you were tuning.</div>
+    <div class="callout warn"><b>What this looks like in the field:</b> a stakeholder forwards a screenshot of an assistant recommending three competitors and not the client. The prompt panel shows citation share on category prompts slipping over two months, concentrated in one engine. In the same window, a competitor published a comparison page, and a widely cited review site refreshed its category list without the client.</div>
     <div class="flow">
-      <div class="step"><b>Confirm which metric failed, on which device</b><p>Field data by device, plus origin-level data for context. LCP, INP and CLS fail for unrelated reasons; "collapsed" almost always means one of them, and fixing the other two wastes the quarter.</p></div>
-      <div class="step"><b>Build the regression timeline</b><p>Every plugin install, tag publish, theme deploy and hosting change in the window, on one line. Correlation with the collapse date is the cheapest hypothesis generator available.</p></div>
-      <div class="step"><b>Check the optimization layer is actually on</b><p>Caching plugin safe mode, CDN status, minify and combine, lazy loading. The single biggest lever is often re-enabling something that was switched off during an unrelated incident and never switched back.</p></div>
-      <div class="step"><b>Cold-cache network trace of the top template and the conversion page</b><p>Incognito, cache disabled. Record TTFB, render-blocking count and bytes, third-party hosts, duplicate loads, and total wire weight by resource type. Note that browser-trace numbers are not throttled-mobile numbers — report both, and say which is which.</p></div>
-      <div class="step"><b>Inventory third parties and look for redundancy</b><p>Marketing stacks accumulate several tools doing the same job — two or three visitor-deanonymization scripts, overlapping session recorders, a chat widget shipping a full UI on load. Consolidation usually beats any single code fix, and it needs marketing-ops sign-off, so start that conversation early.</p></div>
-      <div class="step"><b>Find cache bypasses on money pages</b><p>Query strings on thank-you and campaign URLs commonly bypass the page cache by default, leaving the most conversion-critical page as the slowest one on the site. Often a one-line config fix worth hundreds of milliseconds.</p></div>
-      <div class="step"><b>Tier the fixes, ship one at a time, measure after each</b><p>Tier 0: config changes reversible in minutes. Tier 1: preloads, image formats, preconnects, font loading. Tier 2: dequeue unused CSS and JS, icon fonts, video facades, lazy iframes. Record expected versus actual impact — a large miss means the diagnosis was wrong, not the fix.</p></div>
+      <div class="step"><b>Check it against the prompt set, not the screenshot</b><p>AI answers vary from run to run, so one answer proves nothing. Confirm the change across the full set and at least two runs.</p></div>
+      <div class="step"><b>Split by engine and by prompt type</b><p>A drop in one engine points to that engine's sources. A drop across engines on comparison prompts points to the category's sources changing.</p></div>
+      <div class="step"><b>Compare the cited sources before and after</b><p>New domains being cited is the most common cause. The list tells you where to act.</p></div>
+      <div class="step"><b>Check access and accuracy</b><p>Confirm AI crawlers still reach priority pages (robots.txt, CDN rules, logs), and that nothing important moved behind JavaScript, a login or a redirect.</p></div>
+      <div class="step"><b>Check what competitors shipped</b><p>New comparison pages, studies, review campaigns or list placements in the window.</p></div>
+      <div class="step"><b>Respond at the source</b><p>Win back the cited sources, publish the page the answers are missing, and correct stale facts. Re-run the affected prompts monthly.</p></div>
     </div>
   </div>
 
   <div class="diag" id="d3">
-    <div class="callout warn"><b>What this looks like in the field:</b> a stakeholder reports "a couple of seconds" between submitting the form and seeing the thank-you page. Traced stage by stage, it's four things stacked: a chat tool holding the submit to attempt an intercept, a consent manager holding tags for a fixed wait, an uncached thank-you page, and a cross-origin form iframe negotiating a fresh connection on open. Most of it is configuration, not code.</div>
+    <div class="callout warn"><b>What this looks like in the field:</b> leadership arrives with one total: organic leads down while traffic is flat. Split by form and landing page, a newly added popup is growing while two embedded forms fall away. Meanwhile, conversion-event volume spiked on exactly the days the tag container was published. Neither fact is visible in the total, and both change what to fix.</div>
     <div class="flow">
-      <div class="step"><b>Time each stage separately</b><p>Modal open → form ready; submit → provider response; response → redirect; redirect → thank-you first paint. One stopwatch number is a complaint, not a diagnosis.</p></div>
-      <div class="step"><b>Look for built-in waits</b><p>Chat tools intercept form submits on a configurable threshold; consent managers hold tag firing for a fixed window. Both ship with generous defaults, and both are usually set once and never revisited.</p></div>
-      <div class="step"><b>Check the destination's TTFB</b><p>Thank-you pages carrying query strings are frequently uncached. Add the parameter to the cache allow-list and confirm nothing on the page depends on per-request rendering.</p></div>
-      <div class="step"><b>Preconnect to the form's origin</b><p>One preconnect hint to the form host removes DNS, TCP and TLS from the modal open — and benefits the submit round-trip on the same origin.</p></div>
-      <div class="step"><b>Separate UX delay from CWV</b><p>Submit delay is a UX problem measured in seconds; form <em>load</em> is a Core Web Vitals problem measured in LCP and INP. Track and report them separately, or they get conflated in the room and the wrong one gets the budget.</p></div>
-      <div class="step"><b>Add feedback even after fixing it</b><p>A disabled button and a spinner on submit cuts double-submissions and perceived wait. Additive to the real fix, never a substitute for it.</p></div>
+      <div class="step"><b>Validate the baseline before the decline</b><p>Overlay daily conversion volume on the change log. Spikes within a few days of a tag publish or release are testing or double-firing, not demand, and they inflate the baseline.</p></div>
+      <div class="step"><b>Check for duplicate firing</b><p>Run Tag Assistant on conversion and thank-you pages. Tags firing twice mean every conversion number is wrong.</p></div>
+      <div class="step"><b>Break the total down by form and landing page</b><p>A uniform decline points to something sitewide: tracking, consent, speed. A concentrated one points to specific pages.</p></div>
+      <div class="step"><b>Check the traffic mix</b><p>Flat sessions can hide a shift: more informational traffic from new content converts at a lower rate than product-page traffic. Compare conversion rate by buyer stage.</p></div>
+      <div class="step"><b>Test whether leads just moved</b><p>If the number of people submitting any form is flat, a new form or popup is taking submissions from the old ones.</p></div>
+      <div class="step"><b>Only then check speed, form errors and CRM sync</b><p>All real causes, and all rarely the first one.</p></div>
+    </div>
+  </div>
+
+  <div class="diag" id="d4">
+    <div class="callout warn"><b>What this looks like in the field:</b> a release changes a template's canonical tags, or a staging noindex setting ships to production. Over a few weeks a whole section moves to excluded in Search Console, and traffic erodes slowly enough that nobody connects it to the release.</div>
+    <div class="flow">
+      <div class="step"><b>Find the reason in Search Console</b><p>Indexing → Pages, looking at which exclusion reasons grew. The reason names the investigation.</p></div>
+      <div class="step"><b>Inspect a sample of affected URLs</b><p>URL Inspection: live test against the indexed version, declared versus Google-selected canonical, crawl allowed, page fetch.</p></div>
+      <div class="step"><b>Match it to a template and a release</b><p>Exclusions clustered on one template almost always trace to a release that changed it.</p></div>
+      <div class="step"><b>Check the usual causes</b><p>Noindex tags, canonicals pointing elsewhere, robots.txt rules, redirects, soft 404s, rendering failures. If the main reason is "Crawled – currently not indexed" or a duplicate-canonical reason, the fix is usually consolidation or better content, not a technical switch.</p></div>
+      <div class="step"><b>Fix at the template, then validate</b><p>Use Validate fix in the Indexing report, and request indexing on priority URLs.</p></div>
+      <div class="step"><b>Add a release check</b><p>Put a pre-launch crawl of changed templates into the client's release process so it doesn't happen again.</p></div>
     </div>
   </div>
 </section>
@@ -431,296 +438,398 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
 <section class="chapter" id="reporting">
   <div class="eyebrow">Reporting model</div>
   <h2>What leadership sees, and how often</h2>
-  <p class="lede">The dashboard is derived from the catalog, not the other way round. Six pages, three cadences, and an honest statement of where the standard reporting stack stops being able to answer the question.</p>
+  <p class="lede">Reports lead with the answer, cover the whole chain from visibility to pipeline, and explain every movement with a cause. Traffic alone under-reports wins and hides losses once AI answers take clicks, so visibility and citations are reported beside it.</p>
 
-  <h3>Executive dashboard pages</h3>
+  <h3>The monthly report</h3>
   <div class="tw"><table>
-    <tr><th>Page</th><th>Contents</th><th>Sources</th></tr>
-    <tr><td>1 · Executive summary</td><td>Year-to-date snapshot against prior year; conversions by form; pipeline handoff where a CRM connector exists</td><td>Analytics, CRM</td></tr>
-    <tr><td>2 · Traffic overview</td><td>Users and sessions by channel, top landing pages, engagement rate</td><td>Analytics</td></tr>
-    <tr><td>3 · Search &amp; AI visibility</td><td>Impressions, clicks, CTR, position; branded vs non-branded; search appearance; AI-referral sessions and conversion rate; citation panel results; field CWV pass rate by device</td><td>Search Console, analytics, citation log</td></tr>
-    <tr><td>4 · Content performance</td><td>Content by category, posts that send traffic to the conversion page, gated-asset access</td><td>Analytics</td></tr>
-    <tr><td>5 · CTA &amp; form performance</td><td>Clicks by position, submissions by variant, click-to-submit ratio, submit latency</td><td>Analytics events</td></tr>
-    <tr><td>6 · Observations</td><td>Written: what changed, why, what's next, and the integrity caveats for the period</td><td>You</td></tr>
+    <tr><th>Section</th><th>Contents</th><th>Question it answers</th></tr>
+    <tr><td>1 · Summary</td><td>Three sentences: what moved, why, what's next. One decision needed from the client.</td><td>What do I need to know?</td></tr>
+    <tr><td>2 · Scorecard</td><td>The seven layers against baseline and target ranges, marked on track, at risk or off track</td><td>Are we on track?</td></tr>
+    <tr><td>3 · Search visibility</td><td>Non-branded clicks and impressions, share of voice by topic, priority rankings, CTR changes where AI Overviews appeared</td><td>Are we winning search?</td></tr>
+    <tr><td>4 · AI visibility</td><td>Mention and citation share against competitors, answer accuracy, changes in cited sources</td><td>Are we winning AI answers?</td></tr>
+    <tr><td>5 · Traffic &amp; pipeline</td><td>Organic and AI sessions, leads by landing page, search-sourced pipeline against target</td><td>Is it paying off?</td></tr>
+    <tr><td>6 · Work shipped</td><td>What shipped, expected impact against early signal, what's next</td><td>What did we get for the fee?</td></tr>
+    <tr><td>7 · Integrity notes</td><td>Tracking caveats and data changes for the period</td><td>Can I trust this?</td></tr>
   </table></div>
 
   <h3>Cadence</h3>
   <div class="grid g3">
-    <div class="panel"><h3>Weekly</h3><p>Submissions by form variant, CTA clicks by position, field CWV pass rate, and any tag or deploy change in the week as an integrity note.</p></div>
-    <div class="panel"><h3>Monthly</h3><p>Channel mix, search trend, content leaderboard, page-level field data, third-party inventory delta, AI referral and citation movement.</p></div>
-    <div class="panel"><h3>Per deploy</h3><p>Annotate the analytics timeline and the measurement log. Cold-cache trace of the affected template. Tag-assistant pass on the conversion page.</p></div>
+    <div class="panel"><h3>Weekly, internal</h3><p>Leading indicators on shipped work, indexing of changed pages, crawl and tracking alerts, Google updates. Goes to the client only when something needs a decision.</p></div>
+    <div class="panel"><h3>Monthly, client</h3><p>The report above, sent with a 20-minute walkthrough. Decisions go in the decisions log.</p></div>
+    <div class="panel"><h3>Quarterly, leadership</h3><p>Results against targets and the opportunity model, competitive position, the revised roadmap, and a scope proposal.</p></div>
   </div>
+
+  <h3>Reporting when clicks fall and visibility rises</h3>
+  <p>AI Overviews and assistants answer questions before a click. Report impressions, citation share and branded demand as leading indicators next to clicks, and set that expectation at kickoff, not in the month traffic dips. Measure the effect directly: group priority keywords by whether an AI Overview appears, and compare CTR at similar positions.</p>
 
   <h3>The attribution ceiling</h3>
-  <p>"Which CTA led to which submission?" is a completely standard question that the default analytics-plus-dashboard stack under-delivers on: an event-based model with no session or user joins, brittle blends, cross-domain page paths, and no native funnel support. Say this in the first review rather than the fourth. Two honest options:</p>
+  <p>Last-click analytics undercounts search's role in long B2B buying journeys, and AI answers that influence a buyer without a click don't appear at all. Say this in the first review, not the fourth. Two honest options:</p>
   <div class="grid g2">
-    <div class="panel"><div class="eyebrow">Option A</div><h3>Stay in the dashboard tool</h3><p>Custom events plus a blend joining page path to referrer. It works, it's manual, and it breaks silently on URL mismatches. Adequate for a team that needs directional CTA performance and nothing more.</p></div>
-    <div class="panel"><div class="eyebrow">Option B</div><h3>Warehouse export</h3><p>Export raw events, join clicks and submissions on session or user ID in SQL, visualize anywhere. Solid, and the only way to do spike-source analysis or true path work. Costs setup and SQL time. Recommend it for any team that wants real attribution.</p></div>
+    <div class="panel"><div class="eyebrow">Option A</div><h3>GA4 plus CRM original source</h3><p>Leads by landing page from GA4, pipeline by original source from the CRM. Directional, cheap, and enough for most programs.</p></div>
+    <div class="panel"><div class="eyebrow">Option B</div><h3>Warehouse join</h3><p>GA4's BigQuery export joined to CRM records for journey-level attribution. Solid, and the only way to show multi-touch influence. Costs setup and analyst time.</p></div>
   </div>
-  <p>Naming the ceiling honestly builds more credibility than promising to try harder in the dashboard tool — and it turns a recurring disappointment into a budget decision the client can actually make.</p>
+  <p>Agree the attribution rule in writing before month one. Changing it mid-program looks like moving the goalposts, even when it's the right call.</p>
 </section>
 
-<!-- ============ LESSONS ============ -->
-<section class="chapter" id="lessons">
-  <div class="eyebrow">Transferable patterns</div>
-  <h2>What generalizes across engagements</h2>
-  <div class="grid g2" id="lessonGrid"></div>
+<!-- ============ CATALOG ============ -->
+<section class="chapter" id="catalog">
+  <div class="eyebrow">Signal catalog</div>
+  <h2>Every signal we track, and how to read it</h2>
+  <p class="lede">Each card opens to its definition, source, how to capture it, how to read it, and the field note behind it. Filter by layer or phase, or search for a metric.</p>
+  <div class="filters" id="layerFilters"></div>
+  <div class="filters" id="phaseFilters"></div>
+  <div class="filters"><input id="search" type="search" placeholder="Search signals… e.g. citation, cannibalization, index"></div>
+  <div class="count" id="count"></div>
+  <div class="cards" id="cards"></div>
 </section>
 
-<!-- ============ APP NOTES ============ -->
-<section class="chapter" id="app">
-  <div class="eyebrow">Toward a health &amp; performance app</div>
-  <h2>What a product would compute automatically</h2>
-  <p class="lede">Brief by design. The playbook is the spec; these are the parts of it mechanical enough to become software, with the alert condition that makes each one worth shipping.</p>
+<!-- ============ MEASUREMENT ============ -->
+<section class="chapter" id="measurement">
+  <div class="eyebrow">Measurement foundations</div>
+  <h2>The setup every engagement needs before month one</h2>
+  <p class="lede">Small, standard, and done in the baseline phase. Much of it can't be backfilled, so every week of delay is a week the program can't take credit for.</p>
   <div class="tw"><table>
-    <tr><th>Signal</th><th>Computation</th><th>Inputs</th><th>Alert when</th></tr>
-    <tr><td>Field CWV status</td><td>Pass / needs-improvement / poor per metric, per device, per template group</td><td>Field data API, Search Console CWV report</td><td>Passing-URL share drops more than 20% week over week</td></tr>
-    <tr><td>Change-correlated anomalies</td><td>Event volume against a rolling baseline, joined to a change log of tag versions, plugin installs and deploys</td><td>Analytics API, tag manager API, CMS webhook</td><td>Any event exceeds 3× baseline within 72h of a change</td></tr>
-    <tr><td>Duplicate tag load</td><td>Count of analytics and tag-loader instances per synthetic pageview</td><td>Headless browser trace</td><td>More than one instance of any tag</td></tr>
-    <tr><td>Third-party budget</td><td>Distinct third-party hosts, bytes, blocking time, and redundancy classes (deanonymization, chat, consent, replay)</td><td>Headless trace plus request classification</td><td>A new host appears, or two tools occupy one class</td></tr>
-    <tr><td>Money-page cache health</td><td>TTFB on conversion and thank-you URLs, with and without common query strings</td><td>Synthetic requests</td><td>TTFB above 500ms, or a cache-miss header on a money page</td></tr>
-    <tr><td>Form funnel by variant</td><td>Click-to-submit by form variant, with traffic-versus-conversion-rate decomposition</td><td>Analytics API or warehouse, CRM connector</td><td>Any variant falls 25% with stable traffic</td></tr>
-    <tr><td>Submit latency</td><td>Synthetic form submission, timed per stage</td><td>Headless browser</td><td>Submit to thank-you exceeds 2s</td></tr>
-    <tr><td>Taxonomy hygiene</td><td>Near-duplicate event names, missing required params, unregistered dimensions</td><td>Analytics admin and data APIs</td><td>Any new event name outside the contract</td></tr>
-    <tr><td>AI referral share</td><td>Sessions and conversion rate from assistant referrers versus organic, by landing page</td><td>Analytics API with a referrer regex</td><td>AI conversion rate falls below half of organic — the landing page isn't answering the prompt</td></tr>
-    <tr><td>AI crawler reach</td><td>Retrieval-bot hits on key pages; declared robots policy versus observed behaviour</td><td>CDN / server logs, robots.txt fetch</td><td>A retrieval bot is blocked, or a key page goes unfetched for 30 days</td></tr>
-    <tr><td>GEO readiness</td><td>Schema completeness per template, machine-readable copy files present, entity anchoring resolvable</td><td>Scripted crawl plus JSON-LD validation</td><td>Any template regresses, or the composite drops more than 5 points</td></tr>
-    <tr><td>Interaction coverage</td><td>Interactive elements per template versus events observed in a synthetic walkthrough</td><td>Headless browser plus data-layer capture</td><td>Any primary CTA or form fires no event</td></tr>
-    <tr><td>Consent timing</td><td>Configured tag wait versus measured consent resolve time</td><td>Trace</td><td>Wait exceeds twice the median resolve time</td></tr>
+    <tr><th>Setup</th><th>Why it matters</th><th>How</th></tr>
+    <tr><td><b>Search Console Domain property, linked to GA4</b></td><td>Covers every subdomain and protocol, and brings query data next to landing-page behaviour</td><td>Verify through DNS, then link in GA4 under Admin → Product links → Search Console links</td></tr>
+    <tr><td><b>AI assistants channel</b></td><td>Separates AI referrals from Referral and Direct so they can be reported and compared</td><td>In GA4 Admin → Channel groups, copy the default group and add an "AI assistants" channel matching known assistant sources (chatgpt, perplexity, gemini, copilot, claude and others), placed above Referral. Channel groups apply to past data too.</td></tr>
+    <tr><td><b>Key events</b></td><td>Lead counts and conversion rates only mean something if only real conversions count</td><td>Mark form submissions and demo bookings as key events; keep clicks and scrolls as ordinary events. Marking isn't retroactive, so do it in week one.</td></tr>
+    <tr><td><b>Brand-term list</b></td><td>Splits branded from non-branded search, the core of honest SEO reporting</td><td>A regex of brand names, product names and common misspellings, reviewed quarterly and versioned in the engagement record</td></tr>
+    <tr><td><b>Content groups by buyer stage</b></td><td>Lets traffic and conversion be reported by problem, solution, comparison, brand and customer stage</td><td>Set the content group from the CMS taxonomy or URL rules in the tag manager, using the topic coverage map</td></tr>
+    <tr><td><b>Keyword set and prompt set</b></td><td>The fixed denominators for share of voice and citation share</td><td>Grouped by topic and buyer stage, signed off by the client, changed only as dated revisions</td></tr>
+    <tr><td><b>Change log</b></td><td>Lets every movement be explained and every win credited</td><td>One shared log of releases, content shipped, tag publishes and Google updates, mirrored as GA4 annotations</td></tr>
+    <tr><td><b>CRM original source and landing page</b></td><td>The only way to connect search to pipeline</td><td>Hidden form fields populated with first-touch source and landing page; confirm they're filled on recent leads</td></tr>
+    <tr><td><b>Internal traffic exclusion</b></td><td>Keeps the team, the agency and contractors out of the numbers</td><td>GA4 data filter set to Active, plus a QA cookie or staging property for testers</td></tr>
+    <tr><td><b>Server log or CDN access</b></td><td>The only first-party view of AI crawler activity</td><td>Read access or a monthly export from hosting or the CDN</td></tr>
   </table></div>
-  <p>A recurring health letter that pairs each red signal with the diagnostic flow it maps to is the product version of chapter five. Score per layer rather than as one blended number, so a tracking-integrity failure can never hide behind a good LCP.</p>
-  <div class="foot">Thresholds follow the published Core Web Vitals guidance (LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1, TTFB ≤ 800ms at the 75th percentile). Field notes throughout are generalized patterns from B2B SaaS marketing-site engagements, not any single client's figures.</div>
+
+  <h3>If the client has no tracking plan</h3>
+  <p>Two events cover most of what a search program needs to report. Define them once and never invent new event names inside a template.</p>
+  <div class="tw"><table>
+    <tr><th>Event</th><th>Fires when</th><th>Parameters</th></tr>
+    <tr><td><code>form_submit</code></td><td>A lead form succeeds (the provider's success callback or the thank-you page)</td><td><code>form_variant</code>, <code>form_location</code>, <code>source_cta</code></td></tr>
+    <tr><td><code>cta_click</code></td><td>A primary call to action is clicked</td><td><code>cta_text</code>, <code>cta_position</code>, <code>page_location</code></td></tr>
+  </table></div>
+  <p>Register the parameters as custom dimensions the day the events ship; custom dimensions don't backfill. Never put UTM parameters on links between pages of the client's own site: they overwrite the real traffic source and corrupt channel reporting.</p>
+</section>
+
+<!-- ============ PRINCIPLES ============ -->
+<section class="chapter" id="principles">
+  <div class="eyebrow">Principles</div>
+  <h2>What holds across every engagement</h2>
+  <div class="grid g2" id="lessonGrid"></div>
+  <div class="foot">Core Web Vitals thresholds follow Google's published guidance (LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1 at the 75th percentile). Tool names are examples, not endorsements. Field notes are generalized patterns from B2B engagements, not any single client's figures. Menu paths in Google tools change; verify them when something looks different.</div>
 </section>
 
 </main>
 </div>
 
 <script>
-const CHAPTERS=[["overview","Overview"],["recipes","Recipes"],["questions","Questions"],["phases","Phases"],["catalog","Signal catalog"],["contract","Tracking contract"],["diagnostics","Diagnostics"],["reporting","Reporting"],["lessons","Patterns"],["app","App notes"]];
+const CHAPTERS=[["overview","Overview"],["recipes","Leader questions"],["engagement","Engagement model"],["audit","Audit"],["plays","Plays"],["diagnostics","Diagnostics"],["reporting","Reporting"],["catalog","Signal catalog"],["measurement","Measurement"],["principles","Principles"]];
 
 const PHASES=[
- {n:"01",t:"Discover",w:"week 1",why:"Turn the stakeholder's questions into a written list before touching a tag. The list in chapter two is the starting template; the client's version of it is the scope document.",
-  items:["Interview the marketing lead: capture the 5–10 questions they need answered on a recurring basis","Inventory the stack: CMS, form provider, CRM/MAP, consent manager, chat, tag manager, caching, hosting — and who owns each","Export tag-manager version history and the current tag inventory","Pull 90 days of event names; flag near-duplicates and anything too generic to report on","Get admin on analytics, search console and tag manager; confirm CRM read access or a named contact","Write the scope: which of the six layers are yours, and which the client staffs"],
-  deliv:["Questions-to-answer list","Stack and ownership map","Scope memo with layer boundaries and an hour cap"]},
- {n:"02",t:"Baseline",w:"week 1–2",why:"Nothing ships until the before-state is written down. The baseline doubles as an integrity check: a window with heavy tag churn is not a clean baseline, and knowing that early saves a quarter of wrong conclusions.",
-  items:["Field CWV: passing / needs-improvement / poor URL counts by device, plus six-month trend","Cold-cache network trace of homepage, top content template, conversion page and thank-you page","Third-party inventory: hosts, bytes, duplicates, redundancy classes","Form submissions by variant for the last 8 weeks, with deploy annotations overlaid","Search: impressions, clicks, CTR, position; branded vs non-branded","AI baseline: assistant-referral sessions, crawler hits from logs, a first citation panel, a GEO audit","Interaction coverage audit: interactive elements per template versus events firing","Start the measurement log and the regression timeline"],
-  deliv:["Measurement log, baseline section","Regression timeline","Third-party inventory","GEO and AI baseline"]},
- {n:"03",t:"Instrument",w:"week 2–4",why:"Ship the tracking contract: three events, the UTM convention, the persistence cookie, custom dimensions, internal-traffic exclusion, and one analytics module that every template calls.",
-  items:["Implement cta_click with position, variant, page location and slug","Implement form_submit with form variant and source CTA","Implement gated_access with the cookie-status taxonomy where gating exists","Register custom dimensions the same day the events ship","Internal traffic exclusion via a CMS login data-layer variable; QA cookie for contractors","Route all calls through one analytics module; remove template-level analytics calls","Mark key events; set content groups by intent class; add an AI-assistant channel group","Nav-region click handler; save intent segments as reusable explorations","Name each tag-manager version for its intervention; announce publishes in the shared channel"],
-  deliv:["Tracking plan: event → params → dimension","Named tag-manager versions","Analytics module documentation"]},
- {n:"04",t:"Report",w:"week 4–6",why:"Build the executive view from the catalog. State the attribution ceiling in the first review so nobody spends a quarter expecting the dashboard tool to do a warehouse's job.",
-  items:["Build the six-page dashboard, or the subset in scope","Add deploy and tag annotations to the analytics timeline","Write the cadence: what gets read, by whom, when","Document Option A versus Option B for click-to-submit attribution and get a decision","Confirm what was actually published, where it lives, and who has access"],
-  deliv:["Dashboard plus access list","Cadence document","Attribution decision, recorded"]},
- {n:"05",t:"Diagnose & fix",w:"ongoing",why:"Use the diagnostic flows. Tier the work, ship one change at a time, measure after each, and record expected against actual impact so a misdiagnosis surfaces immediately.",
-  items:["Run the matching diagnostic flow before opening tickets","Tier 0: config fixes reversible in minutes — cache rules, consent wait, chat intercept, duplicate tags, preconnects","Tier 1: preloads, image formats, font loading","Tier 2: dequeue unused CSS/JS, icon fonts, video facades, lazy iframes","Re-measure after each shipped change and update the measurement log","Add form error logging so failures stop being silent","Work the GEO backlog: entity schema, author pages, product and FAQ templates, machine-readable copy"],
-  deliv:["Tiered action plan with acceptance criteria","Decisions log","Measurement log, after-state per change"]},
- {n:"06",t:"Hand off",w:"final 2 weeks",why:"Most of this work never lands in a repo — it lives in tag containers, analytics properties and dashboards. If it isn't written down, it doesn't exist to the next person.",
-  items:["Engagement record: what was built and where it lives — container ID, property ID, dashboard URLs, cookie names","Open items with owners: tool consolidation, unvalidated hypotheses, pending decisions","Reading order for a successor","Transfer tag-manager ownership explicitly and confirm access lists","Bill the hours actually spent; note any unbilled ones as a scope lesson for the next SOW"],
-  deliv:["Engagement record","Open-items list","Access and ownership transfer"]}
+ {n:"01",t:"Audit",w:"weeks 1–2",why:"The audit is the diagnosis and usually the sale. It establishes where the site stands on all six pillars, what competitors do better, and where the money is. Every later decision refers back to it.",
+  items:["Kickoff interview: business model, ideal customer, deal size, sales cycle, priority products, named competitors, planned redesigns, and the questions leadership needs answered","Get access: Search Console, GA4, tag manager, CMS, CDN or hosting, and CRM reports","Run the six-pillar audit and score every check Pass, Watch or Fail with evidence","Draft the keyword set and the priority prompt set by topic and buyer stage","Benchmark three to five named competitors on share of voice, citation share and cited sources","Build the opportunity model per topic with low, expected and high cases","Present the top ten findings ranked by revenue at stake, each mapped to a play"],
+  deliv:["Audit report with pillar scores","Competitor benchmark","Opportunity model","Top-ten findings and proposal"]},
+ {n:"02",t:"Baseline",w:"weeks 2–3",why:"Lock the before-state before changing anything. A program that can't show where it started can't prove what it achieved.",
+  items:["Run the trust check and fix anything that blocks honest reporting","Set up measurement foundations: AI assistants channel, key events, brand-term list, content groups, Search Console link to GA4","Freeze the keyword set and prompt set with client sign-off, and version both","Record the baseline for every scorecard layer","Confirm the CRM records original source and landing page, and agree the attribution rule in writing","Start the change log"],
+  deliv:["Baseline scorecard","Measurement setup record","Signed-off keyword and prompt sets"]},
+ {n:"03",t:"Plan",w:"weeks 3–4",why:"Turn findings into a 90-day roadmap the client can fund. Sequence matters: remove what blocks crawling and measurement, then take quick wins on existing pages, then build new content and off-site presence.",
+  items:["Score every candidate play on revenue at stake, confidence and effort","Sequence the roadmap: blockers, then quick wins, then new content and off-site work","Write the expected impact and leading indicator for each play before work starts","Name owners on both sides, and what the client must provide: approvals, experts, developer time","Set 90-day targets as ranges tied to the scorecard"],
+  deliv:["90-day roadmap","Target ranges","Ownership across agency and client"]},
+ {n:"04",t:"Execute",w:"months 1–3",why:"Work in two-to-four-week sprints. Ship, log, measure. Changes shipped in bulk can't be credited or rolled back.",
+  items:["Plan each sprint against the roadmap and confirm client dependencies are ready","Log every shipped change with date, pages and expected effect","Request indexing for changed priority pages and confirm they're recrawled","Re-run the affected prompts after changes to money pages","Check leading indicators weekly and escalate anything moving the wrong way","Hold unapproved work back rather than letting it age in a document"],
+  deliv:["Shipped-work log","Sprint notes","Updated roadmap"]},
+ {n:"05",t:"Report",w:"monthly",why:"The monthly report proves progress through the whole chain and makes next month's decision easy. A busy executive reads it, so it leads with the answer.",
+  items:["Run the trust check for the period","Update the scorecard across all seven layers","Explain every major movement with its cause: shipped work, a Google update, AI Overviews, seasonality or tracking","Show work shipped and its early signal against expected impact","Recommend next month's priorities and the decisions needed from the client"],
+  deliv:["Monthly report","Decisions log"]},
+ {n:"06",t:"Review & renew",w:"each quarter",why:"The quarterly review resets the plan with leadership. It's where the program is renewed, expanded or corrected, so it's argued in pipeline and competitive position, not tasks completed.",
+  items:["Compare results with the 90-day targets and the original opportunity model","Re-benchmark competitors and re-run the full prompt set","Re-score the audit pillars that changed","Review the brand-term list, keyword set and prompt set, and version any changes","Revise the roadmap and opportunity model with what the quarter taught","Propose scope changes with the revenue case for each"],
+  deliv:["Quarterly review deck","Next-quarter roadmap","Renewal or expansion proposal"]}
 ];
 
-const L={rev:"Revenue",acq:"Acquisition",eng:"Engagement",ai:"AI & intent",perf:"Performance",int:"Integrity"};
-const P={2:"Baseline",3:"Instrument",4:"Report",5:"Diagnose"};
+const L={found:"Foundations",content:"Content & authority",vis:"Search visibility",ai:"AI visibility",traffic:"Traffic",rev:"Pipeline",int:"Integrity"};
+// [id, title, layer, phases, question, definition, source, how to capture, how to read, field note]
 const METRICS=[
- ["form_submit_variant","Form submissions by variant","rev",[3,4,5],"Which forms produce leads, and is a decline uniform or concentrated?","Count of form submissions split by variant — popup, embedded search, landing-page form, smart capture.","Analytics event plus custom dimension; fallback is thank-you page path and query string","Append a form identifier to the thank-you redirect, or set the variant in the provider's success callback. Register the dimension.","Trend per variant against the prior period; never report the aggregate alone","An aggregate decline routinely nets a growing new surface against two declining ones. Splitting it is the single highest-value five minutes in the investigation."],
- ["cta_click_position","CTA clicks by position","rev",[3,4],"Which CTA placement drives demand — header, hero, in-content, footer?","Click events grouped by CTA position or campaign parameter.","Analytics event via a tag-manager click trigger","One handler on all primary CTAs, params from data attributes. Add the post slug so content CTAs attribute to the article.","Share of clicks by position, week over week","Multiple identical 'book a demo' buttons produce indistinguishable traffic until position is carried as a parameter."],
- ["click_submit_ratio","Click-to-submit ratio","rev",[4,5],"Of the people who clicked the CTA, how many submitted?","Submissions divided by clicks, by source CTA and page.","Blended dashboard join (directional) or warehouse session join (exact)","Carry the source CTA onto the form via hidden field or a persisted campaign cookie.","Directional in a blend; trust it only from a warehouse join","This is where the standard stack's ceiling shows. Name it in the first review, not the fourth."],
- ["conv_by_source_page","Conversion rate by source page","rev",[4,5],"Is a declining form losing traffic, or losing conversion on the page?","Submissions per session on the pages hosting that form.","Analytics sessions by host page plus submissions by form location","Requires a form-location param; otherwise derive it from the referrer, imperfectly.","Split traffic loss from conversion-rate loss before assigning a cause","A common dead end: a form is known to be declining but nobody can say which pages host it. Capture form location up front."],
- ["lead_status","New versus returning lead","rev",[3,4],"Is this conversion a new lead, a returning lead, or a campaign click?","Distribution of cookie status across gated-access and submission events.","Custom dimension set by the analytics module","A five-state first-party cookie taxonomy, set on submit and on direct-link access.","Share of new and new-direct statuses is the net-new lead rate","Cross-session attribution without a warehouse: cheap to build, and it answers the 'are these the same people?' question that otherwise stalls every funnel conversation."],
- ["pipeline_handoff","Lead-to-pipeline handoff","rev",[2,4],"Did website leads become pipeline?","Leads by source form through to qualified opportunities in the CRM, against target.","CRM / marketing automation report","Ask for a recurring export carrying source form and campaign parameters. You don't need CRM admin.","Target attainment, with the website's share called out","A missed pipeline target is what converts a performance project into a conversion investigation overnight. Know the number before the meeting."],
- ["form_error_rate","Form error rate","rev",[3,5],"How many submissions fail silently?","JS errors, network failures and timeouts in the submit flow divided by attempts.","Error logger plus provider logs","Wrap the submit flow; alert the marketing team by email within minutes.","Any non-zero rate on the primary demo form is a P0","Form errors are invisible by default. Nobody asks for this instrumentation until a forensic investigation needs data that was never collected."],
- ["submit_latency","Submit-to-thank-you latency","rev",[2,5],"How long does the user wait after clicking submit?","Time from submit click to thank-you first paint, broken out per stage.","Manual trace or synthetic browser","Stage it: chat intercept, consent wait, provider response, redirect TTFB.","Under 1s perceived; beyond 2s is abandonment territory","Most of a multi-second submit delay is usually configuration defaults stacked on each other, not application code."],
- ["cpl_channel","Cost per lead by channel","rev",[4],"Which paid channels pay back?","Spend divided by submissions attributed to each source and medium.","Ad platforms plus analytics","Campaign UTMs must not collide with internal CTA UTMs.","Trend against target CPL","Internal CTAs tagged as campaigns silently corrupt paid attribution, and the fix after the fact is a migration."],
- ["sessions_channel","Sessions and users by channel","acq",[2,4],"Where does traffic come from, and is the mix changing?","Sessions, users and engaged sessions by channel group.","Analytics","Standard — but confirm internal exclusion is actually working first.","A mix shift beyond 10 points deserves a written note","Traffic up while conversions fall is the most common shape of the problem; the channel view is what proves it isn't a demand story."],
- ["gsc_core","Impressions, clicks, CTR, position","acq",[2,4],"Is organic search health holding?","Core search performance metrics for the property.","Search Console","Connect it to the dashboard tool early and keep the full retention window.","CTR by position band; watch position drift on money queries","Search data expires. Connecting it on day one is worth more than any analysis you'd run in week one."],
- ["branded_split","Branded versus non-branded queries","acq",[4],"Is growth demand generation, or just brand recognition?","Query-level split using a brand regex.","Search Console","Maintain the brand term list, including misspellings and product names.","Non-branded click share, trended","Missing from almost every inherited dashboard, and it's the difference between 'marketing is working' and 'people already knew us'."],
- ["landing_pages","Top landing pages","acq",[2,4],"Which pages start sessions that convert?","Sessions and conversions by landing page.","Analytics","Pair with form location to see landing-page-to-conversion paths.","Rank by conversions, not sessions","The top-20-by-sessions list and the top-20-by-conversions list overlap far less than stakeholders expect."],
- ["entry_pages","Entry pages by channel","eng",[2,4],"Where do people enter, and does the entry page convert?","Entrances, engagement rate and conversions by landing page and channel.","Analytics landing-page report","Exclude internal traffic; configure cross-domain so a form or campaign host doesn't invent entrances.","Compare the entrance ranking and the conversion ranking side by side","Campaign pages on a separate host fragment the entry picture until cross-domain tracking is clean."],
- ["url_migration","Old versus new URL performance","acq",[2,4],"Did the migration keep the traffic?","Clicks and sessions on old versus new URL structures, plus redirect health.","Search Console, analytics, and a mapping sheet","Maintain the old-to-new mapping in a sheet and blend it in the dashboard.","Recovery to pre-migration clicks within about 8 weeks","URL restructures land mid-engagement more often than not. Build the mapping before you need it to explain a drop."],
- ["index_health","Indexed pages and crawl errors","acq",[2],"Is the search engine seeing the site you think it is?","Indexed count, exclusion reasons, 404 and 5xx rates.","Search Console","Monthly snapshot is enough.","Any spike in excluded or erroring pages","Legal, policy and author pages returning 404 is a surprisingly common finding, and it damages both search trust and AI citability."],
- ["engagement_rate","Engagement rate and time","eng",[2,4],"Are visitors actually reading?","Engaged sessions divided by sessions, and average engagement time.","Analytics","Report per landing page and per template.","Compare templates against each other, not a site average","This is the honest answer to a 'what's our bounce rate?' ask, and it reframes the conversation productively."],
- ["bounce","Bounce and engagement rate by landing page","eng",[2,4],"Are landing pages holding attention?","Bounce read as the inverse of engagement rate — short, single-page, no-key-event sessions.","Analytics","Per landing page and template; always pair with average engagement time.","A content page at 70% bounce and three minutes on page is fine","Bounce rate in isolation has ended more good pages than it has saved."],
- ["content_by_category","Content traffic by category","eng",[4],"Which content themes earn attention?","Sessions and conversions by content category or type.","Analytics plus a content-group dimension","Set the content group in the data layer from the CMS taxonomy.","Leaderboard by conversions assisted, not pageviews","Cheap to add in the data layer on day one; expensive and partial to retrofit later."],
- ["posts_to_conversion","Content that feeds the conversion page","eng",[3,4],"Which articles send people to the demo or pricing page?","Click events carrying the source article slug where the destination is a conversion page.","Analytics event parameter","Add the post slug to the CTA click event and to the CTA's own query string.","Top 10 articles by clicks, and by click-to-submit","Content CTAs are indistinguishable from each other until the slug ships — which means the content team can't tell which writing sells."],
- ["path_journey","Path and funnel exploration","eng",[3,4,5],"What was the journey from entry to conversion, and where does it break?","Path exploration from landing page; funnel from landing through key page, CTA click and submission, with per-step drop-off.","Analytics explorations; warehouse for paths beyond a few steps","Needs the three core events with params, and content groups on key pages.","The largest single step drop is the first thing to fix","Platform funnels are coarse and session-scoped. Say so before someone builds a roadmap on a six-step path report."],
- ["exit_dropoff","Exit rate and drop-off by key page","eng",[2,4,5],"Where do people leave?","Exits divided by pageviews on key pages, and abandonment at each funnel step.","Analytics pages report plus funnel exploration","Define key events first, so 'engaged' has a specific meaning.","Exit rate above 60% on a conversion page is a page problem","Pricing and thank-you pages need opposite readings — leaving after getting an answer is success on one and failure on the other."],
- ["nav_clicks","Navigation and internal-link clicks","eng",[3,4],"What do they click, and where do they go next?","Clicks by navigation region — header, mega menu, footer, in-content — and the next page.","Tag-manager click handler with a region param; path exploration","Track regions plus primary CTAs. Don't track every link; the data is unusable and the tag cost is real.","Share of sessions using the mega menu; next page from key pages","Navigation is also a performance surface — page-builder-driven menus commonly load assets sitewide for widgets that appear nowhere else."],
- ["key_events","Key events and conversion pages","rev",[3,4],"What counts as a conversion, and which pages produce them?","Key events — submissions by variant, demo booking, gated access, pricing view, contact click — and conversion pages ranked by submissions and assists.","Analytics admin key events plus explorations","Mark only true conversions. Keep CTA clicks as diagnostic events, not key events.","Rank conversion pages by submissions and by assist","Marking clicks as conversions is how a routine fluctuation becomes a crisis in the executive meeting."],
- ["key_pages","Most important pages, three rankings","rev",[2,4],"Which pages matter most?","Pages ranked by entrances, by conversions, and by assists, with field performance data joined to that set.","Analytics plus field CWV data","Content groups on the templates and a saved exploration per ranking.","Assists drive roadmap, entrances drive SEO, conversions drive CRO","Pick the first page for performance benchmarking by where these three rankings overlap — usually the homepage or a top product page."],
- ["interaction_coverage","Interaction coverage per template","int",[3,5],"Are we tracking every UI element a user can engage with?","Per template: the interactive elements that exist — CTAs, nav, tabs, accordions, video, search, forms, chat — versus the events that actually fire.","Tracking plan plus a tag-assistant walkthrough","Audit each template at release and put the walkthrough in the deploy checklist.","100% of primary CTAs and forms; secondary elements by decision","Every modular-template or design-system rollout ships a new set of elements. Coverage decays silently unless it's a release gate."],
- ["intent_segments","Intent segments","ai",[3,4],"Are they researching, buying, or already a customer?","Behaviour-defined segments: pricing, integrations, security and demo pages signal buying; blog and glossary signal research; docs, login and support signal an existing customer. Plus query-intent classes.","Analytics segments on content groups; search query classification","Content groups by intent class from the CMS taxonomy, and a logged-in or customer-domain signal to separate customers.","Conversion rate by intent segment; buying-intent sessions week over week","'Everyone goes to the same form, so we can't tell intent' is the most common first complaint — and it's a content-grouping problem, not an analytics-tool problem."],
- ["ai_referrals","AI-assistant referral traffic","ai",[2,3,4],"How much traffic comes from AI assistants, and does it convert?","Sessions whose referrer or campaign source is an assistant domain, with landing pages and conversion rate.","Analytics custom channel group","Build an 'AI assistants' channel group from a referrer regex and report it beside organic search.","Judge on conversion rate versus organic; volume is usually small and intent high","Most sites aren't separating this yet, so it sits inside 'referral' or 'direct' and nobody can see that it converts better than organic."],
- ["ai_crawlers","AI crawler activity","ai",[2,5],"Which AI bots fetch the site, and what do they read?","Hits by user agent, by URL, split into retrieval bots and training crawlers.","Server or CDN logs","Get log access early. Classify agents, then reconcile observed behaviour against the robots policy.","Retrieval bots allowed and reaching key pages; training-crawler policy decided deliberately","Robots files are usually inherited, not authored — blocking retrieval bots by accident costs citations no one is measuring."],
- ["ai_citations","AI answer citation panel","ai",[2,4],"What are the AI engines showing people about us?","A fixed panel of 15–25 prompts — category, comparison, pricing, 'best X for Y' — run across the major assistants on a schedule, logging whether you're cited, what's claimed, and which competitors appear.","Manual or scripted prompt runs into a tracking sheet","Fix the prompt list so results are comparable. Log citation, sentiment, accuracy and competitor set.","Citation rate on category prompts; accuracy of pricing and product claims","Ask an assistant what a product costs and, absent public pricing, it will quote a third-party directory. Whatever the site won't say, something else will."],
- ["geo_score","GEO readiness","ai",[2,5],"Is the site legible to LLM agents?","Entity schema completeness, author and person schema, product and pricing schema, FAQ page typing, machine-readable copy files, robots policy, entity anchoring in public knowledge bases, security headers.","Scripted crawl plus schema validation","Run at baseline and quarterly, then fold the fixes into the SEO backlog.","Composite score plus a per-template pass list","The pattern is consistent: strong technical foundations, thin entity layer. The highest-value evidence pages — customer stories, case studies — are usually the least structured."],
- ["lcp","LCP, field","perf",[2,5],"Does the main content render fast enough on real devices?","75th-percentile Largest Contentful Paint by device and template.","Field data; lab runs for diagnosis","Preload the hero, right-size the image set, remove render-blocking CSS.","Good ≤ 2.5s · needs improvement ≤ 4.0s · poor above","A fast cold-cache trace on a desktop connection routinely hides a failing throttled-mobile number. Report both and label which is which."],
- ["inp","INP, field","perf",[2,5],"Does the page respond to taps?","75th-percentile Interaction to Next Paint.","Field data","Cut third-party JS, duplicate loaders and main-thread work.","Good ≤ 200ms · needs improvement ≤ 500ms · poor above","Interaction failures are usually a third-party accumulation problem, which makes them an ownership conversation before a code one."],
- ["cls","CLS, field","perf",[2,5],"Does the layout jump?","75th-percentile Cumulative Layout Shift.","Field data","Explicit dimensions on media; reserve space for consent banners and accessibility widgets.","Good ≤ 0.1 · needs improvement ≤ 0.25 · poor above","A terrible layout-shift reading from a partially cached run is a measurement artifact. Measure cold before you fix anything."],
- ["ttfb","TTFB by template","perf",[2,5],"Is the server — and the cache — doing its job?","Time to first byte on top templates and money pages.","Network trace; synthetic monitoring","Test with and without the query strings your funnel actually uses.","Good ≤ 800ms; cached pages should be well under 200ms","The thank-you page is frequently the slowest page on the site, because a query parameter bypasses the cache by default."],
- ["good_urls","Passing-URL count by device","perf",[2,4,5],"How many URLs pass all three vitals on mobile and desktop?","Field report counts of passing, needs-improvement and poor URLs.","Search Console","Log it weekly in the measurement log.","Trend it; a collapse to zero is a regression event, not a metric","A sitewide collapse can sit unnoticed for weeks when nobody owns the weekly number. The log is the fix."],
- ["render_blocking","Render-blocking resources","perf",[2,5],"What stops first paint?","Count and bytes of blocking CSS and JS on cold load.","Network trace or lab audit","Dequeue what the page doesn't use, async the non-critical, self-host and subset fonts.","Three or fewer blocking resources on the top template","Double-loaded font families and page-builder CSS on pages that use no builder widgets are the two most common easy wins."],
- ["third_party_count","Third-party hosts and duplicate loads","perf",[2,5],"How much of the page isn't yours?","Distinct third-party hosts, instances per tag, bytes and blocking time.","Network trace plus tag assistant","Classify by role — analytics, ads, deanonymization, chat, consent, replay — and flag duplicates and same-class redundancy.","One tool per class; zero duplicates","Duplicate analytics loaders and two or three overlapping deanonymization tools is the default state of a mature marketing stack, not an anomaly."],
- ["page_weight","Page weight by resource type","perf",[2,5],"Where do the bytes go?","Requests and wire versus decompressed bytes by resource type.","Network trace","Record per template in the measurement log so deltas are attributable.","Track deltas after each shipped change","CSS is usually the surprise: decompressed stylesheet weight often dwarfs the script total on theme-heavy sites."],
- ["cache_hit","Cache hit ratio and bypass rules","perf",[2,5],"Are money pages served from cache?","Cache status headers on conversion and thank-you URLs, including with query strings.","Synthetic requests","Add funnel parameters to the cache allow-list, and verify the optimization layer isn't in a safe or degraded mode.","100% hit on money pages","Always confirm the caching layer is fully enabled before drawing conclusions from a trace — otherwise you're tuning an unoptimized baseline."],
- ["long_tasks","Long tasks and total blocking time","perf",[2,5],"Is the main thread blocked?","Count and duration of tasks over 50ms.","Lab audit or performance profiling","Attribute each task to a script; it's usually third-party.","TBT at or under 200ms in lab conditions","Zero long tasks during load with poor interaction metrics means the problem lives in post-load third-party execution."],
- ["tag_dup","Tag firing count per pageview","int",[2,3,5],"Is every conversion counted exactly once?","Instances of each tag per page load.","Tag assistant; network trace","Check after every container publish, on the conversion and thank-you pages especially.","Exactly one","Tags reported as firing twice on a thank-you page means the conversion number in every report is wrong — and it's usually discovered by accident."],
- ["spike_detect","Event volume against the change log","int",[2,4,5],"Is a spike demand, or a deployment?","Daily event volume overlaid on tag versions, plugin installs and deploys.","Analytics plus a maintained change log","Annotate the analytics timeline on every change and keep a regression timeline.","Any event beyond 3× baseline within 72h of a change gets a written caveat","Click-event spikes of five to ten times baseline landing on publish dates are contractor testing or duplicate firing — and they inflate the baseline that next quarter's 'decline' is measured against."],
- ["internal_excl","Internal traffic exclusion coverage","int",[3],"Are we counting ourselves?","Share of events from logged-in or QA-flagged users.","Tag-manager data-layer variable plus an analytics filter","CMS login state into the data layer, plus a QA cookie for anyone testing in a clean browser.","Zero internal events in production reporting","Login-based exclusion is necessary and insufficient: incognito testing bypasses it completely, which is exactly how baselines get inflated."],
- ["event_hygiene","Event naming hygiene","int",[2,3],"Can an executive read the event list?","Count of near-duplicate or generic event names, and events missing required params.","Analytics event list diffed against the tracking contract","Diff quarterly and deprecate duplicates in the tag manager.","Zero events outside the contract","Four near-identical submission event names coexisting in one property is common. Each one is a question the report can't answer."],
- ["consent_timing","Consent wait versus resolve time","int",[2,5],"Are tags waiting longer than the consent manager needs?","Configured wait against measured resolve time.","Tag-manager config plus a trace","Set the wait to roughly twice the median resolve, not a round default.","Wait at or under 200ms when the manager resolves in under 100ms","A half-second default wait for a manager that resolves in under a tenth of that is pure latency, on every page, for every visitor."],
- ["xdomain","Cross-domain continuity","int",[3,5],"Does attribution survive the hop to the form host?","Share of sessions on the form host attributed to direct or none, and referrer presence.","Cross-domain settings plus referrer inspection","Configure the domain list and persist the campaign URL in a first-party cookie.","Under 5% direct on the form host","A marketing site and its form or landing-page subdomain are the classic break, and it's why dashboard blends silently return nothing."],
- ["schema_coverage","Schema coverage by template","ai",[3,5],"Can machines parse what each page is?","Structured-data types present per template versus the types that template should emit.","Crawl plus JSON-LD validation","Fix at the template level once, not page by page — every template fix applies to its whole archive.","Every template emits its intended types, validated","The highest-value pages are often the least structured: case studies and customer stories emitting only breadcrumbs while thin pages carry full markup."]
+ ["index_coverage","Index coverage of priority pages","found",[1,2,5],"Are the pages we care about indexed?","Indexing status of each priority page, plus site-wide exclusion reasons over time.","Search Console Indexing report and URL Inspection","Track priority URLs as their own list and review exclusion reasons monthly.","Every priority page indexed","'Crawled – currently not indexed' on important pages is usually a quality or duplication signal, not a switch to flip and resubmit."],
+ ["crawlability","Crawlability and architecture","found",[1],"Can crawlers reach every important page easily?","Status codes, redirect chains, canonicals, crawl depth, orphan pages and sitemap accuracy.","Site crawler (Screaming Frog, Sitebulb or similar)","Full crawl at audit, and before any release that changes templates or URLs.","Priority pages within three clicks of the homepage, with no redirect chains or conflicting canonicals","Compare the crawl, the sitemap and Search Console. Pages that appear in only one of the three are where problems hide."],
+ ["js_rendering","Content visible without JavaScript","found",[1],"Do crawlers that don't run JavaScript see our content?","Whether primary content, internal links and schema are present in the raw HTML the server returns.","View-source comparison, or a crawl with JavaScript turned off","Compare the raw and rendered versions of each template.","Nothing important missing from the raw HTML","Many AI crawlers fetch raw HTML without running scripts. A site can rank well in Google and still be close to invisible to AI engines."],
+ ["ai_crawler_access","AI crawler access","found",[1,2],"Are AI crawlers allowed in, and actually fetching key pages?","Rules for AI user agents in robots.txt and in CDN or firewall bot settings, split into search and retrieval bots versus training crawlers, confirmed by log hits.","robots.txt, CDN or firewall settings, server logs","Record each AI agent's status: allowed, blocked by robots.txt, or blocked at the CDN. Confirm with hits on priority pages.","Search and retrieval bots reach priority pages; training-crawler policy is a deliberate business decision","CDN bot protection can block AI crawlers even when robots.txt allows them, and the marketing team rarely sees those settings."],
+ ["structured_data","Structured data by template","found",[1,4],"Can machines tell what each page is, and who's behind it?","Schema types each template emits (Organization, Product or SoftwareApplication, Article with Person authors, BreadcrumbList) and any validation errors.","Crawler extraction, Rich Results Test, Schema Markup Validator","Check a sample page per template and fix at the template level.","Every template emits its intended types, with facts that match the page","Google has limited FAQ rich results to authoritative government and health sites since 2023. FAQ markup on a B2B site helps machines understand the page; it won't earn a rich result."],
+ ["cwv","Core Web Vitals, field data","found",[1,2,5],"Is the site fast enough on real devices?","Share of URLs passing LCP, INP and CLS at the 75th percentile, by device and template.","Search Console Core Web Vitals, PageSpeed Insights","Check money-page templates on mobile first.","Good: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1","Speed rarely wins rankings on its own, but a failing template on pricing or demo pages costs conversions directly."],
+ ["migration_risk","Migration and redesign risk","found",[1,4],"Will a redesign or URL change keep its search equity?","Redirect coverage from old to new URLs, preserved titles, content and internal links, and clicks before versus after.","Pre-launch crawl, redirect map, Search Console","Benchmark before launch, crawl staging, check redirects on launch day, and monitor daily for four weeks.","Clicks back to the pre-launch level within about two months","The biggest risk is being brought in after launch. Ask about planned redesigns at kickoff."],
+ ["topic_coverage","Topic coverage map","content",[1,3],"Do we have a strong page for every priority topic and buyer stage?","Priority topics by buyer stage, each mapped to its target page, primary keyword, prompts, and the competitor page that currently wins.","Keyword research, content inventory, rank tracker","One row per topic and stage, with gaps marked explicitly.","Gaps at the comparison, alternatives, pricing and integration stages come first","Most B2B sites are over-built at the top of the funnel and missing the pages buyers read right before they shortlist."],
+ ["cannibalization","Keyword cannibalization","content",[1,4],"Are our own pages competing with each other?","Queries where two or more of the site's URLs rank and trade positions.","Search Console query-to-page data, rank tracker","Flag priority queries with more than one ranking URL over the period.","Consolidate, redirect or re-target; internal links alone rarely fix it","Blog sprawl on one topic is the usual cause. Consolidation often lifts the surviving page faster than publishing something new."],
+ ["content_decay","Content decay","content",[4,5],"Which pages are losing clicks they used to earn?","Pages whose clicks declined against the same period last year.","Search Console Pages report","Compare the last three months with the same months last year for each page, and rank by clicks lost.","Refresh pages that still match intent; merge or retire the rest","A refresh program against decaying pages is usually the fastest measurable win on a mature site."],
+ ["content_quality","Experience and expertise signals","content",[1,4],"Would a buyer, and an AI engine, trust this page?","Named authors with real credentials, first-hand experience, original data or examples, clear sourcing and visible update dates on priority pages.","Scored review of priority pages","Score priority pages against a fixed rubric at audit and after each refresh.","Fix at the template level first: an author box or methodology section lifts every page on the template","Pages with specific numbers, original data and named experts are the ones engines quote. Generic summaries of other pages get summarized away."],
+ ["extractability","Answer-first structure","content",[1,4],"Can an AI engine lift a clear answer from the page?","Whether priority pages open with a direct answer, use question-style headings, keep key facts in text rather than images or tabs, and use tables for comparisons.","Scored review of priority pages","Read the first screen of each page as a buyer asking its target question.","Rewrite the top of the page first","Answers hidden in JavaScript tabs, accordions or images are often invisible to crawlers that don't run scripts."],
+ ["referring_domains","Relevant referring domains","content",[1,5],"Is the site's authority growing from sites that matter?","New and lost referring domains, filtered for relevance and quality, compared with competitors.","Backlink tool (Ahrefs, Semrush or similar)","Track monthly, and tag the links the program earned.","Relevance beats volume","Link counts are an input. Report them only next to the rankings and citations they're meant to move."],
+ ["third_party_presence","Third-party presence","content",[1,4,5],"Are we present where buyers and AI engines look beyond our site?","Profile completeness and review recency on review sites, inclusion in category lists, and mentions in communities, video and publications, prioritized by the cited-sources list.","Cited-sources list, manual review","Track presence, recency and sentiment per source, monthly.","Prioritize sources by how often engines cite them in category prompts","In categories with established review sites, this is where AI visibility is usually won or lost."],
+ ["internal_links","Internal links to priority pages","content",[1,4],"Do our strongest pages pass authority to the pages that convert?","Internal links pointing at priority pages, where they come from, their anchor text, and orphaned pages.","Site crawler","Crawl and count inbound internal links for each priority page.","Every priority page linked from relevant, high-traffic content","Money pages are often linked only from the navigation, while the posts that attract links never point to them."],
+ ["nb_clicks","Non-branded clicks and impressions","vis",[2,5],"Is SEO winning new demand?","Search Console clicks and impressions from queries that don't contain brand or product names.","Search Console","Performance report with a Query filter that doesn't match the brand-term regex. Keep the regex in the engagement record.","Trend year over year; month over month is mostly seasonality","The brand list decays. New product names, acquisitions and misspellings leak branded demand into the non-branded number and flatter the program."],
+ ["share_of_voice","Share of voice by topic","vis",[1,2,5],"Are we more visible than competitors where it matters?","Estimated share of available clicks across a fixed keyword set, grouped by topic and compared with named competitors.","Rank tracker (Ahrefs, Semrush or similar)","Build the keyword set from priority topics, tag each keyword by topic and buyer stage, and add three to five named competitors. Freeze the set; changes are dated revisions.","Compare by topic, not overall","Winning the glossary while losing 'pricing' and 'alternatives' looks like growth in the overall number. It isn't. Visibility scores also differ by vendor, so never compare numbers across tools."],
+ ["priority_rankings","Priority keyword positions","vis",[2,4,5],"Where do our money pages rank for the terms that buy?","Position distribution (top 3, 4–10, 11–20, beyond) for keywords tagged by buyer stage.","Rank tracker, Search Console","Tag keywords as problem, solution, comparison or brand, and report the distribution for each stage.","Movement from page two onto page one is where click gains show up first","Average position averages every query and every impression. A page can average 8 while ranking first for one term and fortieth for fifty. Read distributions."],
+ ["serp_features","Results-page features and AI Overviews","vis",[1,2,5],"What else sits on the results page for our terms?","For priority keywords, which features appear (AI Overviews, featured snippets, People Also Ask, video, forum results) and which the site owns.","Rank tracker SERP-feature data, manual checks","Record feature presence per keyword at baseline and monthly.","On keywords with AI Overviews, judge citation in the overview as much as the ranking","A stable ranking with falling clicks is often a new feature above the result, not a ranking problem. Look at the results page before rewriting the page."],
+ ["ctr_by_position","Click-through rate at stable positions","vis",[2,5],"Are we getting the clicks our rankings should earn?","CTR for priority queries grouped by position band and by whether an AI Overview appears.","Search Console, rank tracker","Export query data, add the rank tracker's AI Overview flag, and compare CTR at similar positions.","Falling CTR at a stable position means the results page changed, or the title stopped earning the click","This is the cleanest way to show a client that clicks fell because of AI Overviews rather than because the work stopped working."],
+ ["branded_demand","Branded search demand","vis",[2,5],"Is the brand itself growing?","Search Console impressions and clicks for brand and product-name queries, trended.","Search Console","Use the same brand-term regex as the non-branded split, inverted.","Trend year over year, alongside AI mention share","Branded demand belongs to brand and demand generation, not the search program. Report it, but don't claim it."],
+ ["prompt_set","Priority prompt set","ai",[1,2],"Which questions should we win in AI answers?","A fixed list of prompts written the way buyers ask: category, problem, comparison, alternatives, pricing, integration and 'best for' questions.","Keyword research, sales-call notes, People Also Ask, client input","Group prompts by topic and buyer stage, get client sign-off, and version the list. Add prompts as dated revisions; never edit silently.","Every priority topic has prompts at each buyer stage","The prompt set is the AI equivalent of the keyword set, and it decides whether AI reporting means anything at all."],
+ ["citation_share","AI mention and citation share","ai",[2,5],"How often do AI engines name or cite us, compared with competitors?","Across the prompt set and each engine (ChatGPT, Perplexity, Gemini, Google AI Overviews and AI Mode, Copilot), the share of answers that mention the brand, cite the site, and mention each competitor.","AI visibility tracker (Profound, Peec AI, Otterly or similar) or a manual monthly panel","Run every prompt at least monthly on each engine. Log mention, citation, competitors named and sources cited.","Mention share and citation share by engine and buyer stage, against competitors","Answers vary from run to run. Report across the whole set and over months, never from a single screenshot someone forwards."],
+ ["answer_accuracy","Accuracy of AI answers about the brand","ai",[1,5],"Are AI engines getting our facts right?","For brand prompts (pricing, features, integrations, security, who it's for), whether each stated fact is correct, outdated or wrong.","Prompt runs","Score each fact, and record the source the engine cites for it.","Any wrong pricing or capability claim is a priority fix","Wrong answers usually trace to a third-party page or an old page on the client's own site. Fix the source, then state the fact plainly on a page the client controls."],
+ ["cited_sources","Sources cited in the category","ai",[1,3,5],"Which sites shape AI answers about our category?","The domains cited across category and comparison prompts, ranked by frequency: review sites, lists, communities, publications, competitors and the client.","Tracker exports or panel logs","Aggregate cited URLs by domain across the prompt set, monthly.","The top of this list is the off-site plan","The client rarely owns the top of the list. Presence on sources engines already trust tends to move citation share faster than on-site work alone."],
+ ["entity_consistency","Entity consistency","ai",[1,4],"Do the facts about the company match everywhere engines look?","Whether name, category, description, audience, pricing model and key facts agree across the site, Organization schema, LinkedIn, review sites, Crunchbase, and Wikipedia or Wikidata where they exist.","Fact sheet checked against major profiles","Write a one-page fact sheet, audit each profile against it, and log mismatches.","No conflicting facts on the profiles engines cite","Engines reconcile what several sources say. Conflicting descriptions produce vague answers, or confident wrong ones."],
+ ["organic_sessions","Organic sessions that engage","traffic",[2,5],"Is search traffic real, engaged traffic?","Organic search sessions, engaged sessions and engagement rate, split by landing-page type.","GA4","Report by content group or page type, not as one blended number.","Compare page types with each other, not with a sitewide average","Blog traffic and product-page traffic behave differently. The blend hides both stories."],
+ ["ai_referrals","AI assistant referrals","traffic",[2,5],"Do AI assistants send visitors, and do they convert?","Sessions from AI assistants, with landing pages, engagement and key event rate.","GA4 custom channel group","An AI assistants channel matching known assistant sources, placed above Referral.","Judge on conversion rate against organic; volume is usually small","Some AI apps strip the referrer, so part of this traffic lands in Direct. Treat the number as a floor."],
+ ["landing_performance","Landing pages that convert","traffic",[2,5],"Which pages turn search visits into leads?","Organic and AI sessions, engagement and key event rate by landing page.","GA4 Landing page report","Filter to the organic and AI channels and sort by key events.","Rank by leads, not sessions","The top landing pages by sessions and by leads overlap far less than stakeholders expect."],
+ ["buyer_stage","Traffic by buyer stage","traffic",[3,5],"Are we attracting researchers, buyers or existing customers?","Sessions and conversion rate grouped by the buyer stage of the landing page: problem, solution, comparison, brand, customer.","GA4 content groups","Set content groups from the topic coverage map.","Comparison and brand stages should convert far better than problem stage","Existing customers visiting docs and login pages inflate 'organic traffic' and drag down conversion rates. Separate them."],
+ ["organic_leads","Leads from search and AI","rev",[2,5],"How many leads do search and AI produce?","Key events (form submissions, demo requests) from organic search and AI assistant sessions, by landing page.","GA4 key events","Mark only real conversions as key events.","Leads by landing page show which content sells","Last click undercounts content that starts the journey. Show the CRM's original source beside it."],
+ ["search_pipeline","Search-sourced pipeline","rev",[2,5],"Did search leads become opportunities and revenue?","Opportunities and pipeline value where original source is organic search or an AI assistant.","CRM","Capture original source and landing page on every form, and agree the attribution rule with the client in writing.","Report against target and program cost","If the CRM can't tell organic from direct, fix it before month three. A program that can't show pipeline gets cut in the first budget review."],
+ ["opportunity_value","Opportunity model","rev",[1,3,6],"What is the realistic upside?","Per priority topic: search demand × expected click-through at the target position × conversion rate × lead value, with low, expected and high cases.","Rank tracker volumes, Search Console, GA4, CRM","Model each topic, state the assumptions, and re-baseline each quarter.","Ranges, never a single number","A forecast without ranges gets remembered as a promise. Show the assumptions before the number."],
+ ["change_log","Change log against the data","int",[2,4,5],"Is a movement real, or did something ship?","A dated log of releases, content shipped, tag publishes, robots or CDN changes and Google updates, overlaid on the scorecard.","Shared log plus GA4 annotations","Log every change the day it ships, and add Google's confirmed updates from the Search Status Dashboard.","Any movement within a few days of a change gets investigated before it's reported","Spikes that land on tag-publish dates are testing or double-firing, and they inflate the baseline that next quarter's 'decline' is measured against."],
+ ["duplicate_tags","Duplicate tags on conversion pages","int",[2,5],"Is every conversion counted exactly once?","Instances of each analytics and conversion tag per page load.","Tag Assistant","Check conversion and thank-you pages after every tag publish.","Exactly one","An engagement rate near 100% is the giveaway: duplicate page views make every session look engaged."],
+ ["key_events","Key event definitions","int",[2],"Do the conversions we report mean something?","Which GA4 events are marked as key events, and whether event names are consistent.","GA4 Admin","Mark only real conversions and record the definitions in the engagement record.","No near-duplicate names, and no clicks marked as key events","Marking a key event isn't retroactive, and renaming one mid-program breaks the trend. Decide in the baseline phase and leave it."],
+ ["internal_traffic","Internal traffic exclusion","int",[2],"Are we counting ourselves?","Whether the GA4 internal-traffic filter is active and covers the client team, the agency and contractors.","GA4 data filters","Set the filter to Active, and give testers a QA cookie or a staging property.","No internal sessions in reported numbers","IP-based exclusion misses remote teams and anyone testing on a phone. Check it; don't assume it."],
+ ["brand_list","Brand-term list","int",[2,6],"Is the branded and non-branded split still accurate?","The regex of brand names, product names and common misspellings used to split search data.","Engagement record","Review quarterly and after launches, acquisitions or renames, and version every change.","Every current product name and common misspelling included","The most flattering error in search reporting: branded growth counted as an SEO win."]
 ];
 
 const LESSONS=[
- ["Name events from the executive's question","A submission event that carries form variant, page and source CTA answers 'which form, on which page, from which CTA' with no dashboard formula. One that carries nothing answers nothing, and no amount of reporting effort recovers it."],
- ["Cookie status is a lead-journey bridge","Event-based analytics won't connect this asset download to that form submission three weeks ago. A five-value first-party cookie does, without standing up a warehouse."],
- ["A strict UTM convention beats an attribution module","Header-versus-hero was a real question answered by a naming convention and one click handler. Reach for JavaScript only after the convention runs out."],
- ["Defend stack consolidation early","Marketing teams add deanonymization, chat, consent, replay and heatmap tools faster than they retire them. Measure each duplicate's cost in milliseconds and make the case before a vitals collapse makes it for you."],
- ["The standard reporting stack has a real ceiling","Blended joins, cross-domain paths and session identity are where it breaks. Naming the ceiling honestly converts a recurring disappointment into a budget decision."],
- ["Find the measurement artifacts before reporting the decline","Check whether the baseline is real before accepting that the decline is. A few weeks of tag churn is enough to inflate it past recognition."],
- ["Check the optimization layer before writing code","A caching or optimization layer left switched off turns every trace into an unoptimized baseline, and every conclusion drawn from it into wasted work. The biggest lever is often free."],
- ["Scope the six layers on day one","Absorbing analytics and reporting work unbilled out of budget sensitivity is a structural risk, not a favour. Decide which layers are yours, which the client staffs, and write it into the SOW."],
- ["Phased delivery beats a finished migration","Performance and instrumentation gains don't require completing the whole rebuild. Sequencing shared components first, then benchmarking one high-traffic page, produces demonstrable wins mid-project — and that framing is what keeps client confidence through a long migration."],
- ["Write the record as you go","Tag containers, analytics properties and dashboards leave no trace in the repo. An engagement record naming every container, property, cookie and dashboard is the difference between transferable work and invisible work."]
+ ["Visibility, then traffic, then pipeline","Report the chain in order. A drop gets diagnosed in the link where it happened, instead of blamed on the channel."],
+ ["Clicks are no longer a complete measure","AI answers resolve questions without a visit. Measure citations and impressions beside clicks, and set that expectation before traffic dips, not after."],
+ ["Freeze the denominators","Keyword sets, prompt sets and brand-term lists change only as dated revisions. Otherwise every trend is an artifact of what you chose to count."],
+ ["Win the sources, not just the page","AI engines lean on third-party sites. In established categories, review sites, lists and communities often move citation share faster than on-site work."],
+ ["Unblock before you build","Crawling, rendering, indexing and measurement blockers cap the return on everything else. Fix them first, even when they're less exciting to sell."],
+ ["Argue the roadmap in revenue","A roadmap ranked by revenue at stake gets funded. A roadmap argued in best practices gets trimmed at the first budget review."],
+ ["Write the expected impact first","Every play states what it should move and by when. A large miss means the diagnosis was wrong, and that's worth knowing early."],
+ ["Ship in sequence and log everything","Bulk releases can't be credited or rolled back. The change log is the only engineering record of work that rarely lives in a repository."],
+ ["Name the attribution ceiling on day one","Analytics undercounts long B2B journeys and can't see influence without a click. Saying so early builds more credibility than promising precision later."],
+ ["Be the source AI can quote","Plain-text facts, original data, named experts and answer-first pages are what engines lift. Copy that says nothing specific gets summarized away."]
 ];
 
-const DIAGS={d1:"Conversions are down",d2:"Core Web Vitals collapsed",d3:"Form submit feels slow"};
+const DIAGS={d1:"Organic traffic dropped",d2:"AI visibility dropped",d3:"Leads fell, traffic didn't",d4:"Pages dropped out of the index"};
+
 const RECIPES=[
- {id:"trust",q:"Can we trust these numbers?",who:"Ask it yourself before any report. Leaders ask it after a number surprises them.",box:"20 min",
-  want:"A yes, or a yes with caveats: which numbers are safe to use for the period, and which need a footnote.",
-  steps:["In GA4, open <b>Admin → Data filters</b> and confirm the internal-traffic filter is <b>Active</b>, not Testing.",
-   "Open <b>Reports → Engagement → Events</b> for the last 90 days. Look for near-duplicate event names (<code>form_submit</code>, <code>formSubmit</code>, <code>generate_lead</code>) and spikes that don't look like real demand.",
-   "Line the spikes up against the change history: tag manager <b>Versions</b>, GA4 annotations, and any deploy or plugin notes. A spike within a few days of a change is testing or double-firing until proven otherwise.",
-   "Run Tag Assistant on the conversion and thank-you pages. Every analytics and conversion tag should fire exactly once.",
-   "In <b>Reports → Acquisition → Traffic acquisition</b>, switch to <b>Session source / medium</b>. If your own domain or form host shows up as a referral, attribution is breaking between hosts."],
+ {id:"trust",q:"Can we trust these numbers?",who:"Ask it yourself before any report. Leaders ask it after a number surprises them.",box:"30 min",
+  want:"A yes, or a yes with caveats: which numbers are safe for the period, and which need a footnote.",
+  steps:["In Search Console, confirm the account uses a <b>Domain property</b>, so every subdomain and protocol is included, and that it's linked to GA4 (GA4 <b>Admin → Product links → Search Console links</b>).",
+   "In GA4, open <b>Admin → Data filters</b> and confirm the internal-traffic filter is <b>Active</b>. Then check the key events list: only real conversions, such as form submissions and demo bookings, should be marked.",
+   "Open <b>Reports → Engagement → Events</b> for the last 90 days. Look for near-duplicate event names and for spikes that don't look like demand, and line any spike up against the change log.",
+   "Confirm AI assistants have their own channel, and that the brand-term list includes every current product name and common misspelling.",
+   "Run Tag Assistant on the main conversion page. Every analytics and conversion tag should fire exactly once."],
   read:["One problem doesn't void the report. Name the affected metric and dates, and report everything else normally.",
-   "An engagement rate near 100%, or a bounce rate near zero, almost always means page views are firing twice.",
-   "Check the comparison period too. An inflated baseline makes an ordinary month look like a decline."],
-  check:"You need editor access to GA4 and the tag manager. Without it this recipe becomes a request list, so ask on day one.",
-  say:"Tracking is reliable for [period] except [metric] between [dates], which was [inflated / undercounted] by [cause]. Treat those numbers as directional.",
-  signals:["tag_dup","spike_detect","internal_excl","event_hygiene","xdomain"],diags:["d1"]},
- {id:"leads",q:"Is the website generating leads?",who:"Executives and the marketing lead, monthly or at quarter end.",box:"15 min",
-  want:"Leads this period against last period and the same period last year, split by form, and how many became pipeline.",
-  steps:["In GA4, open <b>Reports → Engagement → Key events</b>. Set the date range and turn on <b>Compare</b> with the previous period, then with the previous year.",
-   "Split leads by form. If the tracking contract is in place, open the <code>form_submit</code> event and break it down by <code>form_variant</code>. If not, use <b>Pages and screens</b> filtered to thank-you pages.",
-   "Ask marketing ops for leads by source form, and how many became qualified pipeline in the same window. You need the export, not CRM admin access.",
-   "Put it in one table: leads, change against both comparison periods, share by form, and pipeline."],
-  read:["Leads are what the website produces; pipeline is what the business cares about. Report both whenever the CRM export exists.",
-   "A flat total can hide one form growing while another collapses. Always show the split.",
-   "If CTA clicks or page views are marked as key events, the lead count is inflated. Only real conversions count."],
-  check:"Run <a href=\"#recipes/trust\">Can we trust these numbers?</a> for the same period first.",
-  say:"The site produced [N] leads in [period], [up / down] [X]% on [comparison period]. [Form] drove [X]% of them, and [N] became qualified pipeline.",
-  signals:["form_submit_variant","key_events","pipeline_handoff","lead_status"],related:["leads-drop"]},
- {id:"leads-drop",q:"Why did leads drop?",who:"An executive, usually urgently, and usually holding one total.",box:"1–2 hours",
-  want:"Whether the drop is real, where it's concentrated, and what you're doing about it. Ideally the same day.",
-  steps:["Confirm the drop is real. Run <a href=\"#recipes/trust\">Can we trust these numbers?</a> on both the current and comparison periods. An inflated baseline is the most common false alarm.",
-   "Split leads by form. A drop across every form points to something sitewide: tracking, speed or consent. A drop in one or two forms points to specific pages.",
-   "For each declining form, compare visits to the pages that host it with its conversion rate. Fewer visits is a traffic question. The same visits with fewer submissions is a page question.",
-   "Check whether the leads just moved. If the number of people submitting any form is flat, a new form or popup is taking the submissions.",
-   "Only then look at site speed, form errors and CRM sync failures."],
-  read:["Answer with the split, not the total. 'Down 30%' often turns out to be two forms down and one up.",
-   "Lost traffic goes to whoever owns SEO or paid. A lower conversion rate goes to whoever owns the page. Getting that right sends the problem to the right person."],
-  check:"List every site, tag and campaign change in the window. It's the fastest route to the cause.",
-  say:"Leads fell [X]% in [period]. [Most / all] of the drop comes from [form or page], down [X]%, while [form or page] is up [X]%. We're [action] and will report back by [date].",
-  signals:["spike_detect","form_submit_variant","conv_by_source_page","sessions_channel"],diags:["d1"]},
- {id:"traffic",q:"Where is our traffic coming from, and is it the right traffic?",who:"The marketing lead planning spend, or an executive asking what's working.",box:"15 min",
-  want:"Channels ranked by leads rather than visits, with the trend and what changed.",
-  steps:["In GA4, open <b>Reports → Acquisition → Traffic acquisition</b>. Make sure <b>Key events</b> and <b>Session key event rate</b> are columns, and compare with the previous period.",
-   "For the channel that moved most, switch the dimension to <b>Session source / medium</b> to see which sources drove the change.",
-   "Open <b>Reports → Engagement → Landing page</b> and add the channel as a secondary dimension to see where each channel lands."],
-  read:["The right traffic engages and converts. A channel with half the visits and twice the conversion rate is the better channel.",
-   "Rising Direct traffic often means lost attribution, such as broken campaign tags or a form on another domain, rather than more people typing the URL.",
-   "A channel-mix shift of more than about 10 points deserves a written note in the report."],
-  check:"Internal traffic is excluded, and the site's own CTAs aren't tagged with campaign UTMs. Tagged CTAs quietly take credit from real channels.",
-  say:"[Channel] brought [X]% of visits and [X]% of leads. [Channel] grew [X]% but converts at [rate] against [rate] overall, so we recommend [action].",
-  signals:["sessions_channel","landing_pages","entry_pages","cpl_channel"]},
- {id:"seo",q:"Is SEO working?",who:"The marketing lead, or an executive weighing SEO spend. Usually quarterly.",box:"20 min",
-  want:"Non-branded search clicks and the leads they produce, year over year, with the pages behind the change.",
-  steps:["In Search Console, open <b>Performance → Search results</b>. Show clicks, impressions, CTR and position, and compare the last 3 months with the same months last year.",
-   "Add a <b>Query</b> filter set to <b>Doesn't match regex</b> with your brand terms (for example <code>acme|acme hq</code>). What's left is non-branded search, the part SEO actually earns.",
-   "On the <b>Pages</b> tab, sort by the change in clicks to find the pages behind any gain or loss.",
-   "Open <b>Indexing → Pages</b>. Check whether not-indexed counts are rising and whether any important pages return errors.",
-   "In GA4 <b>Traffic acquisition</b>, look at Organic Search to get the leads search produced."],
-  read:["Branded clicks measure demand the company already created. Non-branded clicks show whether SEO is winning new people.",
-   "Impressions up while clicks stay flat usually means ranking on page two, or AI Overviews answering the question on the results page. Search Console counts AI Overviews and AI Mode in these totals but doesn't report them separately.",
-   "Search Console only keeps 16 months of data. Export it monthly if you'll need a longer history."],
-  check:"Use a Domain property so every subdomain and protocol is included.",
-  say:"Non-branded search clicks [grew / fell] [X]% year over year to [N], led by [pages]. Organic search produced [N] leads, [X]% of the total.",
-  signals:["gsc_core","branded_split","index_health","url_migration"]},
- {id:"content",q:"Which pages and content are pulling their weight?",who:"The content lead deciding what to write, update or retire.",box:"30 min",
-  want:"A short list of pages sorted into traffic drivers, lead drivers and assists, with a decision next to each.",
-  steps:["In GA4, open <b>Reports → Engagement → Pages and screens</b>. Filter to the content section (for example <code>/blog/</code>) and look at views, engagement time and key events.",
-   "Open <b>Landing page</b> for the same section to see which posts start visits that go on to convert.",
-   "In Search Console, filter <b>Pages</b> to the same section to see search clicks per post and the trend.",
-   "For assists (posts people read before converting), build an <b>Explore → Free form</b> report with a segment of sessions that include your lead event."],
-  read:["Most content does one job. Judge each post on its job: traffic, leads, or assists.",
-   "Compare posts with other posts, not with the pricing page.",
-   "A high-traffic post with no leads usually needs a better next step, like a CTA or a link to the product, not a rewrite."],
-  check:"Content groups turn this into a two-minute report instead of a filtering exercise. They're part of the tracking contract.",
-  say:"[N] of [total] posts produce [X]% of content-sourced leads. [Post] is our best converter. [Post] brings traffic but no leads, so we'll add [next step]. We'll retire or merge [N] posts.",
-  signals:["content_by_category","posts_to_conversion","key_pages","engagement_rate"]},
- {id:"dropoff",q:"Where do visitors drop off before converting?",who:"The marketing lead or demand-gen owner planning conversion tests.",box:"45 min",
-  want:"The path from landing to lead, the single biggest leak, and the change to test first.",
-  steps:["In GA4, open <b>Explore → Funnel exploration</b>. Set the steps to session start → key page (pricing or demo) → CTA click → form submission, and break it down by <b>Device category</b>.",
-   "If CTA clicks are tracked, check which positions get clicked on the key page: header, hero, in-content or footer.",
-   "Submit the form yourself on a phone. Time it from tapping submit to seeing the thank-you page.",
-   "In <b>Explore → Path exploration</b>, start from the key page to see where people go instead of converting."],
-  read:["Fix the biggest drop first. One large early leak costs more than several small late ones.",
-   "A much bigger drop on mobile at the form step points to form usability or speed.",
-   "If the funnel shows far fewer CTA clicks than form submissions, CTA tracking is incomplete. The funnel isn't the problem."],
-  check:"CTA and form events need to fire on every page template. <a href=\"#recipes/trust\">Can we trust these numbers?</a> covers it.",
-  say:"[X]% of visitors who reach [page] click a CTA, and [X]% of those submit the form. The biggest loss is at [step], and it's [worse on mobile]. We'll test [change] first.",
-  signals:["path_journey","exit_dropoff","click_submit_ratio","cta_click_position","submit_latency"],diags:["d3"]},
- {id:"speed",q:"Is the site fast enough?",who:"An executive after a complaint, or sales after a slow demo.",box:"30 min",
-  want:"Pass or fail on Google's Core Web Vitals for mobile and desktop, which pages fail, and how long the form takes to submit.",
-  steps:["In Search Console, open <b>Core Web Vitals</b>. Note the good, needs-improvement and poor URL counts for mobile and desktop, and the trend.",
-   "Run <a href=\"https://pagespeed.web.dev/\">PageSpeed Insights</a> on the homepage, the top landing page, the conversion page and the thank-you page. Use the real-user data at the top of the results, not the lab score below it.",
-   "Submit the main form and time it from click to thank-you page.",
-   "List site, plugin and tag changes around any date where the trend drops."],
-  read:["Real-user data is the verdict; the lab score is for diagnosis. Report the real-user numbers.",
-   "'Slow' almost always means one metric is failing: loading (LCP), response to taps (INP) or layout shift (CLS). Name which one.",
-   "The thank-you page is often the slowest page on the site, because the parameters in its URL skip the cache."],
-  check:"Confirm caching and optimization are fully switched on before measuring. Otherwise you're measuring an unoptimized site.",
-  say:"On mobile, [X]% of URLs pass Core Web Vitals, [up / down] from [X]% in [period]. [Metric] fails on [page types]. The form takes [N] seconds to submit, and we'll fix [issue] first.",
-  signals:["good_urls","lcp","inp","cls","ttfb","submit_latency"],diags:["d2","d3"]},
- {id:"ai",q:"Are AI tools sending us visitors, and what are they saying about us?",who:"An executive who has seen a headline about AI search.",box:"1 hour",
-  want:"How many visitors AI assistants send and how well they convert, plus whether assistants recommend you and get the facts right.",
-  steps:["In GA4, open <b>Explore → Free form</b>. Rows: <b>Session source</b> and <b>Landing page</b>. Values: sessions and key events. Filter session source with the regex <code>chatgpt|openai|perplexity|gemini|copilot|claude</code>.",
-   "Compare their conversion rate with Organic Search on the same landing pages.",
-   "Ask the major assistants a fixed list of 15–25 prompts: your category, comparisons with competitors, pricing, and 'best tool for…' questions. Log whether you're cited, whether the facts are right, and which competitors appear.",
-   "To report this every month without rebuilding it, create an 'AI assistants' channel in <b>Admin → Channel groups</b>, placed above Referral."],
-  read:["Volume is usually small. Judge AI traffic on conversion rate, not visits.",
-   "When an assistant gets your pricing or features wrong, it's usually quoting another site because yours doesn't state them plainly.",
-   "Some AI apps strip the referrer, so part of this traffic lands in Direct. Treat the number as a floor.",
-   "Search Console includes AI Overviews and AI Mode in normal search data without separating them, so the prompt list is your only direct view of what the answers say."],
-  check:"Agree the prompt list with the client up front and keep it the same every month. Results only compare if the prompts don't change.",
-  say:"AI assistants sent [N] visits ([X]% of total), converting at [rate] against [rate] for organic search. We were cited in [N] of [N] test prompts, and [competitor] appeared in [N].",
-  signals:["ai_referrals","ai_citations","ai_crawlers","geo_score"]},
- {id:"next",q:"What should we fix or invest in next?",who:"Leadership, quarterly or at the end of a reporting cycle.",box:"1 hour",
-  want:"Three priorities, each with its expected impact, the effort involved, and an owner.",
-  steps:["Run <a href=\"#recipes/trust\">Can we trust these numbers?</a> first. Anything it flags becomes priority zero.",
-   "Collect the headline from each recipe you ran into the standing report (see <a href=\"#reporting\">Reporting</a>).",
-   "Tag each problem by type: tracking, traffic, page and form, speed, or AI visibility. The type decides the owner.",
-   "Size each one roughly: leads at stake (visits multiplied by the conversion-rate gap) against effort (config change, small fix, or project).",
-   "Pick three, and write down the expected result for each so the next report can check it."],
-  read:["Don't recommend anything that rests on numbers that failed the trust check.",
-   "Ship one change at a time where possible, so the result can be credited to it.",
-   "'We can't answer this with current tracking' is a legitimate recommendation. Put a cost on closing the gap."],
-  check:"Bring the change log. Leaders trust a recommendation more when they can see what was tried last time and what it did.",
-  say:"Our top priorities for [period] are [fix] (expected [impact]), [fix] and [fix]. We're deferring [item] because [reason].",
-  related:["trust"],links:[["#reporting","Reporting model"],["#phases","Phase 05 · Diagnose & fix"]]}
+   "An engagement rate near 100% almost always means page views are firing twice.",
+   "A stale brand-term list quietly moves branded demand into 'non-branded growth'. It's the most flattering error in search reporting, so check it hardest."],
+  check:"You need access to Search Console, GA4 and the tag manager. Ask on day one; without access this recipe becomes a request list.",
+  say:"Data is reliable for [period] except [metric] between [dates], which was [inflated / undercounted] by [cause]. Treat those numbers as directional.",
+  signals:["change_log","duplicate_tags","key_events","internal_traffic","brand_list"],links:[["#measurement","Measurement foundations"]]},
+ {id:"visible",q:"Are we showing up when buyers search?",who:"The CMO or marketing lead, monthly, and every executive before a budget review.",box:"20 min",
+  want:"Non-branded visibility on the topics that matter, the trend against last year, and where the site ranks for the terms that buy.",
+  steps:["In Search Console, open <b>Performance → Search results</b>. Add a <b>Query</b> filter set to <b>Doesn't match regex</b> with the brand-term list, and compare the last three months with the same months last year.",
+   "On the <b>Pages</b> tab, look at priority pages (product, pricing, comparison and key topic pages) to see their impressions and clicks.",
+   "In the rank tracker, report the frozen keyword set's position distribution by buyer stage: top 3, 4–10, 11–20, beyond.",
+   "Note which priority keywords show AI Overviews or other features above the results."],
+  read:["Non-branded impressions are the widest measure of search visibility. Clicks show how much of it turns into visits.",
+   "Read positions as a distribution by buyer stage. An average position hides both wins and losses.",
+   "Impressions rising while clicks stay flat, on keywords with AI Overviews, is visibility moving into the answer rather than SEO failing. Check the AI questions before concluding anything."],
+  check:"The brand-term list is current and the keyword set is frozen. Otherwise the trend measures the list, not the site.",
+  say:"Non-branded search impressions [grew / fell] [X]% year over year and clicks [grew / fell] [X]%. [N] priority keywords are now in the top 10, up from [N]. [Topic] is the biggest gain; [topic] is where we're weakest.",
+  signals:["nb_clicks","priority_rankings","serp_features","ctr_by_position","branded_demand"],related:["ai-answers"]},
+ {id:"ai-answers",q:"What do AI assistants say about us?",who:"An executive who asked ChatGPT about the category and didn't like the answer.",box:"1–2 hours",
+  want:"How often AI assistants name and cite the brand compared with competitors, whether they get the facts right, and which sources they rely on.",
+  steps:["Start from the signed-off prompt set: category, problem, comparison, alternatives, pricing and 'best for' prompts, grouped by buyer stage.",
+   "Run it across the major engines (ChatGPT, Perplexity, Gemini, Google AI Overviews and AI Mode, Copilot) with an AI visibility tracker or a manual panel. For each answer, log whether the brand is mentioned, whether the site is cited, which competitors are named, and which sources are cited.",
+   "Run the brand-fact prompts (pricing, features, integrations, security, who it's for) and score each fact correct, outdated or wrong.",
+   "Tally mention share and citation share by engine and buyer stage, and list the most-cited source domains."],
+  read:["Mention and citation are different wins. A mention shapes the shortlist; a citation can send the visit.",
+   "Answers vary from run to run. Report across the whole prompt set and over months, never from one screenshot.",
+   "The most-cited sources are the off-site plan. If they don't mention the client, that's usually the fastest route to more citations."],
+  check:"Agree the prompt set with the client up front and keep it fixed. Results only compare over time if the prompts don't change.",
+  say:"Across [N] buyer prompts, AI assistants mentioned us in [X]% of answers, against [X]% for [competitor]. [N] answers got our [fact] wrong, citing [source]. The sources shaping our category are [sources], and we're absent from [N] of them.",
+  signals:["prompt_set","citation_share","answer_accuracy","cited_sources"],diags:["d2"],related:["competitors"]},
+ {id:"competitors",q:"Who is beating us, and why?",who:"The marketing lead or CEO after losing deals to a competitor who 'shows up everywhere'.",box:"2 hours",
+  want:"Which competitors win search and AI visibility on each priority topic, and the specific reasons: better pages, more authority, or presence on the sources engines trust.",
+  steps:["In the rank tracker, compare share of voice for three to five named competitors across the keyword set, by topic and buyer stage.",
+   "For the topics you're losing, open the pages that outrank the client. Note what they have that the client's page doesn't: a comparison table, original data, depth, freshness, stronger internal links.",
+   "In a backlink tool, compare relevant referring domains, and look at the links the winning pages earned.",
+   "From the AI prompt runs, list which competitors are named in category answers, and which sources cite them."],
+  read:["Competitors rarely win everywhere. Find the two or three topics where they win and why, then decide which are worth contesting.",
+   "If competitors win with pages the client doesn't have, it's a content gap. If they win with similar pages, it's authority or sources.",
+   "The competitor that dominates AI answers is often not the one that dominates Google. Report the two separately."],
+  check:"Agree the named competitors with the client. Search competitors, the sites ranking for your terms, often differ from sales competitors, and both matter.",
+  say:"[Competitor] leads on [topic] with [X]% share of voice against our [X]%, mainly because [reason]. In AI answers, [competitor] is named in [X]% of category prompts, largely through [sources]. We'll contest [topic] first; [topic] isn't worth the cost yet.",
+  signals:["share_of_voice","topic_coverage","referring_domains","cited_sources"]},
+ {id:"pipeline",q:"Is search producing pipeline?",who:"The CFO or CEO deciding whether to keep funding search, and the CMO defending it.",box:"30 min",
+  want:"Leads and pipeline from organic search and AI assistants against target and program cost, and the landing pages that produce them.",
+  steps:["In GA4, open <b>Reports → Acquisition → Traffic acquisition</b>. Look at Organic Search and the AI assistants channel with <b>Key events</b> and <b>Session key event rate</b>, compared with last year.",
+   "Open <b>Reports → Engagement → Landing page</b>, filtered to the same channels and sorted by key events. These are the pages that sell.",
+   "Pull the CRM report of leads, opportunities and pipeline value where original source is organic search or AI, for the same period.",
+   "Put leads, opportunities and pipeline next to the target and the program cost."],
+  read:["Leads are what search produces; pipeline is what leadership funds. Report both, and lead with pipeline when the CRM data is trustworthy.",
+   "Separate branded from non-branded where you can. Many branded-search leads would have arrived anyway.",
+   "Last-click analytics undercounts content that starts journeys. Say so, and show the CRM's original source beside it."],
+  check:"The CRM records original source and landing page, and the attribution rule is agreed in writing. If not, fix that before this report goes to finance.",
+  say:"Organic search and AI assistants produced [N] leads and [N] opportunities worth [value] in [period], [X]% of total pipeline, against a target of [value]. [Page] was the top-producing landing page.",
+  signals:["organic_leads","search_pipeline","landing_performance","buyer_stage"],related:["worth"]},
+ {id:"traffic-drop",q:"Why did organic traffic drop?",who:"An executive, urgently, usually holding one year-over-year number.",box:"Half a day",
+  want:"Whether the drop is real, which parts of it come from which cause, and the response to each, within a day or two.",
+  steps:["Compare Search Console clicks with GA4 organic sessions. If Search Console is flat and GA4 fell, the cause is tracking or consent, not search.",
+   "Split branded from non-branded clicks. A branded decline is a demand question, not an SEO one.",
+   "In Search Console, compare periods on the <b>Pages</b> and <b>Queries</b> tabs and sort by clicks lost. Declines are almost always concentrated.",
+   "For the losing queries, check whether position fell, or whether CTR fell at the same position. Stable position with falling CTR usually means AI Overviews or new results-page features.",
+   "Line the drop up against Google's <a href='https://status.search.google.com/'>Search Status Dashboard</a>, site releases, migrations, and robots or CDN changes."],
+  read:["Answer with the components, not the total. 'Down 20%' is usually three or four smaller stories with different owners.",
+   "Ranking losses are an SEO problem. Click losses at stable rankings are a results-page change, and the response is to win the answer, not rewrite the page.",
+   "Seasonality explains more month-over-month drops than anything else. Compare year over year."],
+  check:"Run the trust check on both periods, and list every release and tag change in the window before you start.",
+  say:"Organic clicks fell [X]% year over year. [X] points come from [cause] on [pages or queries], [X] from [cause], and [X] from [cause]. Non-branded rankings on priority topics are [stable / down]. We're [response] and will report back by [date].",
+  signals:["nb_clicks","organic_sessions","ctr_by_position","serp_features","index_coverage","change_log"],diags:["d1","d4"]},
+ {id:"content",q:"What should we write, update or retire?",who:"The content lead planning next quarter, or a CMO asking why the blog doesn't sell.",box:"Half a day",
+  want:"A decision for every priority page and gap (create, refresh, consolidate or retire), ranked by value.",
+  steps:["Start from the topic coverage map: every priority topic by buyer stage, with its target page or a gap.",
+   "In Search Console, compare each page's clicks with the same period last year to find decaying pages.",
+   "Find cannibalization: queries where two or more of the client's pages rank. In Search Console, click a query, then open the <b>Pages</b> tab.",
+   "In GA4's <b>Landing page</b> report, add key events to see which content produces leads, not just visits.",
+   "Give each page a decision, and size it with the opportunity model."],
+  read:["Gaps at the comparison, alternatives and pricing stages are usually worth more than another top-of-funnel post.",
+   "Refreshing a decaying page that still matches intent usually pays off faster than publishing a new one.",
+   "Retiring or merging thin pages is a real recommendation. Fewer, stronger pages are easier for search engines and AI to trust."],
+  check:"Agree priority topics and buyer stages with the client first. Without them, content decisions turn into a list of keyword volumes.",
+  say:"We recommend creating [N] pages for [topics], refreshing [N] decaying pages led by [page], and consolidating [N] overlapping pages into [N]. Together they address [X]% of the opportunity in [topic].",
+  signals:["topic_coverage","content_decay","cannibalization","content_quality","extractability"]},
+ {id:"technical",q:"Can Google and AI crawlers read our site?",who:"A CMO after a developer or another agency raised it, or anyone planning a redesign.",box:"Half a day",
+  want:"Pass or fail on whether priority pages are crawlable, rendered, indexed, fast, and readable by AI crawlers, with the fixes that matter ranked.",
+  steps:["In Search Console, open <b>Indexing → Pages</b>. Check the exclusion reasons, and inspect each priority URL with <b>URL Inspection</b>.",
+   "Crawl the site (Screaming Frog, Sitebulb or similar). Check status codes, redirects, canonicals, internal links to priority pages, and crawl depth.",
+   "For each template, compare the page source (view-source) with what you see in the browser. Content, links or schema that appear only after JavaScript runs are at risk.",
+   "Read robots.txt for AI user agents, ask whoever manages the CDN or firewall about bot rules, and check server logs for AI crawler hits on priority pages.",
+   "In Search Console's <b>Core Web Vitals</b> report, check money-page templates on mobile."],
+  read:["Report priority pages separately. One unindexed pricing page matters more than hundreds of excluded tag pages.",
+   "Many AI crawlers read raw HTML without running JavaScript. A site can rank in Google and still be close to invisible to AI engines.",
+   "'Crawled – currently not indexed' on important pages is usually a quality or duplication signal, not a technical switch."],
+  check:"Ask about planned redesigns or platform changes in the same meeting. A technical audit is worth most before a migration, not after.",
+  say:"[N] of [N] priority pages are indexed and readable. The blockers are [issue] on [template] and [issue]. AI crawlers are [allowed / blocked by (rule)]. Fixing [issue] first unblocks [X]% of priority pages.",
+  signals:["index_coverage","crawlability","js_rendering","ai_crawler_access","cwv","structured_data"],diags:["d4"]},
+ {id:"ai-traffic",q:"Are AI assistants sending us visitors, and do they convert?",who:"An executive who has heard AI search is replacing Google.",box:"15 min",
+  want:"Visits and leads from AI assistants, their conversion rate against organic search, and the pages they land on.",
+  steps:["In GA4, open <b>Reports → Acquisition → Traffic acquisition</b> and look at the AI assistants channel. If it doesn't exist yet, set it up (see <a href='#measurement'>Measurement</a>); it applies to past data.",
+   "Compare its engagement rate and session key event rate with Organic Search.",
+   "Open <b>Reports → Engagement → Landing page</b> filtered to the AI channel to see where AI visitors land.",
+   "Cross-check those landing pages against the prompts where the site is cited."],
+  read:["Volume is usually small. Judge AI traffic on conversion rate and trend, not visits.",
+   "AI visitors landing on pages with no clear next step is a quick fix: add the path to the product or a demo.",
+   "Some AI apps strip the referrer, so part of this traffic lands in Direct. Treat the number as a floor."],
+  check:"The AI assistants channel exists and sits above Referral in the channel group.",
+  say:"AI assistants sent [N] visits in [period], [up / down] [X]%, converting at [rate] against [rate] for organic search. Most land on [pages], and we'll [action] on those pages.",
+  signals:["ai_referrals","landing_performance","citation_share"]},
+ {id:"worth",q:"What is search worth to us, and what should we invest in next?",who:"Leadership at planning time, or in a quarterly review.",box:"Half a day",
+  want:"The realistic upside as a range, three priorities with expected impact and effort, and what the client needs to provide.",
+  steps:["Run the <a href='#recipes/trust'>trust check</a>. Anything it flags becomes priority zero.",
+   "For each priority topic, estimate the upside: search demand × expected click-through at the target position × conversion rate × lead value. Build low, expected and high cases.",
+   "List candidate plays from the audit and recent reports, and score each on revenue at stake, confidence and effort (see <a href='#plays'>Plays</a>).",
+   "Pick three. Blockers to crawling, indexing or measurement go first regardless of score.",
+   "Write the expected result and leading indicator for each, and what the client needs to supply."],
+  read:["Present ranges and assumptions before the number. A single forecast gets remembered as a promise.",
+   "Include AI visibility in the upside, but value it on the leads it can plausibly drive, not on the hype.",
+   "'We can't measure this yet' is a legitimate finding. Put a cost on closing the gap."],
+  check:"Bring the change log and last quarter's expected-versus-actual results. Leaders fund teams whose past estimates held up.",
+  say:"Search could add [low]–[high] leads a quarter within [timeframe], worth [value range] in pipeline. Our top priorities are [play] ([impact]), [play] and [play]. We need [dependency] from your team to get there.",
+  signals:["opportunity_value","search_pipeline"],links:[["#plays","Plays and prioritization"],["#reporting","Reporting model"]]}
+];
+
+// [check, how to check, what a fail looks like]
+const AUDIT=[
+ {id:"technical",name:"Technical & crawl access",q:"Can Google and AI crawlers reach, render and index the pages that matter?",signals:["index_coverage","crawlability","js_rendering","ai_crawler_access","cwv","migration_risk"],checks:[
+  ["Priority pages indexed","URL Inspection on each priority page; Indexing → Pages for exclusion reasons","A priority page not indexed, or 'Crawled – currently not indexed' on money pages"],
+  ["Content in raw HTML","Compare view-source with the rendered page for each template, or crawl with JavaScript off","Body copy, links or schema appear only after JavaScript runs"],
+  ["AI crawlers allowed","Read robots.txt for AI user agents, ask about CDN or firewall bot rules, and check logs for hits","Search or retrieval bots blocked, or no AI crawler hits on priority pages in 30 days"],
+  ["Crawl health","Full crawl: status codes, redirect chains, canonicals, orphan pages, crawl depth","Priority pages more than three clicks deep, redirect chains, or canonicals pointing elsewhere"],
+  ["Sitemaps","Compare sitemap URLs with the crawl and with indexed pages","Sitemap lists redirected, noindexed or missing pages"],
+  ["Core Web Vitals","Search Console Core Web Vitals and PageSpeed Insights field data on money-page templates","Money-page templates failing on mobile"],
+  ["Migration history","Ask about redesigns and URL changes in the last two years; test old URLs","Old URLs return 404 or redirect to the homepage"]]},
+ {id:"content",name:"Content & topical authority",q:"Does the site have the best page for each priority topic at each buyer stage?",signals:["topic_coverage","cannibalization","content_decay","content_quality","extractability","internal_links"],checks:[
+  ["Topic coverage","Map priority topics by buyer stage to existing pages","No page for comparison, alternatives, pricing or integration topics"],
+  ["Cannibalization","Search Console queries with more than one ranking URL","Two or more pages trading positions on priority terms"],
+  ["Content decay","Clicks per page against the same period last year","Priority pages losing a large share of clicks, with no refresh planned"],
+  ["Experience and expertise","Score priority pages for named expert authors, original data or examples, sources and update dates","Anonymous, generic pages on topics where competitors publish original data"],
+  ["Answer-first structure","Read the first screen of each priority page as a buyer asking the target question","The answer is buried under marketing copy, or sits in tabs or images"],
+  ["Internal links","Crawl for internal links into priority pages","Money pages linked only from the navigation"]]},
+ {id:"entity",name:"Entity & structured data",q:"Do machines understand who the company is and what each page is?",signals:["structured_data","entity_consistency","answer_accuracy"],checks:[
+  ["Organization schema","Validate homepage schema: name, logo, URL, and sameAs links to real profiles","Missing, or sameAs doesn't list the company's actual profiles"],
+  ["Template schema","Validate a sample page for each template","Product, article or author templates without matching types, or with validation errors"],
+  ["Author entities","Check author pages, and Person schema on articles","No author pages, or authors with no credentials or profiles"],
+  ["Consistent facts","Compare description, category, pricing model and key facts across the site, LinkedIn, review sites, Crunchbase, and Wikipedia or Wikidata where present","Conflicting descriptions or outdated facts on major profiles"],
+  ["Facts in plain text","Check that pricing model, key features, integrations and security details are stated in text on crawlable pages","Key facts exist only in PDFs, images, gated content or sales decks"],
+  ["About page","Check the About page, and whether an llms.txt file exists. No major AI provider has confirmed using llms.txt, so treat it as cheap insurance, not a fix.","No clear statement of what the company does, for whom, and how it's different"]]},
+ {id:"offsite",name:"Off-site authority",q:"Is the brand present and credible where buyers and AI engines look beyond the site?",signals:["referring_domains","third_party_presence","cited_sources"],checks:[
+  ["Referring domains","Backlink tool: relevant referring domains against competitors, new and lost","Well behind competitors on relevant sites, or declining"],
+  ["Review sites","Profiles on the review sites cited in category prompts: completeness, review volume, recency, rating","Missing or stale profiles on sites AI engines cite"],
+  ["Category lists and comparisons","Search 'best [category]' and '[competitor] alternatives', and check inclusion","Absent from the lists that rank and get cited"],
+  ["Communities and video","Search forums, Reddit and YouTube for category discussions","Competitors discussed, client absent"],
+  ["Press and mentions","Coverage and unlinked mentions over the last 12 months","No recent coverage in category publications"]]},
+ {id:"ai",name:"AI answer visibility",q:"When buyers ask AI assistants about the category, is the brand named, cited and described correctly?",signals:["prompt_set","citation_share","answer_accuracy","cited_sources","ai_referrals"],checks:[
+  ["Prompt set","Confirm a signed-off prompt set exists, by topic and buyer stage","No agreed set, only ad hoc screenshots"],
+  ["Mention and citation share","Run the prompt set across major engines and compare with competitors","Competitors named in most category answers, the client rarely"],
+  ["Answer accuracy","Score brand-fact prompts correct, outdated or wrong","Wrong pricing, features or positioning"],
+  ["Cited sources","List the domains cited in category answers","The most-cited sources don't mention the client"],
+  ["AI Overviews on priority terms","Rank tracker SERP features, or manual checks for priority keywords","AI Overviews on priority terms that cite competitors and not the client"],
+  ["AI referral tracking","Check GA4 for an AI assistants channel","AI visits hidden inside Referral or Direct"]]},
+ {id:"measurement",name:"Measurement integrity",q:"Can the numbers in the report be trusted?",signals:["key_events","duplicate_tags","internal_traffic","brand_list","search_pipeline"],checks:[
+  ["Search Console setup","Domain property, linked to GA4","A URL-prefix property that misses subdomains, or no GA4 link"],
+  ["Key events","GA4 key events list","Clicks or page views marked as conversions"],
+  ["Duplicate firing","Tag Assistant on conversion pages","Tags firing twice"],
+  ["Internal traffic","GA4 data filter status","Filter missing or left in Testing"],
+  ["Brand-term list","Review the regex against products, acquisitions and misspellings","No list, or missing product names"],
+  ["CRM source","Check original source and landing page fields on recent leads","Organic leads recorded as Direct or unknown"]]}
+];
+
+const PLAYS=[
+ {id:"unblock",name:"Unblock crawling and indexing",when:"Priority pages aren't indexed, AI crawlers are blocked, or content only renders with JavaScript.",effort:"S–L",signal:"Days to weeks",
+  steps:["Fix robots.txt and CDN rules so search and retrieval bots reach priority pages","Server-render or pre-render primary content, links and schema","Fix canonicals, redirects and the sitemap","Request indexing for priority pages and confirm the recrawl"],
+  moves:["index_coverage","ai_crawler_access","js_rendering"],watch:"Rendering changes need developer time. Get them into the client's sprint before promising dates."},
+ {id:"measure",name:"Stand up measurement foundations",when:"The trust check fails, or the AI channel, brand split or CRM source fields are missing.",effort:"S",signal:"Immediate",
+  steps:["Create the AI assistants channel","Mark real conversions as key events","Write and version the brand-term list","Set content groups by buyer stage","Link Search Console and GA4, and confirm CRM original-source fields"],
+  moves:["key_events","brand_list","ai_referrals","search_pipeline"],watch:"Key events and custom dimensions don't backfill, though channel groups do. Every week of delay is lost history."},
+ {id:"refresh",name:"Refresh decaying pages",when:"Pages that used to earn clicks are declining but still match what searchers want.",effort:"S per page",signal:"2–8 weeks",
+  steps:["Update facts, examples, data and dates","Put the answer first, and use question-style headings","Rewrite the title and description to earn the click","Add internal links from strong pages","Request indexing and log the change"],
+  moves:["content_decay","nb_clicks","ctr_by_position"],watch:"Changing the URL, or cutting sections that earned links, throws away the equity you're trying to recover."},
+ {id:"consolidate",name:"Consolidate cannibalized content",when:"Several of the client's pages compete for the same priority queries.",effort:"S–M",signal:"4–12 weeks",
+  steps:["Pick the strongest URL for each query group","Merge the unique content from the others into it","Redirect the retired URLs to the survivor","Update internal links to point at the survivor"],
+  moves:["cannibalization","priority_rankings"],watch:"Traffic can dip briefly before the surviving page gains. Tell the client before it happens, not after."},
+ {id:"answer-first",name:"Make money pages answer-first",when:"Product, pricing, integration and use-case pages bury the answer under marketing copy.",effort:"S–M",signal:"Weeks for AI answers; 1–3 months for rankings",
+  steps:["Open each page with a direct, plain-text answer to its target question","Use question-style headings and self-contained sections","State key facts (pricing model, features, integrations, security) in text","Add comparison tables and a short FAQ where buyers need them","Add named expert review, then re-run the affected prompts"],
+  moves:["extractability","answer_accuracy","citation_share","landing_performance"],watch:"Answer-first doesn't mean stripped of persuasion. Keep the proof and the call to action; move the fluff."},
+ {id:"comparisons",name:"Build comparison and alternatives pages",when:"Buyers search and prompt '[competitor] alternatives' or '[client] vs [competitor]', and review sites or competitors own the answer.",effort:"M",signal:"1–3 months",
+  steps:["Pick the competitors buyers actually compare","Write fair comparison tables: who each is for, capabilities, pricing model, migration","Add structured data and link from product pages","Keep facts current with a quarterly review"],
+  moves:["topic_coverage","citation_share","organic_leads"],watch:"Inaccurate claims about competitors damage trust with buyers and engines alike. Get legal review where claims are specific."},
+ {id:"cluster",name:"Build a topic cluster",when:"A priority topic has demand, competitors are beatable, and the site has no depth on it.",effort:"L",signal:"3–6 months",
+  steps:["Map the topic by buyer stage from the coverage map","Brief a pillar page and supporting pages, each with a distinct job","Get subject-matter input or original data for every page","Link the cluster tightly, and link it to the money pages"],
+  moves:["topic_coverage","share_of_voice","priority_rankings"],watch:"Clusters built from keyword tools alone produce the generic content AI engines ignore. Budget for expert input."},
+ {id:"entity",name:"Establish the entity foundation",when:"Facts about the company conflict across profiles, or Organization and author schema are missing.",effort:"S–M",signal:"1–3 months",
+  steps:["Write a one-page fact sheet and get it approved","Add Organization schema with sameAs links to real profiles","Create author pages with Person schema","Update LinkedIn, Crunchbase, review sites and Wikidata where eligible","Make the About page state what the company does, for whom, and how it's different"],
+  moves:["entity_consistency","structured_data","answer_accuracy"],watch:"Wikipedia has strict notability and conflict-of-interest rules. Never create or edit the client's article directly."},
+ {id:"sources",name:"Win the cited sources",when:"Category answers cite review sites, lists, communities and publications where the client is absent.",effort:"M–L, ongoing",signal:"2–6 months",
+  steps:["Rank target sources by how often engines cite them","Complete and refresh review profiles, and run a review-request program with happy customers","Pitch inclusion in the category lists that rank and get cited","Take part genuinely in the communities where buyers discuss the category","Produce video for the topics where video results appear"],
+  moves:["third_party_presence","cited_sources","citation_share","referring_domains"],watch:"Undisclosed incentives, review gating and fake community posts break platform rules and can backfire publicly."},
+ {id:"correct",name:"Correct what AI gets wrong",when:"Brand-fact prompts return wrong pricing, features or positioning.",effort:"S",signal:"Weeks to months",
+  steps:["Find the source each wrong answer cites","Fix it at the source, or request a correction from the site that owns it","State the correct fact plainly on a crawlable page the client controls","Update schema and major profiles to match","Re-run the prompts monthly until the answers change"],
+  moves:["answer_accuracy","entity_consistency"],watch:"Engines refresh at different speeds. Report progress per engine so one slow engine doesn't hide the wins."},
+ {id:"data",name:"Publish original data",when:"The category lacks credible numbers, and the client has product data, survey access or rare expertise.",effort:"L",signal:"2–6 months",
+  steps:["Pick a question buyers and journalists actually ask","Collect the data with a defensible method, and publish the methodology","Put the key numbers in plain text, easy to quote","Pitch the findings to category publications and communities"],
+  moves:["referring_domains","citation_share","third_party_presence"],watch:"Weak methodology gets picked apart in public. Have the method reviewed before launch."},
+ {id:"internal-links",name:"Fix internal linking to money pages",when:"Priority pages are weakly linked, or linked only from the navigation.",effort:"S",signal:"2–8 weeks",
+  steps:["List the pages with the most traffic and the most referring domains","Add descriptive, contextual links from them to relevant money pages","Link every cluster page to its pillar and product page","Fix orphaned priority pages"],
+  moves:["internal_links","priority_rankings"],watch:"Sitewide footer links add little. Contextual links from relevant content do the work."},
+ {id:"migration",name:"Protect a migration",when:"A redesign, replatform or URL change is planned.",effort:"M",signal:"Immediate; recovery over 1–3 months",
+  steps:["Crawl and benchmark rankings, traffic and leads before launch","Build a complete old-to-new redirect map","Preserve titles, content and internal links on priority pages","Crawl staging, check redirects on launch day, and monitor daily for four weeks"],
+  moves:["migration_risk","index_coverage","nb_clicks"],watch:"The biggest risk is being brought in after launch. Ask about planned redesigns at kickoff, and sell this before the launch date is set."}
 ];
 
 const navlinks=document.getElementById('navlinks'),topbar=document.getElementById('topbar'),topbarLinks=document.getElementById('topbarLinks');
 CHAPTERS.forEach(([id,label])=>{for(const host of [navlinks,topbarLinks]){const a=document.createElement('a');a.href='#'+id;a.textContent=label;a.dataset.id=id;host.appendChild(a);}});
-// Hash is "#chapter" or "#chapter/target": a recipe id, a catalog signal id, or a diagnostic tab id.
+// Hash is "#chapter" or "#chapter/target": a fold id (recipes, audit, plays), a catalog signal id, or a diagnostic tab id.
 function show(hash){let [id,sub]=hash.split('/');if(!CHAPTERS.some(c=>c[0]===id)){id='overview';sub=''}document.querySelectorAll('section.chapter').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('#navlinks a,#topbar a').forEach(a=>a.classList.toggle('active',a.dataset.id===id));window.scrollTo({top:0});if(sub)openTarget(id,decodeURIComponent(sub));}
 function openTarget(id,sub){
   let el,focusEl;
-  if(id==='recipes'){el=document.getElementById('r-'+sub);if(el){el.open=true;focusEl=el.querySelector('summary')}}
-  else if(id==='catalog'){fLayer='all';fPhase='all';q='';document.getElementById('search').value='';[lf,pf].forEach(h=>[...h.children].forEach(x=>x.classList.toggle('on',x.dataset.v==='all')));renderCards();el=focusEl=cards.querySelector(`.card[data-id="${CSS.escape(sub)}"]`);if(el)el.classList.add('open')}
+  if(id==='catalog'){fLayer='all';fPhase='all';q='';document.getElementById('search').value='';[lf,pf].forEach(h=>[...h.children].forEach(x=>x.classList.toggle('on',x.dataset.v==='all')));renderCards();el=focusEl=cards.querySelector(`.card[data-id="${CSS.escape(sub)}"]`);if(el)el.classList.add('open')}
   else if(id==='diagnostics'){el=focusEl=document.querySelector(`#diagTabs button[data-d="${CSS.escape(sub)}"]`);if(el)el.click()}
+  else{const d=document.getElementById(`${id}-${sub}`);if(d&&d.tagName==='DETAILS'){d.open=true;el=d;focusEl=d.querySelector('summary')}}
   if(el){el.scrollIntoView({block:'start'});focusEl.focus({preventScroll:true})}
 }
 window.addEventListener('hashchange',()=>show(location.hash.slice(1)));
@@ -733,8 +842,9 @@ function renderTheme(){const next=curTheme()==='dark'?'light':'dark',label=`Swit
 darkMQ.addEventListener('change',renderTheme);
 renderTheme();
 
-let state={};try{state=JSON.parse(localStorage.getItem('ssp-checks')||'{}')}catch(e){state={}}
-function saveState(){try{localStorage.setItem('ssp-checks',JSON.stringify(state))}catch(e){}}
+// Checklist keys are "phaseIndex-itemIndex"; the -v2 suffix drops ticks saved against the v1 phase list.
+let state={};try{state=JSON.parse(localStorage.getItem('ssp-checks-v2')||'{}')}catch(e){state={}}
+function saveState(){try{localStorage.setItem('ssp-checks-v2',JSON.stringify(state))}catch(e){}}
 const phaseTabs=document.getElementById('phaseTabs'),phaseBody=document.getElementById('phaseBody');
 let curPhase=0;
 PHASES.forEach((p,i)=>{const b=document.createElement('button');b.innerHTML=`<span class="n">${p.n}</span><span class="t">${p.t}</span><span class="w">${p.w}</span>`;b.addEventListener('click',()=>{curPhase=i;renderPhase()});phaseTabs.appendChild(b)});
@@ -747,7 +857,7 @@ function renderPhase(){
   phaseBody.querySelectorAll('input').forEach(cb=>cb.addEventListener('change',()=>{const k=cb.id.slice(2);state[k]=cb.checked;saveState();cb.closest('li').classList.toggle('done',cb.checked);updateProgress()}));
   updateProgress();
 }
-function updateProgress(){const total=PHASES.reduce((a,p)=>a+p.items.length,0);const done=Object.values(state).filter(Boolean).length;document.getElementById('progress').textContent=`${done} / ${total}`}
+function updateProgress(){const total=PHASES.reduce((a,p)=>a+p.items.length,0);const done=PHASES.reduce((a,p,i)=>a+p.items.filter((_,j)=>state[i+'-'+j]).length,0);document.getElementById('progress').textContent=`${done} / ${total}`}
 renderPhase();
 
 let fLayer='all',fPhase='all',q='';
@@ -756,7 +866,7 @@ function mkBtn(host,label,val,set){const b=document.createElement('button');b.te
 mkBtn(lf,'All layers','all',v=>fLayer=v).classList.add('on');
 Object.entries(L).forEach(([k,v])=>mkBtn(lf,v,k,v2=>fLayer=v2));
 mkBtn(pf,'Any phase','all',v=>fPhase=v).classList.add('on');
-Object.entries(P).forEach(([k,v])=>mkBtn(pf,'Phase '+k+' · '+v,k,v2=>fPhase=v2));
+[...new Set(METRICS.flatMap(m=>m[3]))].sort((a,b)=>a-b).forEach(n=>mkBtn(pf,`${PHASES[n-1].n} · ${PHASES[n-1].t}`,String(n),v=>fPhase=v));
 document.getElementById('search').addEventListener('input',e=>{q=e.target.value.toLowerCase();renderCards()});
 const cards=document.getElementById('cards');
 function renderCards(){
@@ -765,7 +875,7 @@ function renderCards(){
   cards.innerHTML=rows.map(m=>`<div class="card" tabindex="0" data-id="${m[0]}">
     <div class="top"><h4>${m[1]}</h4><span class="pill acc">${L[m[2]]}</span></div>
     <div class="q">${m[4]}</div>
-    <div class="meta">${m[3].map(p=>`<span class="pill">phase ${p}</span>`).join('')}</div>
+    <div class="meta">${m[3].map(p=>`<span class="pill">${PHASES[p-1].t}</span>`).join('')}</div>
     <div class="more"><dl>
       <dt>Definition</dt><dd>${m[5]}</dd>
       <dt>Source</dt><dd>${m[6]}</dd>
@@ -775,20 +885,23 @@ function renderCards(){
   cards.querySelectorAll('.card').forEach(c=>{const t=()=>c.classList.toggle('open');c.addEventListener('click',t);c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}})});
 }
 renderCards();
+document.querySelectorAll('[data-count="signals"]').forEach(e=>{e.textContent=METRICS.length});
 
 document.querySelectorAll('#diagTabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#diagTabs button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.diag').forEach(d=>d.classList.toggle('on',d.id===b.dataset.d))}));
 
 document.getElementById('lessonGrid').innerHTML=LESSONS.map(([t,b])=>`<div class="panel"><h3>${t}</h3><p>${b}</p></div>`).join('');
 
-const recipeList=document.getElementById('recipeList');
+const pad=i=>String(i).padStart(2,'0');
 const signalTitle=id=>(METRICS.find(m=>m[0]===id)||[])[1];
-recipeList.innerHTML=RECIPES.map((r,i)=>{
-  const deep=[...(r.signals||[]).filter(signalTitle).map(s=>`<a class="pill" href="#catalog/${s}">${signalTitle(s)}</a>`),
+const signalLinks=ids=>(ids||[]).filter(signalTitle).map(s=>`<a class="pill" href="#catalog/${s}">${signalTitle(s)}</a>`);
+
+document.getElementById('recipeList').innerHTML=RECIPES.map((r,i)=>{
+  const deep=[...signalLinks(r.signals),
     ...(r.diags||[]).map(d=>`<a class="pill warn" href="#diagnostics/${d}">Diagnostic: ${DIAGS[d]}</a>`),
-    ...(r.related||[]).map(id=>`<a class="pill acc" href="#recipes/${id}">Recipe: ${RECIPES.find(x=>x.id===id).q}</a>`),
+    ...(r.related||[]).map(id=>`<a class="pill acc" href="#recipes/${id}">${RECIPES.find(x=>x.id===id).q}</a>`),
     ...(r.links||[]).map(([h,l])=>`<a class="pill" href="${h}">${l}</a>`)];
-  return `<details class="recipe" id="r-${r.id}">
-  <summary><span class="rn">${String(i).padStart(2,'0')}</span><span class="rq">${r.q}</span><span class="rwho">${r.who}</span><span class="pill rbox">${r.box}</span></summary>
+  return `<details class="fold" id="recipes-${r.id}">
+  <summary><span class="rn">${pad(i)}</span><span class="rq">${r.q}</span><span class="rwho">${r.who}</span><span class="rbox"><span class="pill">${r.box}</span></span></summary>
   <div class="rbody">
     <div class="want"><b>What they expect to see:</b> ${r.want}</div>
     <div class="cols">
@@ -800,12 +913,31 @@ recipeList.innerHTML=RECIPES.map((r,i)=>{
     ${deep.length?`<div class="deep">Go deeper: ${deep.join('')}</div>`:''}
   </div>
 </details>`}).join('');
-recipeList.addEventListener('click',async e=>{
+document.getElementById('recipeList').addEventListener('click',async e=>{
   const b=e.target.closest('.copy');if(!b)return;
   try{await navigator.clipboard.writeText(RECIPES.find(r=>r.id===b.dataset.id).say);b.textContent='Copied'}
   catch(err){const sel=getSelection(),range=document.createRange();range.selectNodeContents(b.previousElementSibling);sel.removeAllRanges();sel.addRange(range);b.textContent='Selected'}
   setTimeout(()=>{b.textContent='Copy'},1500);
 });
+
+document.getElementById('auditList').innerHTML=AUDIT.map((p,i)=>`<details class="fold" id="audit-${p.id}">
+  <summary><span class="rn">${pad(i+1)}</span><span class="rq">${p.name}</span><span class="rwho">${p.q}</span><span class="rbox"><span class="pill">${p.checks.length} checks</span></span></summary>
+  <div class="rbody">
+    <div class="tw"><table><tr><th>Check</th><th>How to check</th><th>Fail looks like</th></tr>${p.checks.map(([c,h,f])=>`<tr><td><b>${c}</b></td><td>${h}</td><td>${f}</td></tr>`).join('')}</table></div>
+    <div class="deep">Signals: ${signalLinks(p.signals).join('')}</div>
+  </div>
+</details>`).join('');
+
+document.getElementById('playList').innerHTML=PLAYS.map((p,i)=>`<details class="fold" id="plays-${p.id}">
+  <summary><span class="rn">${pad(i+1)}</span><span class="rq">${p.name}</span><span class="rwho">${p.when}</span><span class="rbox"><span class="pill">Effort ${p.effort}</span><span class="pill acc">First signal: ${p.signal}</span></span></summary>
+  <div class="rbody">
+    <div class="cols">
+      <div><div class="eyebrow">What we do</div><ol class="steps">${p.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>
+      <div><div class="eyebrow">What it should move</div><div class="deep" style="margin-top:6px">${signalLinks(p.moves).join('')}</div>
+      <div class="callout warn"><b>Watch out:</b> ${p.watch}</div></div>
+    </div>
+  </div>
+</details>`).join('');
 
 show(location.hash.slice(1));
 </script>
