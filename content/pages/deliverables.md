@@ -48,7 +48,7 @@ blocks:
         - Everyone on both sides
         - Spreadsheet or dashboard
       - - "**Measurement setup record**"
-        - Baseline, updated when setup changes
+        - "Started at [onboarding](page:onboarding), completed in Baseline, updated when setup changes"
         - Marketing ops and the client's analytics owner
         - Document
       - - "**Keyword and prompt sets**"
@@ -60,7 +60,7 @@ blocks:
         - Marketing leader and owners on both sides
         - Spreadsheet or project board
       - - "**Change log**"
-        - Baseline onward
+        - "[Onboarding](page:onboarding) onward"
         - Account team and client
         - Shared spreadsheet
       - - "**Sprint notes**"
@@ -72,7 +72,7 @@ blocks:
         - Marketing leader
         - Document with a 20-minute walkthrough
       - - "**Decisions log**"
-        - Report onward
+        - "[Onboarding](page:onboarding) onward"
         - Marketing leader and account lead
         - Shared document
       - - "**Quarterly review deck**"
@@ -365,7 +365,7 @@ blocks:
     rows:
       - - Pre-launch benchmark
         - Rankings, clicks, indexed pages and leads for priority pages, and a full crawl of the current site
-        - Before development starts
+        - As soon as the engagement starts, and before launch
       - - Redirect map
         - Every old URL with traffic, links or rankings, mapped to its new URL, with priority pages flagged
         - Before the staging review

@@ -155,7 +155,7 @@ blocks:
     rows:
       - - "\"SEO takes too long.\""
         - A past program showed no visible progress for months
-        - "Show the play timings: measurement and crawl fixes show results almost immediately, page refreshes in weeks, new content in months. The roadmap puts quick wins first, and every play has its first-signal date written down before work starts."
+        - "Show the play timings: measurement fixes show immediately, crawl fixes in days to weeks, page refreshes in weeks, new content in months. The roadmap puts quick wins first, and every play has its first-signal date written down before work starts."
       - - "\"Isn't SEO dead now that AI answers everything?\""
         - Fear that search is shrinking, or doubt that AI visibility is real
         - Both front doors depend on the same foundations, pages engines can crawl, understand and trust, and we report both side by side. Show them the prompt results for their category from your call preparation.
@@ -167,7 +167,7 @@ blocks:
         - Often true for writing and publishing. Sell the audit, then scope the program around what the team can't do alone, such as technical specifications, the prompt panel and the reporting.
       - - "\"Can you guarantee results?\""
         - They need to justify the spend internally
-        - Nobody controls rankings or AI answers, and a guarantee is a warning sign. We commit to shipping the plays on schedule, writing the expected impact down in advance, and reporting honestly against it. The opportunity model's range is their internal case.
+        - Nobody controls rankings or AI answers, and a guarantee is a warning sign. We commit to shipping the plays on schedule once the approvals, expert input and developer time they need arrive by the agreed dates, to writing the expected impact down in advance, and to reporting honestly against it. The opportunity model's range is their internal case.
       - - "\"It's too expensive.\""
         - The fee hasn't been compared with what's at stake
         - Put the fee next to the opportunity model's expected case. If it still doesn't make sense, reduce the scope, not the rate.

@@ -11,7 +11,7 @@ blocks:
     text: Clicks falling while visibility rises, the limits of attribution, and how long plays take to show results are easy to explain at kickoff. Explained for the first time in the month traffic dips, they sound like excuses.
   - type: flow
     heading: The steps
-    intro: From signature to a working engagement. Onboarding is the audit's first week, so every day it slips comes out of the audit.
+    intro: From signature to a working engagement. Onboarding is the audit's first week. If access isn't complete by the end of that week, the audit presentation date moves back by the days it's late; the audit work is never cut short.
     items:
       - title: Hand off from sales
         text: The account lead reads the discovery notes, the signed scope, and any qualification gaps from [Selling](page:selling). Nothing discovery already answered gets asked again, only confirmed.
@@ -22,7 +22,7 @@ blocks:
       - title: Hold the kickoff
         text: A 60-minute call with the marketing leader, the day-to-day contact, and ideally the budget holder. The agenda is below.
       - title: Test every access item
-        text: Log in and check each one works at the level agreed. Chase what's missing with a named owner and a date; the audit timeline starts when access is complete.
+        text: Log in and check each one works at the level agreed. Chase what's missing with a named owner and a date. If the week ends with access still missing, move the audit presentation date back by the same number of days and tell the client.
       - title: Send the kickoff summary
         text: Confirmed facts, named contacts, the expectations agreed, the audit presentation date, and open items with owners. The expectations also go in the decisions log.
   - type: table
@@ -114,7 +114,7 @@ blocks:
         - Analytics undercounts search in long B2B journeys and can't see AI influence without a click. We agree which [attribution option](page:reporting) we'll report, and keep it.
         - Changing the rule mid-program looks like moving the goalposts
       - - "**Timelines**"
-        - Measurement and crawl fixes show in days to weeks, page refreshes in weeks, and new content and off-site work in months. Every play's first-signal date goes in the roadmap.
+        - Measurement fixes show immediately, crawl fixes in days to weeks, page refreshes in weeks, and new content and off-site work in months. Every play's first-signal date goes in the roadmap.
         - The first quarter gets judged on leading indicators, not on the north star
       - - "**What we need from the client**"
         - Results depend on access, expert time, approvals and developer releases. We name what we need and by when, and hold work rather than let it age.
