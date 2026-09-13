@@ -28,10 +28,26 @@ export default function PhaseChecklist({ phases }: { phases: PhaseView[] }) {
   const [current, setCurrent] = useState(0);
   const [checks, setChecks] = useState<Checks>({});
 
+  function selectPhase(index: number) {
+    const phase = phases[index];
+    if (!phase) return;
+    setCurrent(index);
+    const hash = `#phase-${phase.id}`;
+    if (location.hash !== hash) {
+      history.replaceState(null, "", hash);
+    }
+  }
+
   useEffect(() => {
     setChecks(readChecks());
-    const fromHash = phases.findIndex((p) => `#phase-${p.id}` === location.hash);
-    if (fromHash >= 0) setCurrent(fromHash);
+    // Links to a phase on the same page only change the hash, so select on every change.
+    const selectFromHash = () => {
+      const fromHash = phases.findIndex((p) => `#phase-${p.id}` === location.hash);
+      if (fromHash >= 0) setCurrent(fromHash);
+    };
+    selectFromHash();
+    window.addEventListener("hashchange", selectFromHash);
+    return () => window.removeEventListener("hashchange", selectFromHash);
   }, [phases]);
 
   function toggle(key: string, on: boolean) {
@@ -63,7 +79,7 @@ export default function PhaseChecklist({ phases }: { phases: PhaseView[] }) {
             type="button"
             id={`phase-${p.id}`}
             aria-pressed={i === current}
-            onClick={() => setCurrent(i)}
+            onClick={() => selectPhase(i)}
           >
             <span className="n">{String(p.order).padStart(2, "0")}</span>
             <span className="t">{p.title}</span>

@@ -315,33 +315,27 @@ const signalCards: SignalCard[] = [...pb.signals]
     )}
 
     {b.type === "collection" && b.collection === "offers" && (
-      <div class="tw">
-        <table>
-          <thead>
-            <tr>
-              <th>Offer</th>
-              <th>What the client gets</th>
-              <th>Length</th>
-              <th>Leads into</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pb.offers.map((o) => (
-              <tr id={`offer-${o.id}`}>
-                <td>
-                  <b>{o.name}</b>
-                </td>
-                <td>
-                  <Md text={o.includes} />
-                </td>
-                <td>{o.length}</td>
-                <td>
-                  <Md text={o.leadsInto} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div class="grid offers">
+        {pb.offers.map((o) => (
+          <div class="panel offer" id={`offer-${o.id}`}>
+            <div class="eyebrow">{o.length}</div>
+            <h3>{o.name}</h3>
+            <dl>
+              <dt>Best for</dt>
+              <dd>
+                <Md text={o.bestFor} />
+              </dd>
+              <dt>What the client gets</dt>
+              <dd>
+                <Md text={o.includes} />
+              </dd>
+              <dt>Leads into</dt>
+              <dd>
+                <Md text={o.leadsInto} />
+              </dd>
+            </dl>
+          </div>
+        ))}
       </div>
     )}
 

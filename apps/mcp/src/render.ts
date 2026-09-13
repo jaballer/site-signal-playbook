@@ -46,7 +46,7 @@ export function summaryOf(collection: CollectionName, entry: AnyEntry): string {
     case "principles":
       return firstSentence(entry.body);
     case "offers":
-      return (entry as Offer).includes;
+      return `Best for: ${(entry as Offer).bestFor}`;
     case "glossary":
       return (entry as Term).definition;
     case "pages":
@@ -228,6 +228,7 @@ function renderOffer(o: Offer) {
   return join([
     `# Offer: ${o.name}`,
     [
+      `- **Best for:** ${md(o.bestFor)}`,
       `- **What the client gets:** ${md(o.includes)}`,
       `- **Length:** ${o.length}`,
       `- **Leads into:** ${md(o.leadsInto)}`,

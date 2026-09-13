@@ -86,6 +86,8 @@ export const principle = z.strictObject({
 export const offer = z.strictObject({
   order: Order,
   name: Text,
+  /** The client situation this offer fits, in a sentence or two. */
+  bestFor: Md,
   includes: Md,
   length: Text,
   leadsInto: Md,

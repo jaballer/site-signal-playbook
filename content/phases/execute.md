@@ -1,7 +1,7 @@
 ---
 order: 4
 title: Execute
-when: months 1–3
+when: from program month 2
 checklist:
   - Plan each sprint against the roadmap and confirm client dependencies are ready
   - Log every shipped change with date, pages and expected effect

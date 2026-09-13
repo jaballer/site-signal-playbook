@@ -1,0 +1,28 @@
+/* Offers collection: one panel per offer, with labelled facts, two to a row. */
+.offers {
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: 820px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.offer {
+  & dl {
+    margin: 10px 0 0;
+  }
+
+  & dt {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 10px;
+  }
+
+  & dd {
+    margin: 2px 0 0;
+    font-size: 0.93rem;
+  }
+}

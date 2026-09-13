@@ -1,7 +1,7 @@
 ---
 order: 2
 title: Baseline
-when: weeks 2–3
+when: program weeks 1–2
 checklist:
   - Run the trust check and fix anything that blocks honest reporting
   - "Set up measurement foundations: AI assistants channel, key events, brand-term list, content groups, Search Console link to GA4"
