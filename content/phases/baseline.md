@@ -8,7 +8,7 @@ checklist:
   - Freeze the keyword set and prompt set with client sign-off, and version both
   - Record the baseline for every scorecard layer
   - Confirm the CRM records original source and landing page, and agree the attribution rule in writing
-  - Start the change log
+  - Log every measurement change in the change log started at onboarding
 deliverables:
   - Baseline scorecard
   - Measurement setup record

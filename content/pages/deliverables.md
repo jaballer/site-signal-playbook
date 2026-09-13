@@ -148,10 +148,10 @@ blocks:
       - Question it answers
     rows:
       - - Assumptions
-        - "Lead value from the CRM (lead-to-opportunity rate, win rate and average deal size), click-through by position, and conversion rate by buyer stage, each with its source"
+        - "Click-through by position and conversion rate by buyer stage. From the CRM, lead-to-opportunity rate and average deal size, which give pipeline per lead, and win rate, which turns that into lead value (revenue per lead). Each with its source"
         - What are we assuming, and why?
       - - Topics
-        - "For each priority topic: search demand, current and target position, and the expected clicks, leads and pipeline, in low, expected and high cases"
+        - "For each priority topic: search demand, current and target position, and the expected clicks, leads, pipeline and revenue, in low, expected and high cases"
         - Where is the money?
       - - AI visibility
         - The leads AI referrals can plausibly drive on priority topics, in the same three cases

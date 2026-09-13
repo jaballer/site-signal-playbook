@@ -140,13 +140,13 @@ blocks:
     items:
       - eyebrow: Audit to program
         title: A program kickoff, not a new onboarding
-        text: Access and contacts are already in place. Confirm the roadmap owners and client dependencies, repeat the expectations for anyone new, often developers or the budget holder, and start [Baseline](phase:baseline).
+        text: Access and contacts are already in place. Confirm the roadmap owners and client dependencies, repeat the expectations for anyone new, often developers or the budget holder, and start [Baseline](phase:baseline). The first milestone is the 90-day roadmap review at the end of [Plan](phase:plan).
       - eyebrow: Straight to a program
         title: The full onboarding, plus their audit
-        text: Run every step above. In the first week, check the client's existing audit against the six pillars and note the gaps before planning.
+        text: Run every step above, with the 90-day roadmap review at the end of [Plan](phase:plan) in place of the audit presentation. In the first week, check the client's existing audit against the six pillars and note the gaps before planning.
       - eyebrow: Migration protection
         title: Start with the developers
-        text: Hold the kickoff with the web team. Confirm the launch date, staging access, the release plan and who signs off on launch, and start the pre-launch benchmark the same week.
+        text: Hold the kickoff with the web team. Confirm the launch date, staging access, the release plan and who signs off on launch, and start the pre-launch benchmark the same week. The first milestone is the staging review.
   - type: strip
     label: Onboarding is done when
     items:
@@ -159,5 +159,5 @@ blocks:
       - title: Expectations are written
         text: All five are agreed, confirmed in the summary and recorded in the decisions log.
       - title: The date is set
-        text: The audit presentation is in the budget holder's calendar.
+        text: The first milestone is in the calendars of the people who sign it off. That's the audit presentation for a new client, or the milestone named for each starting point above.
 ---
