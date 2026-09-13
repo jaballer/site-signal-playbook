@@ -1,5 +1,5 @@
 ---
-order: 5
+order: 6
 navLabel: Plays
 eyebrow: Play library
 heading: The standard plays, and how to choose between them

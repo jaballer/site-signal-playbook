@@ -14,8 +14,8 @@ blocks:
         title: The four questions every SEO buyer asks
         text: Are we visible where buyers look? Are we beating competitors there? Is it producing pipeline? What should we do next, and what will it return?
       - eyebrow: What's in it
-        title: Ten chapters
-        text: Leader questions with step-by-step answers, the engagement model and offers, a six-pillar audit, a play library, diagnostic flows, the reporting model, a signal catalog, measurement foundations, the principles behind all of it, and a glossary.
+        title: Twelve chapters
+        text: Leader questions with step-by-step answers, how we sell, the engagement model and offers, a six-pillar audit, a play library, diagnostic flows, the reporting model, deliverable outlines, a signal catalog, measurement foundations, the principles behind all of it, and a glossary.
   - type: strip
     heading: The value chain
     intro: Every engagement works the same chain, in order. When a number moves, it's diagnosed in the link where it moved, not blamed on "SEO".
@@ -63,5 +63,5 @@ blocks:
         - Starts every report with an integrity check
   - type: markdown
     heading: How to use this
-    text: "**New prospect:** run the [Audit](page:audit), and use [Leader questions](page:questions) to frame the conversation. **Won the deal:** work the [Engagement model](page:engagement) and tick the checklist as you go; it's saved in this browser. **Choosing what to do:** rank candidates with [Plays](page:plays). **A number moved unexpectedly:** open [Diagnostics](page:diagnostics) before anyone opens a ticket. **Month end:** [Reporting](page:reporting) is the shape of the deliverable. The [Signal catalog](page:signals), [Measurement](page:measurement) and [Glossary](page:glossary) are the reference underneath all of it."
+    text: "**New prospect:** follow [Selling](page:selling) from the first call to a signed audit, then run the [Audit](page:audit). [Leader questions](page:questions) frame the conversation. **Won the deal:** work the [Engagement model](page:engagement) and tick the checklist as you go; it's saved in this browser. **Choosing what to do:** rank candidates with [Plays](page:plays). **A number moved unexpectedly:** open [Diagnostics](page:diagnostics) before anyone opens a ticket. **Month end:** [Reporting](page:reporting) is the shape of the deliverable. **Building any other deliverable:** start from its outline in [Deliverables](page:deliverables). The [Signal catalog](page:signals), [Measurement](page:measurement) and [Glossary](page:glossary) are the reference underneath all of it."
 ---

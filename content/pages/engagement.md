@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 4
 navLabel: Engagement model
 eyebrow: Engagement model
 heading: From audit to renewal, in six phases
@@ -9,15 +9,7 @@ blocks:
   - type: collection
     collection: offers
     heading: Offers
-    intro: Four standard offers, each designed to lead into the next. Standard scopes keep delivery repeatable and margins predictable; custom work is priced as an add-on to one of these, not as a fifth offer.
-  - type: panels
-    items:
-      - eyebrow: Pricing
-        title: Price on scope and revenue at stake, not hours
-        text: The audit's opportunity model is the pricing argument for the program. A fee that's a small fraction of the expected-case upside is an easy decision; a fee that isn't needs a smaller scope, not a discount.
-      - eyebrow: Qualification
-        title: Say no to programs that can't show results
-        text: Before proposing a program, confirm there's search demand in the category, access to analytics and the CMS, developer time for technical fixes, and a CRM that records lead source. Missing any of these, sell the audit and the fix first.
+    intro: Four standard offers, each designed to lead into the next. Standard scopes keep delivery repeatable and margins predictable; custom work is priced as an add-on to one of these, not as a fifth offer. Which offer to lead with, how to qualify and how to price are in [Selling](page:selling).
   - type: table
     heading: Who does what
     columns:

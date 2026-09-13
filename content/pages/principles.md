@@ -1,5 +1,5 @@
 ---
-order: 10
+order: 12
 navLabel: Principles
 eyebrow: Principles
 heading: What holds across every engagement
