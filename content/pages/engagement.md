@@ -3,7 +3,7 @@ order: 5
 navLabel: Engagement model
 eyebrow: Engagement model
 heading: What clients buy, what they decide, and when
-lede: "What a marketing leader or budget holder needs to know before they sign: which offer fits, what they get, the decisions they'll make and when, when to expect results, and what it takes from their team. The account team's phase checklists close the chapter."
+lede: "What a marketing leader or budget holder needs to know before they sign: which offer fits, what they get, the decisions they'll make and when, when to expect results, and what it takes from their team."
 blocks:
   - type: thesis
     mark: →
@@ -12,34 +12,35 @@ blocks:
   - type: collection
     collection: offers
     heading: Offers
-    intro: Four standard offers. The usual path is the audit, then the 90-day program, then a retainer; migration protection runs on the launch date's timeline. Custom work is priced as an add-on to one of these, not as a fifth offer. Which offer to lead with, and how to price it, is in [Selling](page:selling).
+    intro: Three offers. Two are off the shelf, with a set scope and price. A KrateCMS site is a monthly subscription, and a WordPress site is built on our standard stack. Consulting is scoped to the client, and includes the SEO and AI search work the rest of this chapter describes. Custom work is priced as an add-on to one of these, not as a fourth offer. Which offer to lead with, and how to price it, is in [Selling](page:selling).
   - type: table
+    id: phases
     heading: The engagement at a glance
-    intro: What the client receives at each stage, and the decision it asks of them. Each phase's full checklist is at the end of the chapter.
+    intro: "For SEO and AI search [consulting](offer:consulting): what the client receives at each stage, and the decision it asks of them. The usual path is the audit, then the 90-day program, then a retainer."
     columns:
       - Phase and timing
       - What the client gets
       - What the client decides
     rows:
-      - - "**[Audit](phase:audit)** · audit weeks 1–2"
+      - - "**Audit** · audit weeks 1–2"
         - The audit report with pillar scores, the competitor benchmark, the opportunity model, and the top ten findings with a proposal, presented live
         - Fund the 90-day program, change its scope, or stop with the findings. The budget holder decides, by a date agreed in the presentation.
-      - - "**[Baseline](phase:baseline)** · program weeks 1–2"
+      - - "**Baseline** · program weeks 1–2"
         - A baseline scorecard, numbers they can trust, and a record of how measurement is set up
         - Sign off the keyword and prompt sets, and agree the attribution rule in writing
-      - - "**[Plan](phase:plan)** · program weeks 3–4"
+      - - "**Plan** · program weeks 3–4"
         - The 90-day roadmap, with target ranges and owners on both sides
         - Approve the roadmap and targets, and commit the approvals, expert time and developer releases it depends on
-      - - "**[Execute](phase:execute)** · from program month 2"
+      - - "**Execute** · from program month 2"
         - Work shipped in sprints, a note for each sprint, and a log of every change
         - Approvals, expert input and releases by the dates in each sprint note. Work that's waiting is held, not shipped.
-      - - "**[Report](phase:report)** · monthly"
+      - - "**Report** · monthly"
         - The monthly report, with a 20-minute walkthrough
         - The one decision each report asks for, usually next month's priorities, recorded in the decisions log
-      - - "**[Review & renew](phase:review-renew)** · each quarter, from the end of the program"
+      - - "**Review & renew** · each quarter, from the end of the program"
         - "The quarterly review, presented live: results against targets, competitive position, the re-baselined opportunity, and next quarter's roadmap"
         - Renew, expand or correct the scope, with the revenue case for each proposed change
-    after: "Migration protection runs on its own clock, set by the launch date. Its deliverables are the migration pack in [Deliverables](page:deliverables)."
+    after: "Migration protection, also part of consulting, runs on its own clock, set by the launch date. Its deliverables are the migration pack in [Deliverables](page:deliverables)."
   - type: strip
     heading: When results show
     intro: "Agree these at [kickoff](page:onboarding), before any number moves. Every play's first-signal date goes in the roadmap before work starts."
@@ -76,7 +77,4 @@ blocks:
       - - "**Analytics**"
         - Measurement setup, scorecard and monthly report
         - Marketing ops maintains CRM source fields and pipeline reports
-  - type: phases
-    heading: Phase checklists
-    intro: "The account team's working view of each phase: why it matters, its checklist, and what it delivers. The audit offer is the Audit phase, a 90-day program runs from Baseline through the first quarterly review, and the retainer repeats Execute, Report, and Review & renew. Ticks are saved in this browser."
 ---

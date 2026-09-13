@@ -118,11 +118,20 @@ blocks:
       - Lead with
       - Why
     rows:
-      - - No urgent event
-        - "[Search & AI visibility audit](offer:visibility-audit)"
+      - - A small business needs a professional site live fast, with nobody to run it
+        - "[KrateCMS Web Presence Starter](offer:kratecms)"
+        - A set price, live in three business days, and managed for them
+      - - They need a full marketing site their team can edit, without a custom build
+        - "[WordPress site](offer:wordpress-site)"
+        - The standard stack, theme and plugins make the price fixed and the launch predictable
+      - - They have a website team but need senior engineering, design-system or web leadership help
+        - "[Consulting](offer:consulting), scoped to the gap"
+        - Scope the work their team can't do alone, and price it on scope, not hours
+      - - Search matters, and there's no urgent event
+        - "[Consulting](offer:consulting), starting with the audit"
         - Fixed scope and low risk, and its findings become the program proposal
       - - A redesign, replatform or URL change is planned
-        - "[Migration protection](offer:migration-protection)"
+        - "[Consulting](offer:consulting), starting with migration protection"
         - The launch date sets the timeline, and a migration without a redirect map puts rankings at risk. Sell the audit after launch.
       - - Traffic or leads just dropped
         - The audit, starting with the matching [diagnostic](page:diagnostics)
@@ -131,7 +140,7 @@ blocks:
         - The audit, leading with the AI visibility pillar
         - The prompt panel answers their question, and the other pillars show what's behind it
       - - They already have a recent audit they trust
-        - "[90-day program](offer:ninety-day-program), starting by checking that audit against the six pillars"
+        - "The 90-day program in [consulting](offer:consulting), starting by checking that audit against the six pillars"
         - Don't sell the same diagnosis twice. Confirm it still holds, and fill any gaps, such as AI visibility or measurement.
       - - They only want blog posts or a content calendar
         - The audit, or walk away

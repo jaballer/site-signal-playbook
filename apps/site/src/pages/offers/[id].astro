@@ -1,0 +1,105 @@
+---
+import { linksTo, linkTypeFor, titleOf } from "@site-signal/playbook";
+import Md from "../../components/Md.astro";
+import RefPills from "../../components/RefPills.astro";
+import Base from "../../layouts/Base.astro";
+import { hrefFor } from "../../lib/links.ts";
+import { getEntry, getPlaybook } from "../../lib/playbook.ts";
+
+export function getStaticPaths() {
+  return getPlaybook().offers.map((o) => ({ params: { id: o.id } }));
+}
+
+const pb = getPlaybook();
+const offer = getEntry("offers", Astro.params.id as string);
+const usedIn = linksTo(pb, "offer", offer.id).map((ref) => ({
+  href: hrefFor(linkTypeFor[ref.collection], ref.id),
+  text: titleOf(ref.collection, getEntry(ref.collection, ref.id)),
+}));
+// "What it covers" spells out the services, so the one-line summary of them would repeat it.
+const facts = [
+  ...(offer.services ? [] : [{ label: "What the client gets", text: offer.includes }]),
+  { label: "Pricing", text: offer.pricing },
+  { label: "Leads into", text: offer.leadsInto },
+];
+---
+
+<Base title={offer.name} section="engagement">
+  <a class="back" href={hrefFor("page", "engagement")}>
+    ← Engagement model
+  </a>
+  <header class="page-head">
+    <div class="eyebrow">Offer · {offer.length}</div>
+    <h1 class="title">{offer.name}</h1>
+    <p class="lede">
+      <Md text={offer.bestFor} />
+    </p>
+  </header>
+
+  <section class="block">
+    <div class="grid offer-facts">
+      {facts.map((f) => (
+        <div class="panel">
+          <div class="eyebrow">{f.label}</div>
+          <p>
+            <Md text={f.text} />
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {offer.services && (
+    <section class="block">
+      <h2>What it covers</h2>
+      <div class="grid offer-services">
+        {offer.services.map((s) => (
+          <div class="panel">
+            <h3>{s.title}</h3>
+            <p>
+              <Md text={s.text} />
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="block">
+    <h2>How it runs</h2>
+    <div class="flow">
+      {offer.steps.map((s) => (
+        <div class="step">
+          <b>{s.title}</b>
+          <p>
+            <Md text={s.text} />
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>What the client provides</h2>
+    <div class="item">
+      <ul class="steps">
+        {offer.clientProvides.map((item) => (
+          <li>
+            <Md text={item} />
+          </li>
+        ))}
+      </ul>
+    </div>
+    <RefPills label="Go deeper:" pages={offer.pages} />
+    {usedIn.length > 0 && (
+      <div class="refs">
+        <span>Used in:</span>
+        {usedIn.map((ref) => (
+          <a class="pill" href={ref.href}>
+            {ref.text}
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+</Base>

@@ -84,15 +84,11 @@ async function runVariant(
     colorScheme: variant.colorScheme,
   });
   try {
-    // Saved state a returning visitor would have: a theme choice (toggle variants) and two checklist ticks.
+    // Saved state a returning visitor would have: a theme choice (toggle variants).
     await context.addInitScript(
       ({ keys, theme }) => {
         try {
           if (theme) localStorage.setItem(keys.theme, theme);
-          localStorage.setItem(
-            keys.checklist,
-            JSON.stringify({ "audit:0": true, "audit:2": true }),
-          );
         } catch {
           // Without storage the page still renders.
         }

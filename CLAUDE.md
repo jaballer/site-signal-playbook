@@ -74,9 +74,9 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 - **Pages** (`content/pages/*.md`) are chapter layouts made of typed `blocks`:
   - `markdown`, `panels`, `strip`, `thesis`, `table`, `ledger`, `flow`, `note`
   - `collection`, which lists questions, audit, plays, diagnostics, principles, offers or glossary
-  - `scorecard` (from `layers`), `phases` (the checklist) and `signals` (the catalog)
+  - `scorecard` (from `layers`) and `signals` (the catalog)
 
-  Nav order and labels come from each page's `order` and `navLabel`.
+  Nav order and labels come from each page's `order` and `navLabel`. A block with a heading can take an `id`, which becomes its anchor: phase links point to the Engagement table with `id: phases`.
 
 - **Writing level:** write for marketers, executives and account strategists. Use plain procedural steps with menu paths in GA4, Search Console and standard SEO tools. Don't write API request bodies, dimension or metric field names, or SQL unless asked. Don't invent statistics. Name tools as examples ("Ahrefs, Semrush or similar").
 - **The Overview names the chapter count in words** ("Ten chapters"). Update it when pages change.
@@ -85,11 +85,11 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 
 - **Routes:**
   - `/` (the overview page) and `/[page]/` for the other pages
-  - item pages at `/questions/[id]/`, `/plays/[id]/`, `/audit/[id]/`, `/diagnostics/[id]/`, `/signals/[id]/` and `/glossary/[id]/`
+  - item pages at `/questions/[id]/`, `/plays/[id]/`, `/audit/[id]/`, `/diagnostics/[id]/`, `/signals/[id]/`, `/glossary/[id]/` and `/offers/[id]/`
 - **Loading content:** `getPlaybook()` loads content once per build. In dev it caches for 500ms, then reloads so edits show up. `getEntry(collection, id)` throws on unknown ids.
 - **Vite caches:** dev and build use separate Vite dependency caches (`node_modules/.vite/` and `node_modules/.vite-build/` under `apps/site`), set in `astro.config.mjs`. When they shared one, a build wrote production React into it, and every React component in dev failed with `_jsxDEV is not a function`. If that error ever shows up again, stop the dev server, delete `apps/site/node_modules/.vite`, and restart.
 - **Live reload:** the `watchContent` plugin in `astro.config.mjs` watches `content/`. It reports any change as a change to `src/lib/playbook.ts`, so new files get routes without a restart.
-- **Components:** static rendering uses `.astro` components (`Blocks`, `Fold`, the `*Body` components, `RefPills`, `Md`). Interactive parts are React components in `src/components/react/`: `ThemeToggle`, `CopyButton`, `PhaseChecklist` and `SignalCatalog`. Markdown is rendered to HTML on the server and passed to React as HTML strings.
+- **Components:** static rendering uses `.astro` components (`Blocks`, `Fold`, the `*Body` components, `RefPills`, `Md`). Interactive parts are React components in `src/components/react/`: `ThemeToggle`, `CopyButton` and `SignalCatalog`. Markdown is rendered to HTML on the server and passed to React as HTML strings.
 - **Styles** (`src/styles/`, plain CSS with no framework):
   - `global.css` is the entry point. It declares the cascade layers (`reset, tokens, base, layout, components, utilities`) and imports each file into one. Vite inlines the imports and wraps each file in its `@layer` block.
   - **Layers decide precedence before specificity.** A rule in a later layer beats any rule in an earlier one. So a rule that targets a component's elements from outside it (like `nav.side .theme-btn`) must live in the component's own file: from `layout` it would lose, for example to the component's `all: unset`.
@@ -97,14 +97,12 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
     - Components use semantic tokens only, never palette steps (`--purple-800`). When the guide changes, update the values in `tokens.css`, not in components.
     - `--text-secondary`, `--text-muted` and `--font-mono` aren't design-system tokens. `--text-secondary` and `--font-mono` copy values the guide uses only for its own page; `--text-muted` is the site's own.
     - Each theme color is defined once as `light-dark(light, dark)`, with the guide's Light and Dark values. It follows `color-scheme`, which comes from the OS setting or from `data-theme` on `<html>` (set by the theme toggle). Status colors are the same in both modes; status text set directly on the page surface uses `light-dark(var(--text-error), var(--text-error-inverse))` so it reads in dark mode.
-  - **Type:** Roboto 400, 500 and 700 (loaded in `Base.astro`). Set type with `font: var(--type-*)`, the guide's text styles, rather than setting family, size and line height separately. Small labels and controls (pills, field labels, the filter and copy buttons, phase tabs) may shrink a style with `font-size`, as the guide's small badge does. Label/Caps and Label/Field also take `letter-spacing: var(--tracking-caps)` and `text-transform: uppercase`. Headings map to the nearest text style: `h1.display` Display/Hero, `h1.title` Heading/H2, `h2` Heading/H3, `h3` Heading/H4.
+  - **Type:** Roboto 400, 500 and 700 (loaded in `Base.astro`). Set type with `font: var(--type-*)`, the guide's text styles, rather than setting family, size and line height separately. Small labels and controls (pills, field labels, the filter and copy buttons) may shrink a style with `font-size`, as the guide's small badge does. Label/Caps and Label/Field also take `letter-spacing: var(--tracking-caps)` and `text-transform: uppercase`. Headings map to the nearest text style: `h1.display` Display/Hero, `h1.title` Heading/H2, `h2` Heading/H3, `h3` Heading/H4.
   - **Spacing and radius:** use `--space-*` for layout spacing and `--radius-sm` (the only radius in the system) for corners. Small gaps inside components that fall between the steps (like 6px, 12px or 14px) stay as raw pixels, as they do in the guide.
   - `components/`: one file per component, named after the component or block that renders it. Styles use native nesting, and the 820px small-screen overrides sit inside the rule they change.
   - Component styles stay global rather than going in Astro-scoped `<style>` blocks. Scoping wouldn't reach Markdown rendered through `set:html`, slotted children, or the React islands that share classes like `.pill`.
 - **Variables:** site-wide values (name, version, storage keys) live in `src/site.ts`.
-- **Saved state in `localStorage`:**
-  - `ssp-theme`: the theme choice.
-  - `ssp-checklist`: checklist ticks, keyed `phaseId:itemIndex`, so reordering a phase's checklist shifts saved ticks.
+- **Saved state in `localStorage`:** `ssp-theme`, the theme choice.
 
 ## MCP server (apps/mcp)
 

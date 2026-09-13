@@ -1,8 +1,9 @@
-/* Offers collection: one panel per offer, with labelled facts, two to a row. */
+/* Offers collection: one panel per offer, with labelled facts, three to a row. */
 .offers {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
-  @media (max-width: 820px) {
+  /* Below this, three columns are too narrow for the facts, and two would orphan one. */
+  @media (max-width: 1100px) {
     grid-template-columns: 1fr;
   }
 }
@@ -25,5 +26,24 @@
   & dd {
     margin: 4px 0 0;
     font: var(--type-body-small);
+  }
+}
+
+/* Offer pages: the headline facts side by side, one column per fact. */
+.offer-facts {
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+
+  @media (max-width: 1100px) {
+    grid-auto-flow: row;
+  }
+}
+
+/* Offer pages: services two to a row, so an even count never leaves one on its own. */
+.offer-services {
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: 820px) {
+    grid-template-columns: 1fr;
   }
 }

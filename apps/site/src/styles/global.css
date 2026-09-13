@@ -32,7 +32,6 @@
 @import "./components/entry-body.css" layer(components);
 @import "./components/copy-button.css" layer(components);
 @import "./components/ref-pills.css" layer(components);
-@import "./components/phase-checklist.css" layer(components);
 @import "./components/signal-catalog.css" layer(components);
 @import "./components/signal-detail.css" layer(components);
 @import "./components/glossary.css" layer(components);

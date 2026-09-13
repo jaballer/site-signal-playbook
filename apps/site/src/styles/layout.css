@@ -136,6 +136,9 @@ main {
 }
 
 .block {
+  /* Anchored sections land below the sticky top bar on small screens. */
+  scroll-margin-top: 70px;
+
   & + .block {
     margin-top: var(--space-lg);
   }

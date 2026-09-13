@@ -89,8 +89,20 @@ export const offer = z.strictObject({
   /** The client situation this offer fits, in a sentence or two. */
   bestFor: Md,
   includes: Md,
+  /** How the offer is priced: the fees, and what's one-time or recurring. */
+  pricing: Md,
   length: Text,
   leadsInto: Md,
+  /** The kinds of work the offer covers, for offers that cover more than one. */
+  services: z
+    .array(z.strictObject({ title: Text, text: Md }))
+    .min(1)
+    .optional(),
+  /** How the offer runs, in order, from signing to the ongoing relationship. */
+  steps: z.array(z.strictObject({ title: Text, text: Md })).min(1),
+  /** What the client has to supply for the offer to run. */
+  clientProvides: z.array(Md).min(1),
+  pages: Ids.optional(),
 });
 
 export const term = z.strictObject({
@@ -107,7 +119,8 @@ export const term = z.strictObject({
   related: Ids.optional(),
 });
 
-const sectionHeading = { heading: Text.optional(), intro: Md.optional() };
+/** `id` is a stable anchor for the section, for links that point into a page. */
+const sectionHeading = { id: Id.optional(), heading: Text.optional(), intro: Md.optional() };
 const titledText = z.strictObject({ title: Text, text: Md });
 
 /** Page building blocks. Collection-backed blocks render entries from the named collection. */
@@ -154,7 +167,6 @@ export const block = z.discriminatedUnion("type", [
     ]),
   }),
   z.strictObject({ type: z.literal("scorecard"), ...sectionHeading }),
-  z.strictObject({ type: z.literal("phases"), ...sectionHeading }),
   z.strictObject({ type: z.literal("signals"), ...sectionHeading }),
   z.strictObject({ type: z.literal("note"), text: Md }),
 ]);
@@ -207,6 +219,7 @@ export const references: ReadonlyArray<readonly [CollectionName, string, Collect
   ["questions", "pages", "pages"],
   ["plays", "moves", "signals"],
   ["audit", "signals", "signals"],
+  ["offers", "pages", "pages"],
   ["glossary", "signals", "signals"],
   ["glossary", "questions", "questions"],
   ["glossary", "related", "glossary"],
