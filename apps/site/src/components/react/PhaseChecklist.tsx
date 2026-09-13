@@ -60,12 +60,6 @@ export default function PhaseChecklist({ phases }: { phases: PhaseView[] }) {
     }
   }
 
-  function selectPhase(index: number) {
-    setCurrent(index);
-    const hash = `#phase-${phases[index].id}`;
-    if (location.hash !== hash) location.hash = hash;
-  }
-
   const total = phases.reduce((sum, p) => sum + p.checklistHtml.length, 0);
   const done = phases.reduce(
     (sum, p) => sum + p.checklistHtml.filter((_, i) => checks[keyFor(p.id, i)]).length,
