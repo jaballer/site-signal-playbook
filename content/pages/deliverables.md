@@ -99,7 +99,7 @@ blocks:
         - Each of the six pillars with its count of Pass, Watch and Fail, and a one-line verdict
         - Where are we strong, and where are we weak?
       - - 3 · Top ten findings
-        - Each finding with its evidence, affected pages, revenue at stake as a range, confidence, effort and the play that fixes it, in ranked order
+        - Each finding with its evidence, affected pages, revenue at stake as a range, confidence, effort, the play that fixes it, and its owner and first step, in ranked order
         - What's stopping us, and what is fixing it worth?
       - - 4 · Competitor position
         - "The benchmark summary: who wins which topics in search and in AI answers, and why"
@@ -216,7 +216,7 @@ blocks:
       - Contents
     rows:
       - - Access
-        - Who has access to Search Console, GA4, the tag manager, the CMS, the CDN or hosting, and CRM reports, at what level, and who granted it
+        - Who has access to Search Console, GA4, the tag manager, the CMS, the CDN or hosting, CRM reports, and review-site and company profiles, at what level, and who granted it
       - - Setup items
         - Each item from the Measurement checklist with its status, the date it was done, who did it, and where to check it
       - - Definitions

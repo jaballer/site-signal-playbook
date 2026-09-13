@@ -20,7 +20,7 @@ blocks:
       - title: Qualify
         text: Check the criteria below. When one is missing, change what you offer, not just the price.
       - title: Sell the audit
-        text: "Send a one-page scope: the fixed fee, the two-week timeline, and the access needed to start. Once it's signed, hand the discovery notes to the account team, so the [kickoff](page:onboarding) confirms answers instead of asking them again."
+        text: "Send a one-page scope: the fixed fee, the two-week timeline, and the access needed in the first week. Once it's signed, hand the discovery notes to the account team, so the [kickoff](page:onboarding) confirms answers instead of asking them again."
       - title: Present the findings as the pitch
         text: A live working session with the budget holder in the room. The top ten findings, the opportunity model's range and the plays that fix them lead straight into the proposal, sent after the session.
       - title: Ask for the decision
@@ -79,7 +79,7 @@ blocks:
         - Propose a smaller scope, or pass
       - - "**Access to analytics and the CMS**"
         - Who owns GA4, Search Console, the tag manager and the CMS, and whether we can have access in week one
-        - Make access a condition of the audit start date
+        - Write into the scope that the audit presentation moves back by any days access is still missing after the first week
       - - "**Developer time**"
         - How technical changes get released, and how often
         - Sell the audit and the technical fixes as a defined project before a program
