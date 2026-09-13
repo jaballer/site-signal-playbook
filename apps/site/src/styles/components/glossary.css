@@ -1,7 +1,7 @@
 /* Glossary index and term pages. */
 .expansion {
   font-weight: 400;
-  color: var(--ink-2);
+  color: var(--text-secondary);
 
   h1 & {
     font-size: 0.6em;
@@ -11,7 +11,7 @@
 }
 
 .aliases {
-  font-size: 0.92rem;
-  color: var(--ink-2);
+  font: var(--type-body-small);
+  color: var(--text-secondary);
   margin-bottom: 14px;
 }

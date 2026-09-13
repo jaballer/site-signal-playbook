@@ -1,9 +1,9 @@
 /* Fold.astro: expandable cards for leader questions, audit pillars, plays and diagnostics. */
 .fold {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  margin-bottom: 10px;
+  background: var(--surface-default);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-xs);
   scroll-margin-top: 70px;
 
   & > summary {
@@ -11,22 +11,22 @@
     list-style: none;
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: 3px 14px;
+    gap: 4px 14px;
     align-items: center;
-    padding: 14px 16px;
+    padding: 14px var(--space-sm);
 
     &::-webkit-details-marker {
       display: none;
     }
 
     &:focus-visible {
-      outline: 2px solid var(--accent);
+      outline: 2px solid var(--border-focus);
       outline-offset: 2px;
-      border-radius: var(--r);
+      border-radius: var(--radius-sm);
     }
 
     &:hover .rq {
-      color: var(--accent-ink);
+      color: var(--text-link);
     }
 
     @media (max-width: 820px) {
@@ -34,23 +34,22 @@
     }
   }
 
+  /* Label/Caps numbers, as on the guide's numbered cards. */
   & .rn {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--ink-3);
+    font: var(--type-label-caps);
+    letter-spacing: var(--tracking-caps);
+    color: var(--brand-primary);
     grid-row: 1 / span 2;
   }
 
   & .rq {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 1.06rem;
+    font: var(--type-heading-h4);
   }
 
   & .rwho {
     grid-column: 2;
-    font-size: 0.86rem;
-    color: var(--ink-2);
+    font: var(--type-body-small);
+    color: var(--text-secondary);
   }
 
   & .rbox {
@@ -71,18 +70,20 @@
   }
 
   &[open] > summary {
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--border-subtle);
   }
 }
 
 .rbody {
-  padding: 16px 18px 18px;
+  padding: var(--space-sm);
 }
 
+/* Label/Field */
 .open-page {
   display: inline-block;
   margin-top: 14px;
-  font-family: var(--mono);
-  font-size: 0.74rem;
+  font: var(--type-label-field);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
   text-decoration: none;
 }

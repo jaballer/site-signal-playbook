@@ -9,20 +9,21 @@
 
 .offer {
   & dl {
-    margin: 10px 0 0;
+    margin: var(--space-xs) 0 0;
   }
 
+  /* Label/Field */
   & dt {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
+    font: var(--type-label-field);
+    font-size: 12px;
+    letter-spacing: var(--tracking-caps);
     text-transform: uppercase;
-    color: var(--ink-3);
-    margin-top: 10px;
+    color: var(--text-muted);
+    margin-top: 14px;
   }
 
   & dd {
-    margin: 2px 0 0;
-    font-size: 0.93rem;
+    margin: 4px 0 0;
+    font: var(--type-body-small);
   }
 }
