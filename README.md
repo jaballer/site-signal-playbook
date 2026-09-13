@@ -37,6 +37,13 @@ npm run validate
 
 Validation reports unknown fields, broken references and broken links, with the file and field for each.
 
+## Using it from Claude
+
+The MCP server in `apps/mcp` lets Claude Desktop and Claude Code search and read the playbook, pull an audit worksheet, and run prompts such as "answer a leader question" or "plan a roadmap".
+
+- **Claude Code:** start `claude` in this repo and approve the `playbook` server.
+- **Claude Desktop:** see [apps/mcp/README.md](apps/mcp/README.md).
+
 ## Other commands
 
 ```bash
@@ -44,4 +51,6 @@ npm run build    # validate and build the static site (apps/site/dist)
 npm run preview  # serve the built site at http://localhost:4321
 npm run export   # dist/playbook.json and a JSON Schema, for other tools
 npm run check    # type checks
+npm test         # MCP server tests
+npm run mcp      # run the MCP server on stdio (normally your MCP client starts it)
 ```

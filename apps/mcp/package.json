@@ -1,0 +1,20 @@
+{
+  "name": "@site-signal/mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server that exposes the playbook content to Claude Desktop, Claude Code and other MCP clients.",
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.ts",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.ts",
+    "check": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@site-signal/playbook": "*",
+    "zod": "^4.6.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0"
+  }
+}

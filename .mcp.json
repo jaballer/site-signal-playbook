@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "playbook": {
+      "command": "node",
+      "args": ["--disable-warning=ExperimentalWarning", "apps/mcp/src/server.ts"]
+    }
+  }
+}

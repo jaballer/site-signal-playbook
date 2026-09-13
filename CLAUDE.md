@@ -13,7 +13,7 @@ It covers:
 - a six-pillar audit and a play library
 - diagnostics, reporting, a signal catalog, measurement setup, and principles
 
-The content is plain Markdown files, so several tools can read it: the Astro site, Claude Code, Claude Desktop, and later an MCP server, Figma and Playwright.
+The content is plain Markdown files, so several tools can read it: the Astro site, the MCP server (for Claude Desktop, Claude Code and other clients), and later Figma and Playwright.
 
 ## Commands
 
@@ -26,9 +26,13 @@ npm run validate   # check /content against the schemas and references (no build
 npm run export     # write dist/playbook.json and dist/playbook.schema.json
 npm run build      # validate, then build the static site to apps/site/dist
 npm run preview    # serve the built site (run build first)
-npm run check      # tsc for packages/playbook, astro check for apps/site
+npm run check      # tsc for packages/playbook and apps/mcp, astro check for apps/site
+npm test           # MCP server tests (node:test)
+npm run mcp        # run the MCP server on stdio
 npm run format     # prettier (content/ is excluded on purpose)
 ```
+
+To run a single MCP test: `node --disable-warning=ExperimentalWarning --test --test-name-pattern="audit worksheet" apps/mcp/test/server.test.ts`.
 
 After editing anything in `content/`, run `npm run validate`.
 
@@ -38,6 +42,7 @@ After editing anything in `content/`, run `npm run validate`.
 content/            source of truth: one Markdown file per entry, grouped by collection
 packages/playbook/  schemas (Zod), loader, reference checks, link resolution, validate/export CLIs
 apps/site/          Astro site with React components for the interactive parts
+apps/mcp/           MCP server (stdio): read-only tools, playbook:// resources, workflow prompts
 ```
 
 Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loadPlaybook(contentDir)` reads every collection, validates frontmatter with strict schemas, and checks cross-references. It throws a `PlaybookError` listing every problem at once.
@@ -83,6 +88,21 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 - **Saved state in `localStorage`:**
   - `ssp-theme`: the theme choice.
   - `ssp-checklist`: checklist ticks, keyed `phaseId:itemIndex`, so reordering a phase's checklist shifts saved ticks.
+
+## MCP server (apps/mcp)
+
+- **Structure:** `src/server.ts` is the stdio entrypoint. `createPlaybookServer({ contentDir })` in `src/playbook-server.ts` registers everything, and tests connect to it in-process.
+- **Surface:**
+  - Five read-only tools: `search_playbook`, `get_entry`, `list_entries`, `get_audit_checklist`, `validate_content`.
+  - Resources: every entry at `playbook://{collection}/{id}`, plus `playbook://guide` and `playbook://schema`.
+  - Four prompts: `answer_leader_question`, `run_audit`, `diagnose`, `plan_roadmap`.
+- **Rendering:** `src/render.ts` turns entries into Markdown for LLMs and rewrites `[text](type:id)` links to `playbook://` URIs.
+- **Collections need wiring in four places.** Adding a collection or field means updating `renderEntry`, `titleOf`/`summaryOf`, `COLLECTION_GUIDE` and the site together.
+- **Loading:** content is re-read on demand, with results reused for up to a second (`src/content.ts`). If content is invalid, reading tools return `isError` with the issue list; `validate_content` always reads fresh.
+- **Search:** `src/search.ts` is keyword search with title weighting and crude stemming. Every word must match; if nothing does, any word will.
+- **stdout carries the MCP protocol.** Never `console.log` in the server; use `console.error`.
+- **Content folder:** `PLAYBOOK_CONTENT_DIR` overrides where the server reads content; the default is the repo's `/content`.
+- **Connecting:** `.mcp.json` registers the server for Claude Code with a relative path, so Claude Code must start from the repo root. Claude Desktop needs absolute paths (see `apps/mcp/README.md`).
 
 ## History
 
