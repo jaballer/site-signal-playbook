@@ -20,7 +20,7 @@ blocks:
         text: Every version carries a date and a version number. Earlier versions are kept, never overwritten.
   - type: table
     heading: The set
-    intro: Fourteen deliverables cover all four offers. Living documents are started once and updated; the rest are issued at a point in time.
+    intro: Fourteen deliverables cover SEO and AI search [consulting](offer:consulting). Living documents are started once and updated; the rest are issued at a point in time.
     columns:
       - Deliverable
       - When
@@ -80,10 +80,10 @@ blocks:
         - Leadership
         - Slides, presented live
       - - "**Migration pack**"
-        - "[Migration protection](offer:migration-protection), tied to the launch date"
+        - "Migration protection in [consulting](offer:consulting), tied to the launch date"
         - Marketing leader and the client's developers
         - Spreadsheets and a checklist
-    after: "The phase checklists name some of these by stage. The baseline scorecard is the scorecard's first version. Target ranges and ownership are sections of the roadmap, and the updated and next-quarter roadmaps are later versions of it. The shipped-work log is the agency's part of the change log."
+    after: "The baseline scorecard is the scorecard's first version. Target ranges and ownership are sections of the roadmap, and the updated and next-quarter roadmaps are later versions of it. The shipped-work log is the agency's part of the change log."
   - type: table
     heading: Audit report
     intro: The diagnosis, and usually the sale. Presented in a working session, then sent. Built from the [six-pillar audit](page:audit).
@@ -357,7 +357,7 @@ blocks:
         - Where should we invest more?
   - type: table
     heading: Migration pack
-    intro: The deliverables of [Migration protection](offer:migration-protection), in the order they're needed. Each goes to the client's developers as well as the marketing leader. The steps are in [Protect a migration](play:protect-migration).
+    intro: The deliverables of migration protection, part of [consulting](offer:consulting), in the order they're needed. Each goes to the client's developers as well as the marketing leader. The steps are in [Protect a migration](play:protect-migration).
     columns:
       - Item
       - Contents

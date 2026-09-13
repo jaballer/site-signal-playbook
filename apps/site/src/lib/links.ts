@@ -18,11 +18,11 @@ export function hrefFor(type: LinkType, id: string): string {
     case "diagnostic":
       return `${base}/diagnostics/${id}/`;
     case "phase":
-      return `${base}/engagement/#phase-${id}`;
+      return `${base}/engagement/#phases`;
     case "layer":
       return `${base}/signals/?layer=${id}`;
     case "offer":
-      return `${base}/engagement/#offer-${id}`;
+      return `${base}/offers/${id}/`;
     case "principle":
       return `${base}/principles/#${id}`;
     case "term":

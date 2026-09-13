@@ -13,7 +13,15 @@ export type Variant = {
 
 const desktop = { width: 1280, height: 900 };
 const mobile = { width: 375, height: 812 };
-const itemCollections = ["questions", "plays", "audit", "diagnostics", "signals", "glossary"];
+const itemCollections = [
+  "questions",
+  "plays",
+  "audit",
+  "diagnostics",
+  "signals",
+  "glossary",
+  "offers",
+];
 const foldPages = ["/questions/", "/audit/", "/plays/", "/diagnostics/"];
 
 export const slug = (path: string) =>
@@ -110,7 +118,6 @@ export function planVariants(pages: string[], { quick }: { quick: boolean }): Va
         { name: "hover-nav-link", path: "/", prep: hover("nav.side .links a:not([aria-current])") },
         { name: "hover-pill-link", path: "/questions/search-value/", prep: hover("a.pill") },
         { name: "focus-fold", path: "/questions/", prep: tabTo(".fold > summary") },
-        { name: "focus-phase", path: "/engagement/", prep: tabTo(".phases button") },
         { name: "focus-filter", path: "/signals/", prep: tabTo(".filters button") },
         { name: "focus-theme", path: "/glossary/", prep: tabTo("nav.side .theme-btn") },
         { name: "focus-copy", path: "/questions/search-value/", prep: tabTo(".copy") },

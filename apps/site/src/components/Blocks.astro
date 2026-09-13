@@ -1,6 +1,5 @@
 ---
 import type { Block } from "@site-signal/playbook";
-import { inline } from "../lib/markdown.ts";
 import { hrefFor } from "../lib/links.ts";
 import { getPlaybook } from "../lib/playbook.ts";
 import AuditBody from "./AuditBody.astro";
@@ -9,7 +8,6 @@ import Fold from "./Fold.astro";
 import Md from "./Md.astro";
 import PlayBody from "./PlayBody.astro";
 import QuestionBody from "./QuestionBody.astro";
-import PhaseChecklist, { type PhaseView } from "./react/PhaseChecklist.tsx";
 import SignalCatalog, { type SignalCard } from "./react/SignalCatalog.tsx";
 
 interface Props {
@@ -18,16 +16,6 @@ interface Props {
 
 const { blocks } = Astro.props;
 const pb = getPlaybook();
-
-const phaseViews: PhaseView[] = pb.phases.map((p) => ({
-  id: p.id,
-  order: p.order,
-  title: p.title,
-  when: p.when,
-  whyHtml: inline(p.body),
-  checklistHtml: p.checklist.map(inline),
-  deliverablesHtml: p.deliverables.map(inline),
-}));
 
 const layerOrder = new Map(pb.layers.map((l) => [l.id, l.order]));
 const signalCards: SignalCard[] = [...pb.signals]
@@ -48,7 +36,7 @@ const signalCards: SignalCard[] = [...pb.signals]
 ---
 
 {blocks.map((b) => (
-  <section class="block">
+  <section class="block" id={"id" in b ? b.id : undefined}>
     {"heading" in b && b.heading && <h2>{b.heading}</h2>}
     {"intro" in b && b.intro && (
       <p>
@@ -207,8 +195,6 @@ const signalCards: SignalCard[] = [...pb.signals]
       </div>
     )}
 
-    {b.type === "phases" && <PhaseChecklist client:load phases={phaseViews} />}
-
     {b.type === "signals" && (
       <SignalCatalog
         client:load
@@ -329,11 +315,18 @@ const signalCards: SignalCard[] = [...pb.signals]
               <dd>
                 <Md text={o.includes} />
               </dd>
+              <dt>Pricing</dt>
+              <dd>
+                <Md text={o.pricing} />
+              </dd>
               <dt>Leads into</dt>
               <dd>
                 <Md text={o.leadsInto} />
               </dd>
             </dl>
+            <a class="open-page" href={hrefFor("offer", o.id)}>
+              See the full offer →
+            </a>
           </div>
         ))}
       </div>

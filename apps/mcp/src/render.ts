@@ -103,7 +103,7 @@ export function renderEntry(
     case "principles":
       return join([`# Principle: ${(entry as Principle).title}`, md(entry.body)]);
     case "offers":
-      return renderOffer(entry as Offer);
+      return renderOffer(playbook, entry as Offer);
     case "glossary":
       return renderTerm(playbook, entry as Term);
     case "pages":
@@ -224,15 +224,28 @@ function renderLayer(playbook: Playbook, l: Layer) {
   ]);
 }
 
-function renderOffer(o: Offer) {
+function renderOffer(playbook: Playbook, o: Offer) {
   return join([
     `# Offer: ${o.name}`,
     [
       `- **Best for:** ${md(o.bestFor)}`,
       `- **What the client gets:** ${md(o.includes)}`,
+      `- **Pricing:** ${md(o.pricing)}`,
       `- **Length:** ${o.length}`,
       `- **Leads into:** ${md(o.leadsInto)}`,
     ].join("\n"),
+    o.services &&
+      section(
+        "What it covers",
+        o.services.map((s) => `- **${s.title}**: ${md(s.text)}`).join("\n"),
+      ),
+    section(
+      "How it runs",
+      o.steps.map((s, i) => `${i + 1}. **${s.title}**: ${md(s.text)}`).join("\n"),
+    ),
+    section("What the client provides", bullets(o.clientProvides)),
+    o.pages &&
+      section("Chapters", o.pages.map((id) => `- ${link(playbook, "pages", id)}`).join("\n")),
   ]);
 }
 
@@ -330,15 +343,6 @@ export function renderBlock(playbook: Playbook, block: Block): string {
           ["Layer", "North-star metric", "Leading indicators", "Health checks"],
           playbook.layers.map((l) => [l.name, l.northStar, l.leading, l.health]),
         ),
-      ]);
-    case "phases":
-      return join([
-        head,
-        playbook.phases
-          .map(
-            (p) => `- ${link(playbook, "phases", p.id)} (${p.when}): ${md(firstSentence(p.body))}`,
-          )
-          .join("\n"),
       ]);
     case "signals":
       return join([

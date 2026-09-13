@@ -5,6 +5,5 @@ export const site = {
   version: "v2",
   storageKeys: {
     theme: "ssp-theme",
-    checklist: "ssp-checklist",
   },
 } as const;

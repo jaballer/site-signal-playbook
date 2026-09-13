@@ -29,7 +29,8 @@ const COLLECTION_GUIDE: Record<CollectionName, string> = {
   phases: "Engagement phases from audit to renewal, with checklists and deliverables",
   layers: "Scorecard layers, each with a north-star metric, leading indicators and health checks",
   principles: "The principles behind the playbook",
-  offers: "The agency's standard service offers",
+  offers:
+    "The agency's three offers: who each fits, what's included, pricing, how it runs and what the client provides",
   glossary:
     "Glossary: plain-language definitions of marketing and search terms, with aliases and what each means for the program",
   pages:
