@@ -124,12 +124,14 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 - **How it works:**
   - It builds the base ref (`main` by default) in a temporary git worktree with a clean install, and saves that build in `.visual/base/<commit>`. It builds the working tree the usual way.
   - It captures every page common to both builds in headless Chrome (installed Google Chrome, or `CHROME_PATH`), in light and dark, desktop and mobile. It also captures a saved theme overriding the OS, open folds, and hover and keyboard-focus states. The list lives in `shots.ts`.
-  - It writes `.visual/report/index.html`, with before, after and changed-pixel images cropped to each change, and `results.json`. It exits with 1 when anything differs, and 2 when it can't run.
+  - It writes `.visual/report/index.html`, with before, after and changed-pixel images cropped to each change, and `results.json`. It exits with 1 when any shot differs or a page from the base is missing (unless `--pages` narrows the run), and 2 when it can't run.
+  - **It refuses to screenshot a page that didn't load properly.** A shot fails when a font or stylesheet doesn't load or a `client:load` island doesn't hydrate, and the run stops before capturing if either build's home page can't load. Otherwise fallback fonts in both builds would match and pass. The fonts come from Google Fonts, so a run needs a network connection.
 - **Options:** `--base <ref>`, `--quick` (chapter pages and one page per collection), `--only desktop-light,mobile-dark` and `--pages /signals/,/glossary/geo/`. Pass them after `--`: `npm run test:visual -- --quick`.
 - **Captures are deterministic on purpose.** Don't loosen these without re-checking that the same build captured twice gives 0 differences:
   - Chrome runs with software rendering and full compositing before each frame (`CHROME_ARGS` in `capture.ts`).
   - Every font face loads before capture, and each screenshot is retaken until two in a row match.
-  - The window is resized to the page height instead of using full-page capture, which repeats content on tall pages. Pages over 20,000px are captured in overlapping tiles.
+  - The window is resized to the page height instead of using full-page capture, which repeats content on tall pages. Pages over 20,000px are captured in overlapping rows of tiles.
+  - Content wider than the window is captured in extra columns by scrolling sideways. Widening the window would change the layout under test.
   - The mobile `.topbar` is pinned with `position: relative` during capture, because Chrome paints the sticky bar at stale positions in very tall windows.
   - Channel differences of 2/255 or less are ignored: rounded corners of scrolling containers anti-alias slightly differently between captures.
 

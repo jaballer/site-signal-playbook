@@ -4,7 +4,7 @@ import { parseArgs } from "node:util";
 import type { Browser } from "playwright-core";
 import { site } from "../../apps/site/src/site.ts";
 import { buildRef, buildWorkingTree, git } from "./builds.ts";
-import { capturePage, launchBrowser, type Capture } from "./capture.ts";
+import { capturePage, checkPage, launchBrowser, type Capture } from "./capture.ts";
 import { compareCaptures, type ShotFiles } from "./compare.ts";
 import { summarize, writeReport, type ShotResult } from "./report.ts";
 import { pagesIn, serveStatic } from "./server.ts";
@@ -24,8 +24,9 @@ Usage: npm run test:visual -- [options]
 
 Variants: ${VARIANT_NAMES.join(", ")}
 
-Needs Google Chrome, or CHROME_PATH set to a Chrome or Chromium binary. Writes a report to
-.visual/report/index.html. Exits with 1 when any shot differs, and 2 when the comparison can't run.`;
+Needs Google Chrome (or CHROME_PATH set to a Chrome or Chromium binary) and a network connection for
+the site's fonts. Writes a report to .visual/report/index.html. Exits with 1 when any shot differs or
+a page from the base is missing, and 2 when the comparison can't run.`;
 
 const OPTIONS = {
   base: { type: "string", default: "main" },
@@ -39,6 +40,10 @@ const OPTIONS = {
 const CONCURRENCY = 8;
 
 const log = (message: string) => console.log(message);
+const listPages = (pages: string[]) =>
+  pages.length > 10
+    ? `${pages.slice(0, 10).join(", ")} and ${pages.length - 10} more`
+    : pages.join(", ");
 const firstLine = (error: unknown) =>
   (error instanceof Error ? error.message : String(error)).split("\n")[0];
 const splitList = (value: string | undefined) =>
@@ -204,6 +209,21 @@ async function main(): Promise<number> {
     ]);
     const results: ShotResult[] = [];
     try {
+      // Check each build's home page once, so a broken setup (offline, for example) fails before any capture.
+      for (const [name, origin] of [
+        [label, baseServer.origin],
+        ["the working tree", currentServer.origin],
+      ]) {
+        try {
+          await checkPage(browser, `${origin}/`);
+        } catch (error) {
+          const reason = firstLine(error);
+          const hint = reason.startsWith("fonts or stylesheets")
+            ? " The fonts come from Google Fonts, so check the network connection."
+            : "";
+          throw new Error(`The home page of ${name} didn't load properly: ${reason}.${hint}`);
+        }
+      }
       for (const variant of variants) {
         const origins = { before: baseServer.origin, after: currentServer.origin };
         const variantResults = await runVariant(browser, variant, reportDir, origins);
@@ -233,13 +253,15 @@ async function main(): Promise<number> {
       );
     }
     if (problems.length > 25) log(`  …and ${problems.length - 25} more.`);
-    if (added.length || removed.length) {
-      log(
-        `Not compared: ${added.length} pages only in the working tree, ${removed.length} only in ${label}.`,
-      );
+    // A page that disappeared is a regression too, unless --pages limited the run to other pages.
+    const missingFails = removed.length > 0 && !onlyPages;
+    if (removed.length) {
+      const note = missingFails ? "" : " (not counted as a failure, because --pages was given)";
+      log(`Missing from the working tree: ${listPages(removed)}${note}.`);
     }
+    if (added.length) log(`New in the working tree, not compared: ${listPages(added)}.`);
     log(`Report: ${join(reportDir, "index.html")}`);
-    return problems.length ? 1 : 0;
+    return problems.length || missingFails ? 1 : 0;
   } finally {
     await browser.close();
   }

@@ -2,7 +2,11 @@ import { writeFile } from "node:fs/promises";
 import { chromium, type Browser, type BrowserContext, type Page } from "playwright-core";
 import type { Prep } from "./shots.ts";
 
-export type Capture = { width: number; height: number; tiles: number };
+/**
+ * One captured page: its scrollable size, and `tiles` screenshots saved row by row, `columns` to a row.
+ * A page taller or wider than the window is captured by scrolling.
+ */
+export type Capture = { width: number; height: number; tiles: number; columns: number };
 
 // Software rasterization and full compositing before each frame make repeated captures byte-identical.
 const CHROME_ARGS = [
@@ -38,7 +42,7 @@ export async function launchBrowser(): Promise<Browser> {
   }
 }
 
-// Pages taller than this are captured as overlapping scrolled tiles.
+// Pages taller than this are captured as overlapping scrolled rows of tiles.
 const MAX_HEIGHT = 20000;
 const TILE_OVERLAP = 200;
 
@@ -65,9 +69,62 @@ async function stableScreenshot(page: Page, file: string) {
 }
 
 /**
- * Loads a page, waits until fonts and client:load islands are ready, applies `prep`, then captures
- * the whole page as ordinary viewport screenshots. Chrome's beyond-viewport capture isn't deterministic,
- * so the window is resized to the page height instead.
+ * Opens a page and waits until its fonts and client:load islands are ready. Throws when a font or
+ * stylesheet doesn't load or an island doesn't hydrate, because screenshots of that page wouldn't show
+ * the real site (fallback fonts, for example) and could still match each other.
+ */
+async function openPage(context: BrowserContext, url: string): Promise<Page> {
+  const page = await context.newPage();
+  const failed: string[] = [];
+  const noteFailure = (resourceType: string, assetUrl: string) => {
+    if (resourceType === "font" || resourceType === "stylesheet") failed.push(assetUrl);
+  };
+  page.on("requestfailed", (request) => noteFailure(request.resourceType(), request.url()));
+  page.on("response", (response) => {
+    if (response.status() >= 400) noteFailure(response.request().resourceType(), response.url());
+  });
+  try {
+    await page.goto(url, { waitUntil: "networkidle" });
+    // Load every font face up front, so content revealed later (open folds) can't reflow mid-capture.
+    const brokenFaces = await page.evaluate(async () => {
+      await Promise.all([...document.fonts].map((face) => face.load().catch(() => undefined)));
+      await document.fonts.ready;
+      return [...document.fonts]
+        .filter((face) => face.status === "error")
+        .map((face) => `${face.family} ${face.weight}`);
+    });
+    const missing = [...failed, ...brokenFaces];
+    if (missing.length) {
+      throw new Error(`fonts or stylesheets didn't load: ${missing.slice(0, 3).join(", ")}`);
+    }
+    await page
+      .waitForFunction(() => !document.querySelector('astro-island[ssr][client="load"]'), null, {
+        timeout: 10000,
+      })
+      .catch(() => {
+        throw new Error("client:load islands didn't hydrate within 10 seconds");
+      });
+    return page;
+  } catch (error) {
+    await page.close();
+    throw error;
+  }
+}
+
+/** Opens a page once and throws if it doesn't load properly, so a broken setup fails before any capture. */
+export async function checkPage(browser: Browser, url: string) {
+  const context = await browser.newContext();
+  try {
+    const page = await openPage(context, url);
+    await page.close();
+  } finally {
+    await context.close();
+  }
+}
+
+/**
+ * Loads a page, applies `prep`, then captures the whole page as ordinary window screenshots. Chrome's
+ * beyond-viewport capture isn't deterministic, so the window is resized to the page height instead.
  */
 export async function capturePage(
   context: BrowserContext,
@@ -76,19 +133,8 @@ export async function capturePage(
   width: number,
   prep?: Prep,
 ): Promise<Capture> {
-  const page = await context.newPage();
+  const page = await openPage(context, url);
   try {
-    await page.goto(url, { waitUntil: "networkidle" });
-    // Load every font face up front, so content revealed later (open folds) can't reflow mid-capture.
-    await page.evaluate(async () => {
-      await Promise.all([...document.fonts].map((face) => face.load().catch(() => undefined)));
-      await document.fonts.ready;
-    });
-    await page
-      .waitForFunction(() => !document.querySelector('astro-island[ssr][client="load"]'), null, {
-        timeout: 10000,
-      })
-      .catch(() => undefined);
     await page.waitForTimeout(150);
     if (prep) {
       await prep(page);
@@ -110,13 +156,21 @@ export async function capturePage(
     const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
 
     let tiles = 0;
+    let columns = 0;
     for (let y = 0; ; y += windowHeight - TILE_OVERLAP) {
-      await page.evaluate((top) => window.scrollTo(0, top), y);
-      await nextFrames(page);
-      await stableScreenshot(page, `${fileBase}.${tiles++}.png`);
+      // Content wider than the window is captured by scrolling sideways. Widening the window instead
+      // would change the layout being tested.
+      columns = 0;
+      for (let x = 0; ; x += width) {
+        await page.evaluate((position) => window.scrollTo(position), { left: x, top: y });
+        await nextFrames(page);
+        await stableScreenshot(page, `${fileBase}.${tiles++}.png`);
+        columns++;
+        if (x + width >= scrollWidth) break;
+      }
       if (y + windowHeight >= height) break;
     }
-    return { width: scrollWidth, height, tiles };
+    return { width: scrollWidth, height, tiles, columns };
   } finally {
     await page.close();
   }

@@ -62,4 +62,4 @@ npm run mcp      # run the MCP server on stdio (normally your MCP client starts 
 npm run test:visual
 ```
 
-This compares every page of the site with the `main` branch, pixel by pixel, in light and dark, on desktop and mobile. It needs Google Chrome installed. When something differs, open `.visual/report/index.html` to see before, after and the changed pixels. Add `-- --quick` for a faster pass over one page of each kind, or `-- --base <branch>` to compare with another branch.
+This compares every page of the site with the `main` branch, pixel by pixel, in light and dark, on desktop and mobile. It needs Google Chrome installed and a network connection for the site's fonts. When something differs, open `.visual/report/index.html` to see before, after and the changed pixels. Add `-- --quick` for a faster pass over one page of each kind, or `-- --base <branch>` to compare with another branch.

@@ -21,19 +21,19 @@ export function summarize(result: ShotResult["result"]): string {
       return "matches";
     case "error":
       return `couldn't capture it (${result.message})`;
-    case "resized":
-      return `page height changed from ${px(result.before.height)} to ${px(result.after.height)}`;
-    case "changed": {
+    case "resized": {
+      const { before, after } = result;
       const parts: string[] = [];
-      if (result.changedPixels)
-        parts.push(`${result.changedPixels.toLocaleString("en-US")} pixels changed`);
-      if (result.before.width !== result.after.width) {
-        parts.push(
-          `scrollable width changed from ${px(result.before.width)} to ${px(result.after.width)}`,
-        );
+      if (before.height !== after.height) {
+        parts.push(`page height changed from ${px(before.height)} to ${px(after.height)}`);
       }
-      return parts.join("; ");
+      if (before.width !== after.width) {
+        parts.push(`scrollable width changed from ${px(before.width)} to ${px(after.width)}`);
+      }
+      return parts.join("; ") || "page size changed";
     }
+    case "changed":
+      return `${result.changedPixels.toLocaleString("en-US")} pixels changed`;
   }
 }
 
@@ -83,15 +83,18 @@ function section(id: string, shotResult: ShotResult) {
   const { variant, shot, result } = shotResult;
   const figures = (sides: Side[], region: Region) =>
     `<div class="row">${sides
-      .map(([label, folder]) =>
-        figure(label, `${variant}/${folder}/${shot}.${region.tile}.png`, region),
-      )
+      .map(([label, folder]) => {
+        const tile = folder === "after" ? region.afterTile : region.tile;
+        return figure(label, `${variant}/${folder}/${shot}.${tile}.png`, region);
+      })
       .join("")}</div>`;
 
   let body = "";
   if (result.status === "resized") {
-    body = `<p>The pages first differ ${px(result.region.top)} from the top.</p>
-${figures(BEFORE_AFTER, result.region)}`;
+    const { region, after } = result;
+    const part = after.tiles > 1 ? ` of part ${region.afterTile + 1} of ${after.tiles}` : "";
+    body = `<p>The pages first differ ${px(region.top)} from the top${part}.</p>
+${figures(BEFORE_AFTER, region)}`;
   } else if (result.status === "changed") {
     const parts = result.before.tiles;
     body = result.regions
@@ -114,9 +117,9 @@ export async function writeReport(
   run: { base: string; results: ShotResult[]; added: string[]; removed: string[] },
 ) {
   const problems = run.results.filter((r) => r.result.status !== "same");
-  const pageList = (label: string, pages: string[]) =>
+  const pageList = (label: string, pages: string[], className = "") =>
     pages.length
-      ? `<p>${label}: ${pages.map((p) => `<code>${escape(p)}</code>`).join(", ")}</p>`
+      ? `<p class="${className}">${label}: ${pages.map((p) => `<code>${escape(p)}</code>`).join(", ")}</p>`
       : "";
   const contents = problems
     .map(
@@ -150,8 +153,8 @@ export async function writeReport(
 <body>
 <h1>Visual comparison</h1>
 <p>${escape(run.base)} compared with the working tree. ${run.results.length} shots: ${run.results.length - problems.length} match, ${problems.length} differ.</p>
-${pageList("Pages only in the working tree, not compared", run.added)}
-${pageList("Pages only in the base, not compared", run.removed)}
+${pageList("Pages missing from the working tree", run.removed, "bad")}
+${pageList("New pages in the working tree, not compared", run.added)}
 ${problems.length ? `<ol>${contents}</ol>` : "<p>Every shot matches.</p>"}
 ${problems.map((r, i) => section(`shot-${i}`, r)).join("\n")}
 </body>

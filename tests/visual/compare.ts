@@ -6,9 +6,14 @@ import type { Capture } from "./capture.ts";
 // the same page, so channel differences up to this much don't count as changes.
 const TOLERANCE = 2;
 
-/** The box from `left`,`top` to `right`,`bottom` (inclusive) in one tile image of `width` × `height` pixels. */
+/**
+ * The box from `left`,`top` to `right`,`bottom` (inclusive) in a tile image of `width` × `height` pixels:
+ * tile number `tile` of the before capture and `afterTile` of the after capture. The two numbers only
+ * differ when the page size changed.
+ */
 export type Region = {
   tile: number;
+  afterTile: number;
   width: number;
   height: number;
   top: number;
@@ -19,9 +24,9 @@ export type Region = {
 
 export type Comparison =
   | { status: "same" }
-  /** Same page height. `regions` holds the changed rows of each tile that changed. */
+  /** Same page size. `regions` holds the changed area of each tile that changed. */
   | { status: "changed"; before: Capture; after: Capture; changedPixels: number; regions: Region[] }
-  /** The page height changed, so pixels can't be compared one to one. `region` is where the pages first differ. */
+  /** The page size changed, so pixels can't be compared one to one. `region` is where the pages first differ. */
   | { status: "resized"; before: Capture; after: Capture; region: Region };
 
 /** Base paths of one shot's images. Tile N of a shot is saved as `${base}.N.png`. */
@@ -44,8 +49,18 @@ export async function compareCaptures(
   after: Capture,
   files: ShotFiles,
 ): Promise<Comparison> {
-  if (before.height !== after.height || before.tiles !== after.tiles) {
-    return { status: "resized", before, after, region: await firstDifference(files) };
+  const resized = async (): Promise<Comparison> => ({
+    status: "resized",
+    before,
+    after,
+    region: await firstDifference(before, after, files),
+  });
+  if (
+    before.width !== after.width ||
+    before.height !== after.height ||
+    before.tiles !== after.tiles
+  ) {
+    return resized();
   }
   const regions: Region[] = [];
   let changedPixels = 0;
@@ -58,9 +73,7 @@ export async function compareCaptures(
     if (bytesA.equals(bytesB)) continue;
     const a = PNG.sync.read(bytesA);
     const b = PNG.sync.read(bytesB);
-    if (a.width !== b.width || a.height !== b.height) {
-      return { status: "resized", before, after, region: await firstDifference(files) };
-    }
+    if (a.width !== b.width || a.height !== b.height) return resized();
     const diff = new PNG({ width: a.width, height: a.height });
     let changed = 0;
     let top = -1;
@@ -91,27 +104,56 @@ export async function compareCaptures(
     }
     if (!changed) continue;
     changedPixels += changed;
-    regions.push({ tile: index, width: a.width, height: a.height, top, bottom, left, right });
+    const { width, height } = a;
+    regions.push({ tile: index, afterTile: index, width, height, top, bottom, left, right });
     await writeFile(tileFile(files.diff, index), PNG.sync.write(diff));
   }
-  if (!regions.length && before.width === after.width) return { status: "same" };
+  if (!regions.length) return { status: "same" };
   return { status: "changed", before, after, changedPixels, regions };
 }
 
-/** The first row of the top tile where the captures differ, or where the shorter one ends. */
-async function firstDifference(files: ShotFiles): Promise<Region> {
-  const a = PNG.sync.read(await readFile(tileFile(files.before, 0)));
-  const b = PNG.sync.read(await readFile(tileFile(files.after, 0)));
-  const rows = Math.min(a.height, b.height);
-  let row = 0;
-  if (a.width === b.width) {
-    scan: for (; row < rows; row++) {
-      for (let x = 0; x < a.width; x++) {
-        if (differs(a.data, b.data, (row * a.width + x) * 4)) break scan;
+/**
+ * Where two captures of different sizes first differ. Tiles are matched by row and column in reading
+ * order, and a tile that only one capture has is matched with the other capture's nearest tile.
+ */
+async function firstDifference(before: Capture, after: Capture, files: ShotFiles): Promise<Region> {
+  const rowsOf = (capture: Capture) => capture.tiles / capture.columns;
+  const tileAt = (capture: Capture, row: number, column: number) =>
+    Math.min(row, rowsOf(capture) - 1) * capture.columns + Math.min(column, capture.columns - 1);
+  const rows = Math.max(rowsOf(before), rowsOf(after));
+  const columns = Math.max(before.columns, after.columns);
+
+  let region: Region | undefined;
+  for (let row = 0; row < rows; row++) {
+    for (let column = 0; column < columns; column++) {
+      const tile = tileAt(before, row, column);
+      const afterTile = tileAt(after, row, column);
+      const a = PNG.sync.read(await readFile(tileFile(files.before, tile)));
+      const b = PNG.sync.read(await readFile(tileFile(files.after, afterTile)));
+      const shared = Math.min(a.height, b.height);
+      let y = 0;
+      if (a.width === b.width) {
+        scan: for (; y < shared; y++) {
+          for (let x = 0; x < a.width; x++) {
+            if (differs(a.data, b.data, (y * a.width + x) * 4)) break scan;
+          }
+        }
       }
+      // Everything after the first difference can shift, so the region spans the tile's full width.
+      const height = Math.max(a.height, b.height);
+      region = {
+        tile,
+        afterTile,
+        width: a.width,
+        height,
+        top: y,
+        bottom: y,
+        left: 0,
+        right: a.width - 1,
+      };
+      if (y < shared || a.height !== b.height) return region;
     }
   }
-  // Everything below the first difference can shift, so the region spans the full width.
-  const height = Math.max(a.height, b.height);
-  return { tile: 0, width: a.width, height, top: row, bottom: row, left: 0, right: a.width - 1 };
+  // Every matched pair was identical; point at the last one.
+  return region!;
 }
