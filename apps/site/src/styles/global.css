@@ -18,6 +18,7 @@
 
 @import "./components/theme-toggle.css" layer(components);
 @import "./components/panel.css" layer(components);
+@import "./components/offer.css" layer(components);
 @import "./components/thesis.css" layer(components);
 @import "./components/table.css" layer(components);
 @import "./components/pill.css" layer(components);

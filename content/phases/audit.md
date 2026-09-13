@@ -1,7 +1,7 @@
 ---
 order: 1
 title: Audit
-when: weeks 1–2
+when: audit weeks 1–2
 checklist:
   - "Kickoff interview: business model, ideal customer, deal size, sales cycle, priority products, named competitors, planned redesigns, and the questions leadership needs answered"
   - "Get access: Search Console, GA4, tag manager, CMS, CDN or hosting, and CRM reports"

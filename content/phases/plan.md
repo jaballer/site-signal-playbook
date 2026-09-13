@@ -1,7 +1,7 @@
 ---
 order: 3
 title: Plan
-when: weeks 3–4
+when: program weeks 3–4
 checklist:
   - Score every candidate play on revenue at stake, confidence and effort
   - "Sequence the roadmap: blockers, then quick wins, then new content and off-site work"

@@ -30,8 +30,14 @@ export default function PhaseChecklist({ phases }: { phases: PhaseView[] }) {
 
   useEffect(() => {
     setChecks(readChecks());
-    const fromHash = phases.findIndex((p) => `#phase-${p.id}` === location.hash);
-    if (fromHash >= 0) setCurrent(fromHash);
+    // Links to a phase on the same page only change the hash, so select on every change.
+    const selectFromHash = () => {
+      const fromHash = phases.findIndex((p) => `#phase-${p.id}` === location.hash);
+      if (fromHash >= 0) setCurrent(fromHash);
+    };
+    selectFromHash();
+    window.addEventListener("hashchange", selectFromHash);
+    return () => window.removeEventListener("hashchange", selectFromHash);
   }, [phases]);
 
   function toggle(key: string, on: boolean) {
