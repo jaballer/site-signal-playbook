@@ -146,12 +146,12 @@ blocks:
         text: Run every step above, with the 90-day roadmap review at the end of [Plan](phase:plan) in place of the audit presentation. In the first week, check the client's existing audit against the six pillars and note the gaps before planning.
       - eyebrow: Migration protection
         title: Start with the developers
-        text: Hold the kickoff with the web team. Confirm the launch date, staging access, the release plan and who signs off on launch, and start the pre-launch benchmark the same week. The first milestone is the staging review.
+        text: "Hold the kickoff with the web team. Confirm the launch date, staging access, the release plan and who signs off on launch, and start the pre-launch benchmark the same week. Request only the access a migration needs: Search Console, Google Analytics 4, Google Tag Manager, the CMS with staging, and the CDN or hosting. The first milestone is the staging review."
   - type: strip
     label: Onboarding is done when
     items:
       - title: Access works
-        text: Every item on the access list is tested at the agreed level, not just granted.
+        text: Every access item the offer needs is tested at the agreed level, not just granted.
       - title: People are named
         text: Contacts for approvals, subject-matter input, developer work and CRM reports.
       - title: Facts are confirmed

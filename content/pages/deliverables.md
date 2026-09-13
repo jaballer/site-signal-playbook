@@ -201,11 +201,11 @@ blocks:
       - - Baseline
         - The value, its date range and its source
       - - Target range
-        - The 90-day range from the roadmap
+        - "The 90-day range from the roadmap, added once [Plan](phase:plan) sets it"
       - - This period
         - The current value, and the change against baseline and against last year
       - - Status
-        - On track, at risk or off track, with a one-line reason
+        - On track, at risk or off track against the target range, with a one-line reason. Blank until the targets are set.
       - - Caveat
         - Anything the trust check flagged for this metric this period
   - type: table
@@ -367,7 +367,7 @@ blocks:
         - Rankings, clicks, indexed pages and leads for priority pages, and a full crawl of the current site
         - As soon as the engagement starts, and before launch
       - - Redirect map
-        - Every old URL with traffic, links or rankings, mapped to its new URL, with priority pages flagged
+        - Every old URL from the pre-launch crawl, mapped to its new URL or deliberately retired, with pages that have traffic, links or rankings flagged as priority
         - Before the staging review
       - - Staging crawl report
         - Missing pages, broken redirects, changed titles and content, noindex or robots rules, and internal links to priority pages
