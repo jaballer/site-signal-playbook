@@ -4,7 +4,8 @@
   "type": "module",
   "workspaces": [
     "packages/*",
-    "apps/*"
+    "apps/*",
+    "tests/*"
   ],
   "engines": {
     "node": ">=22.18.0"
@@ -13,8 +14,9 @@
     "dev": "npm run dev -w @site-signal/site",
     "build": "npm run validate && npm run build -w @site-signal/site",
     "preview": "npm run preview -w @site-signal/site",
-    "check": "npm run check -w @site-signal/playbook && npm run check -w @site-signal/mcp && npm run check -w @site-signal/site",
+    "check": "npm run check -w @site-signal/playbook && npm run check -w @site-signal/mcp && npm run check -w @site-signal/visual-tests && npm run check -w @site-signal/site",
     "test": "npm run test -w @site-signal/mcp",
+    "test:visual": "node --disable-warning=ExperimentalWarning tests/visual/run.ts",
     "validate": "node --disable-warning=ExperimentalWarning packages/playbook/src/cli/validate.ts",
     "export": "node --disable-warning=ExperimentalWarning packages/playbook/src/cli/export.ts",
     "mcp": "node --disable-warning=ExperimentalWarning apps/mcp/src/server.ts",

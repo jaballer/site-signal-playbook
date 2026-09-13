@@ -55,3 +55,11 @@ npm run check    # type checks
 npm test         # MCP server tests
 npm run mcp      # run the MCP server on stdio (normally your MCP client starts it)
 ```
+
+## Checking design changes
+
+```bash
+npm run test:visual
+```
+
+This compares every page of the site with the `main` branch, pixel by pixel, in light and dark, on desktop and mobile. It needs Google Chrome installed. When something differs, open `.visual/report/index.html` to see before, after and the changed pixels. Add `-- --quick` for a faster pass over one page of each kind, or `-- --base <branch>` to compare with another branch.

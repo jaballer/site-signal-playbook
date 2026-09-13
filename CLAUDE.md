@@ -26,8 +26,9 @@ npm run validate   # check /content against the schemas and references (no build
 npm run export     # write dist/playbook.json and dist/playbook.schema.json
 npm run build      # validate, then build the static site to apps/site/dist
 npm run preview    # serve the built site (run build first)
-npm run check      # tsc for packages/playbook and apps/mcp, astro check for apps/site
+npm run check      # tsc for packages/playbook, apps/mcp and tests/visual, astro check for apps/site
 npm test           # MCP server tests (node:test)
+npm run test:visual  # compare every page with main, pixel by pixel (needs Google Chrome)
 npm run mcp        # run the MCP server on stdio
 npm run format     # prettier (content/ is excluded on purpose)
 ```
@@ -43,6 +44,7 @@ content/            source of truth: one Markdown file per entry, grouped by col
 packages/playbook/  schemas (Zod), loader, reference checks, link resolution, validate/export CLIs
 apps/site/          Astro site with React components for the interactive parts
 apps/mcp/           MCP server (stdio): read-only tools, playbook:// resources, workflow prompts
+tests/visual/       screenshot comparison of the built site against a git ref
 ```
 
 Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loadPlaybook(contentDir)` reads every collection, validates frontmatter with strict schemas, and checks cross-references. It throws a `PlaybookError` listing every problem at once.
@@ -114,6 +116,22 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 - **stdout carries the MCP protocol.** Never `console.log` in the server; use `console.error`.
 - **Content folder:** `PLAYBOOK_CONTENT_DIR` overrides where the server reads content; the default is the repo's `/content`.
 - **Connecting:** `.mcp.json` registers the server for Claude Code with a relative path, so Claude Code must start from the repo root. Claude Desktop needs absolute paths (see `apps/mcp/README.md`).
+
+## Visual tests (tests/visual)
+
+`npm run test:visual` checks that a change looks the way it should, on every page. Run it after any CSS or component change; for a refactor, 0 differences is the pass mark.
+
+- **How it works:**
+  - It builds the base ref (`main` by default) in a temporary git worktree with a clean install, and saves that build in `.visual/base/<commit>`. It builds the working tree the usual way.
+  - It captures every page common to both builds in headless Chrome (installed Google Chrome, or `CHROME_PATH`), in light and dark, desktop and mobile. It also captures a saved theme overriding the OS, open folds, and hover and keyboard-focus states. The list lives in `shots.ts`.
+  - It writes `.visual/report/index.html`, with before, after and changed-pixel images cropped to each change, and `results.json`. It exits with 1 when anything differs, and 2 when it can't run.
+- **Options:** `--base <ref>`, `--quick` (chapter pages and one page per collection), `--only desktop-light,mobile-dark` and `--pages /signals/,/glossary/geo/`. Pass them after `--`: `npm run test:visual -- --quick`.
+- **Captures are deterministic on purpose.** Don't loosen these without re-checking that the same build captured twice gives 0 differences:
+  - Chrome runs with software rendering and full compositing before each frame (`CHROME_ARGS` in `capture.ts`).
+  - Every font face loads before capture, and each screenshot is retaken until two in a row match.
+  - The window is resized to the page height instead of using full-page capture, which repeats content on tall pages. Pages over 20,000px are captured in overlapping tiles.
+  - The mobile `.topbar` is pinned with `position: relative` during capture, because Chrome paints the sticky bar at stale positions in very tall windows.
+  - Channel differences of 2/255 or less are ignored: rounded corners of scrolling containers anti-alias slightly differently between captures.
 
 ## History
 

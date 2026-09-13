@@ -1,0 +1,15 @@
+{
+  "name": "@site-signal/visual-tests",
+  "private": true,
+  "type": "module",
+  "description": "Pixel comparison of every site page between a base git ref and the working tree.",
+  "scripts": {
+    "check": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/pngjs": "^6.0.5",
+    "playwright-core": "^1.63.0",
+    "pngjs": "^7.0.0"
+  }
+}
