@@ -1,0 +1,42 @@
+/* Small rounded labels and links. Tones: good, warn, crit, acc. */
+.pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  background: var(--surface-2);
+  white-space: nowrap;
+  text-decoration: none;
+
+  &.good {
+    background: var(--good-soft);
+    color: var(--good);
+    border-color: transparent;
+  }
+
+  &.warn {
+    background: var(--warn-soft);
+    color: var(--warn);
+    border-color: transparent;
+  }
+
+  &.crit {
+    background: var(--crit-soft);
+    color: var(--crit);
+    border-color: transparent;
+  }
+
+  &.acc {
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    border-color: transparent;
+  }
+}
+
+a.pill:hover {
+  border-color: var(--ink-3);
+  color: var(--ink);
+}

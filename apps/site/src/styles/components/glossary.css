@@ -1,0 +1,17 @@
+/* Glossary index and term pages. */
+.expansion {
+  font-weight: 400;
+  color: var(--ink-2);
+
+  h1 & {
+    font-size: 0.6em;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+}
+
+.aliases {
+  font-size: 0.92rem;
+  color: var(--ink-2);
+  margin-bottom: 14px;
+}

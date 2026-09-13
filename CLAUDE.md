@@ -88,7 +88,12 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 - **Vite caches:** dev and build use separate Vite dependency caches (`node_modules/.vite/` and `node_modules/.vite-build/` under `apps/site`), set in `astro.config.mjs`. When they shared one, a build wrote production React into it, and every React component in dev failed with `_jsxDEV is not a function`. If that error ever shows up again, stop the dev server, delete `apps/site/node_modules/.vite`, and restart.
 - **Live reload:** the `watchContent` plugin in `astro.config.mjs` watches `content/`. It reports any change as a change to `src/lib/playbook.ts`, so new files get routes without a restart.
 - **Components:** static rendering uses `.astro` components (`Blocks`, `Fold`, the `*Body` components, `RefPills`, `Md`). Interactive parts are React components in `src/components/react/`: `ThemeToggle`, `CopyButton`, `PhaseChecklist` and `SignalCatalog`. Markdown is rendered to HTML on the server and passed to React as HTML strings.
-- **Styles:** `src/styles/global.css` holds the design tokens. The dark palette is defined twice: once under `prefers-color-scheme` scoped to `:root:not([data-theme="light"])`, and once under `:root[data-theme="dark"]`. Change both copies together.
+- **Styles** (`src/styles/`, plain CSS with no framework):
+  - `global.css` is the entry point. It declares the cascade layers (`reset, tokens, base, layout, components, utilities`) and imports each file into one. Vite inlines the imports and wraps each file in its `@layer` block.
+  - **Layers decide precedence before specificity.** A rule in a later layer beats any rule in an earlier one. So a rule that targets a component's elements from outside it (like `nav.side .theme-btn`) must live in the component's own file: from `layout` it would lose, for example to the component's `all: unset`.
+  - `tokens.css`: each theme color is defined once as `light-dark(light, dark)`. It follows `color-scheme`, which comes from the OS setting or from `data-theme` on `<html>` (set by the theme toggle).
+  - `components/`: one file per component, named after the component or block that renders it. Styles use native nesting, and the 820px small-screen overrides sit inside the rule they change.
+  - Component styles stay global rather than going in Astro-scoped `<style>` blocks. Scoping wouldn't reach Markdown rendered through `set:html`, slotted children, or the React islands that share classes like `.pill`.
 - **Variables:** site-wide values (name, version, storage keys) live in `src/site.ts`.
 - **Saved state in `localStorage`:**
   - `ssp-theme`: the theme choice.
