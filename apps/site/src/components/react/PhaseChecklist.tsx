@@ -28,6 +28,14 @@ export default function PhaseChecklist({ phases }: { phases: PhaseView[] }) {
   const [current, setCurrent] = useState(0);
   const [checks, setChecks] = useState<Checks>({});
 
+  function selectPhase(index: number) {
+    setCurrent(index);
+    const hash = `#phase-${phases[index]?.id}`;
+    if (hash && location.hash !== hash) {
+      history.replaceState(null, "", hash);
+    }
+  }
+
   useEffect(() => {
     setChecks(readChecks());
     // Links to a phase on the same page only change the hash, so select on every change.
@@ -69,7 +77,7 @@ export default function PhaseChecklist({ phases }: { phases: PhaseView[] }) {
             type="button"
             id={`phase-${p.id}`}
             aria-pressed={i === current}
-            onClick={() => setCurrent(i)}
+            onClick={() => selectPhase(i)}
           >
             <span className="n">{String(p.order).padStart(2, "0")}</span>
             <span className="t">{p.title}</span>
