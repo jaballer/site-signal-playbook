@@ -92,10 +92,7 @@ export default function PhaseChecklist({ phases }: { phases: PhaseView[] }) {
           Phase {String(phase.order).padStart(2, "0")} · {phase.when}
         </div>
         <h3>{phase.title}</h3>
-        <p
-          style={{ color: "var(--ink-2)", marginTop: 6 }}
-          dangerouslySetInnerHTML={{ __html: phase.whyHtml }}
-        />
+        <p className="phase-why" dangerouslySetInnerHTML={{ __html: phase.whyHtml }} />
         <div className="cols">
           <div>
             <div className="eyebrow" style={{ marginTop: 8 }}>

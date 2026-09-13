@@ -1,7 +1,7 @@
 /* The card that holds an entry on its own page. */
 .item {
-  padding: 16px 18px 18px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
+  padding: var(--space-sm);
+  background: var(--surface-default);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
 }

@@ -1,17 +1,17 @@
-/* Bordered aside; `.warn` adds an amber rule on the left. */
+/* Bordered aside; `.warn` adds a warning rule on the left. */
 .callout {
-  border: 1px solid var(--line);
-  background: var(--surface);
-  padding: 14px 16px;
-  border-radius: var(--r);
-  margin: 16px 0;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-default);
+  padding: 14px var(--space-sm);
+  border-radius: var(--radius-sm);
+  margin: var(--space-sm) 0;
 
   &.warn {
-    border-left: 3px solid var(--warn);
+    border-left: 3px solid var(--border-warning);
   }
 
   .cols & {
     margin: 14px 0 0;
-    font-size: 0.9rem;
+    font: var(--type-body-small);
   }
 }

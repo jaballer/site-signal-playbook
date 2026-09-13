@@ -1,8 +1,8 @@
 /* Scroll wrapper for wide tables. The table elements themselves are styled in base.css. */
 .tw {
   overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: var(--r);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
   margin: 14px 0;
 
   :is(.rbody, .item) & {

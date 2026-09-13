@@ -1,31 +1,18 @@
 /*
- * Design tokens. Each theme color is defined once as light-dark(light, dark). The value follows
- * `color-scheme`: the OS setting by default, or the theme toggle through `data-theme` on <html>.
+ * Design tokens from the 916 Marketing style guide (styleguide-916-marketing.html), which mirrors
+ * the Figma design system. Figma names map to CSS by swapping "/" for "-": text/default is
+ * --text-default. When the guide changes, update the values here, not in components.
+ *
+ * Components use the semantic tokens only. Palette steps exist only to define them. The palette and
+ * the text styles are complete; semantic tokens are defined as the site needs them, with the
+ * guide's names and values.
+ *
+ * Each semantic color is defined once as light-dark(light, dark), or as one value when both modes
+ * match. The value follows `color-scheme`: the OS setting by default, or the theme toggle through
+ * `data-theme` on <html>.
  */
 :root {
   color-scheme: light dark;
-
-  --ink: light-dark(#1c2733, #e8edf2);
-  --ink-2: light-dark(#4a5a6a, #b4bfca);
-  --ink-3: light-dark(#7c8a98, #7f8c99);
-  --ground: light-dark(#f3f5f7, #12181e);
-  --surface: light-dark(#ffffff, #1a2129);
-  --surface-2: light-dark(#e9edf1, #232c36);
-  --line: light-dark(#d6dde4, #2f3a46);
-  --accent: light-dark(#12776c, #4fc0b2);
-  --accent-ink: light-dark(#0b5a51, #8adbd0);
-  --accent-soft: light-dark(#dcefec, #173a37);
-  --good: light-dark(#2e7d4f, #63be86);
-  --good-soft: light-dark(#e1f0e6, #193226);
-  --warn: light-dark(#b7791f, #e0a94b);
-  --warn-soft: light-dark(#f7ecd7, #3a2e16);
-  --crit: light-dark(#b23a48, #e07a87);
-  --crit-soft: light-dark(#f6e0e3, #3e1f26);
-
-  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --display: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
-  --r: 6px;
 
   &[data-theme="light"] {
     color-scheme: light;
@@ -34,4 +21,150 @@
   &[data-theme="dark"] {
     color-scheme: dark;
   }
+}
+
+/* Palette */
+:root {
+  --purple-50: #f9f5ff;
+  --purple-100: #efe4fc;
+  --purple-200: #dfc9f9;
+  --purple-300: #cbaaf0;
+  --purple-400: #b58ce0;
+  --purple-500: #9e71cb;
+  --purple-600: #8559b1;
+  --purple-700: #6d4394;
+  --purple-800: #5a2d81;
+  --purple-900: #3a1c54;
+  --purple-950: #22172e;
+  --purple-975: #150e1c;
+  --purple-990: #09060d;
+
+  --silver-50: #eef9fe;
+  --silver-100: #e1ebf1;
+  --silver-200: #ccd6db;
+  --silver-300: #b1bdc3;
+  --silver-400: #95a4ac;
+  --silver-500: #7c8c94;
+  --silver-600: #63727a;
+  --silver-700: #4f5d65;
+  --silver-800: #3b474d;
+  --silver-900: #262f34;
+
+  --foothill-50: #f1faf0;
+  --foothill-100: #dfefdb;
+  --foothill-200: #bedfb7;
+  --foothill-300: #99ca8e;
+  --foothill-400: #78b46b;
+  --foothill-500: #5b9c4d;
+  --foothill-600: #448335;
+  --foothill-700: #2f6b21;
+  --foothill-800: #1e5211;
+  --foothill-900: #0d3802;
+
+  --manzanita-50: #fff4f4;
+  --manzanita-100: #fee2e2;
+  --manzanita-200: #fdc3c4;
+  --manzanita-300: #fc9b9e;
+  --manzanita-400: #fb6c77;
+  --manzanita-500: #e54a5c;
+  --manzanita-600: #c82d45;
+  --manzanita-700: #a80f32;
+  --manzanita-800: #840424;
+  --manzanita-900: #5b0216;
+
+  /* Only the steps used by status tokens are published for gold and river. */
+  --gold-50: #fcf6ea;
+  --gold-200: #ead1a0;
+  --gold-500: #ad810f;
+  --gold-600: #906b10;
+  --gold-800: #594003;
+
+  --river-50: #f0f8fd;
+  --river-200: #badaed;
+  --river-500: #5092b6;
+  --river-600: #37799d;
+  --river-800: #114b67;
+
+  --white: #ffffff;
+}
+
+/* Color (light, dark) */
+:root {
+  --surface-default: light-dark(var(--white), var(--purple-975));
+  --surface-subtle: light-dark(var(--purple-50), var(--purple-950));
+
+  --text-default: light-dark(var(--purple-975), var(--silver-100));
+  --text-link: light-dark(var(--purple-800), var(--purple-300));
+  --text-on-action: light-dark(var(--white), var(--purple-990));
+
+  --brand-primary: light-dark(var(--purple-800), var(--purple-400));
+
+  --action-primary: light-dark(var(--purple-600), var(--purple-400));
+  --action-primary-hover: light-dark(var(--purple-700), var(--purple-300));
+  --action-secondary-hover: light-dark(var(--purple-50), var(--purple-950));
+  --action-secondary-pressed: light-dark(var(--purple-100), var(--purple-900));
+
+  --border-default: light-dark(var(--silver-500), var(--silver-400));
+  --border-subtle: light-dark(var(--silver-200), var(--silver-800));
+  --border-focus: light-dark(var(--purple-800), var(--purple-300));
+
+  /*
+   * Site only, not in the design system: quieter text for supporting copy and small labels.
+   * --text-secondary matches the guide's own guide/text-secondary.
+   */
+  --text-secondary: light-dark(var(--silver-700), var(--silver-300));
+  --text-muted: light-dark(var(--silver-600), var(--silver-400));
+}
+
+/*
+ * Status colors are the same in both modes. The site uses the success, warning and error roles
+ * (the guide also has info). For status text set directly on the page surface rather than on a
+ * status surface, use light-dark(var(--text-{role}), var(--text-{role}-inverse)).
+ */
+:root {
+  --surface-success: var(--foothill-50);
+  --surface-warning: var(--gold-50);
+  --surface-error: var(--manzanita-50);
+
+  --border-success: var(--foothill-500);
+  --border-warning: var(--gold-500);
+  --border-error: var(--manzanita-500);
+
+  --text-success: var(--foothill-800);
+  --text-warning: var(--gold-800);
+  --text-error: var(--manzanita-800);
+
+  --text-success-inverse: var(--foothill-200);
+  --text-warning-inverse: var(--gold-200);
+  --text-error-inverse: var(--manzanita-200);
+}
+
+/* Type, spacing and radius */
+:root {
+  --font-sans: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Not a design-system token: the code font the guide uses for its own page. */
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --type-display-hero: 700 48px/1.2 var(--font-sans);
+  --type-heading-h2: 700 32px/1.25 var(--font-sans);
+  --type-heading-h3: 700 20px/1.3 var(--font-sans);
+  --type-heading-h4: 700 18px/1.3 var(--font-sans);
+  --type-body-lead: 400 24px/1.5 var(--font-sans);
+  --type-body-large: 400 20px/1.5 var(--font-sans);
+  --type-body-default: 400 16px/1.5 var(--font-sans);
+  --type-body-small: 400 14px/1.5 var(--font-sans);
+  --type-label-caps: 700 14px/1.2 var(--font-sans);
+  --type-label-field: 500 14px/1.2 var(--font-sans);
+  --type-label-nav: 500 16px/1.2 var(--font-sans);
+  /* Label/Caps and Label/Field are always uppercase with this tracking. */
+  --tracking-caps: 0.05em;
+
+  --space-xs: 10px;
+  --space-sm: 20px;
+  --space-md: 30px;
+  --space-lg: 40px;
+  --space-xl: 60px;
+  --space-2xl: 100px;
+
+  --radius-sm: 4px;
 }
