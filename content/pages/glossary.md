@@ -1,5 +1,5 @@
 ---
-order: 11
+order: 14
 navLabel: Glossary
 eyebrow: Glossary
 heading: The marketing terms and acronyms we use most

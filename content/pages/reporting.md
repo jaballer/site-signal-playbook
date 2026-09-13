@@ -1,10 +1,19 @@
 ---
-order: 7
+order: 9
 navLabel: Reporting
 eyebrow: Reporting model
 heading: What leadership sees, and how often
 lede: Reports lead with the answer, cover the whole chain from visibility to pipeline, and explain every movement with a cause. Traffic alone under-reports wins and hides losses once AI answers take clicks, so visibility and citations are reported beside it.
 blocks:
+  - type: panels
+    heading: Cadence
+    items:
+      - title: Weekly, internal
+        text: Leading indicators on shipped work, indexing of changed pages, crawl and tracking alerts, Google updates. Goes to the client only when something needs a decision.
+      - title: Monthly, client
+        text: The report below, sent with a 20-minute walkthrough. Decisions go in the decisions log.
+      - title: Quarterly, leadership
+        text: Results against targets and the opportunity model, competitive position, the revised roadmap, and a scope proposal.
   - type: table
     heading: The monthly report
     columns:
@@ -33,15 +42,6 @@ blocks:
       - - 7 · Integrity notes
         - Tracking caveats and data changes for the period
         - Can I trust this?
-  - type: panels
-    heading: Cadence
-    items:
-      - title: Weekly, internal
-        text: Leading indicators on shipped work, indexing of changed pages, crawl and tracking alerts, Google updates. Goes to the client only when something needs a decision.
-      - title: Monthly, client
-        text: The report above, sent with a 20-minute walkthrough. Decisions go in the decisions log.
-      - title: Quarterly, leadership
-        text: Results against targets and the opportunity model, competitive position, the revised roadmap, and a scope proposal.
   - type: markdown
     heading: Reporting when clicks fall and visibility rises
     text: "AI Overviews and assistants answer questions before a click. Report impressions, citation share and branded demand as leading indicators next to clicks, and set that expectation at kickoff, not in the month traffic dips. Measure the effect directly: group priority keywords by whether an AI Overview appears, and compare CTR at similar positions."

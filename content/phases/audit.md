@@ -17,4 +17,4 @@ deliverables:
   - Top-ten findings and proposal
 ---
 
-The audit is the diagnosis and usually the sale. It establishes where the site stands on all six pillars, what competitors do better, and where the money is. Every later decision refers back to it.
+The audit is the diagnosis and usually the sale. It establishes where the site stands on all six pillars, what competitors do better, and where the money is. Every later decision refers back to it. Its first week is [kickoff and onboarding](page:onboarding).
