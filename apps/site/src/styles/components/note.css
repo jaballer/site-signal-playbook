@@ -1,0 +1,7 @@
+/* Note block: small print at the end of a page. */
+.foot {
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}

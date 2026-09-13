@@ -26,8 +26,9 @@ npm run validate   # check /content against the schemas and references (no build
 npm run export     # write dist/playbook.json and dist/playbook.schema.json
 npm run build      # validate, then build the static site to apps/site/dist
 npm run preview    # serve the built site (run build first)
-npm run check      # tsc for packages/playbook and apps/mcp, astro check for apps/site
+npm run check      # tsc for packages/playbook, apps/mcp and tests/visual, astro check for apps/site
 npm test           # MCP server tests (node:test)
+npm run test:visual  # compare every page with main, pixel by pixel (needs Google Chrome)
 npm run mcp        # run the MCP server on stdio
 npm run format     # prettier (content/ is excluded on purpose)
 ```
@@ -43,6 +44,7 @@ content/            source of truth: one Markdown file per entry, grouped by col
 packages/playbook/  schemas (Zod), loader, reference checks, link resolution, validate/export CLIs
 apps/site/          Astro site with React components for the interactive parts
 apps/mcp/           MCP server (stdio): read-only tools, playbook:// resources, workflow prompts
+tests/visual/       screenshot comparison of the built site against a git ref
 ```
 
 Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loadPlaybook(contentDir)` reads every collection, validates frontmatter with strict schemas, and checks cross-references. It throws a `PlaybookError` listing every problem at once.
@@ -88,7 +90,12 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 - **Vite caches:** dev and build use separate Vite dependency caches (`node_modules/.vite/` and `node_modules/.vite-build/` under `apps/site`), set in `astro.config.mjs`. When they shared one, a build wrote production React into it, and every React component in dev failed with `_jsxDEV is not a function`. If that error ever shows up again, stop the dev server, delete `apps/site/node_modules/.vite`, and restart.
 - **Live reload:** the `watchContent` plugin in `astro.config.mjs` watches `content/`. It reports any change as a change to `src/lib/playbook.ts`, so new files get routes without a restart.
 - **Components:** static rendering uses `.astro` components (`Blocks`, `Fold`, the `*Body` components, `RefPills`, `Md`). Interactive parts are React components in `src/components/react/`: `ThemeToggle`, `CopyButton`, `PhaseChecklist` and `SignalCatalog`. Markdown is rendered to HTML on the server and passed to React as HTML strings.
-- **Styles:** `src/styles/global.css` holds the design tokens. The dark palette is defined twice: once under `prefers-color-scheme` scoped to `:root:not([data-theme="light"])`, and once under `:root[data-theme="dark"]`. Change both copies together.
+- **Styles** (`src/styles/`, plain CSS with no framework):
+  - `global.css` is the entry point. It declares the cascade layers (`reset, tokens, base, layout, components, utilities`) and imports each file into one. Vite inlines the imports and wraps each file in its `@layer` block.
+  - **Layers decide precedence before specificity.** A rule in a later layer beats any rule in an earlier one. So a rule that targets a component's elements from outside it (like `nav.side .theme-btn`) must live in the component's own file: from `layout` it would lose, for example to the component's `all: unset`.
+  - `tokens.css`: each theme color is defined once as `light-dark(light, dark)`. It follows `color-scheme`, which comes from the OS setting or from `data-theme` on `<html>` (set by the theme toggle).
+  - `components/`: one file per component, named after the component or block that renders it. Styles use native nesting, and the 820px small-screen overrides sit inside the rule they change.
+  - Component styles stay global rather than going in Astro-scoped `<style>` blocks. Scoping wouldn't reach Markdown rendered through `set:html`, slotted children, or the React islands that share classes like `.pill`.
 - **Variables:** site-wide values (name, version, storage keys) live in `src/site.ts`.
 - **Saved state in `localStorage`:**
   - `ssp-theme`: the theme choice.
@@ -109,6 +116,24 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 - **stdout carries the MCP protocol.** Never `console.log` in the server; use `console.error`.
 - **Content folder:** `PLAYBOOK_CONTENT_DIR` overrides where the server reads content; the default is the repo's `/content`.
 - **Connecting:** `.mcp.json` registers the server for Claude Code with a relative path, so Claude Code must start from the repo root. Claude Desktop needs absolute paths (see `apps/mcp/README.md`).
+
+## Visual tests (tests/visual)
+
+`npm run test:visual` checks that a change looks the way it should, on every page. Run it after any CSS or component change; for a refactor, 0 differences is the pass mark.
+
+- **How it works:**
+  - It builds the base ref (`main` by default) in a temporary git worktree with a clean install, and saves that build in `.visual/base/<commit>`. It builds the working tree the usual way.
+  - It captures every page common to both builds in headless Chrome (installed Google Chrome, or `CHROME_PATH`), in light and dark, desktop and mobile. It also captures a saved theme overriding the OS, open folds, and hover and keyboard-focus states. The list lives in `shots.ts`.
+  - It writes `.visual/report/index.html`, with before, after and changed-pixel images cropped to each change, and `results.json`. It exits with 1 when any shot differs or a page from the base is missing (unless `--pages` narrows the run), and 2 when it can't run.
+  - **It refuses to screenshot a page that didn't load properly.** A shot fails when a font or stylesheet doesn't load or a `client:load` island doesn't hydrate, and the run stops before capturing if either build's home page can't load. Otherwise fallback fonts in both builds would match and pass. The fonts come from Google Fonts, so a run needs a network connection.
+- **Options:** `--base <ref>`, `--quick` (chapter pages and one page per collection), `--only desktop-light,mobile-dark` and `--pages /signals/,/glossary/geo/`. Pass them after `--`: `npm run test:visual -- --quick`.
+- **Captures are deterministic on purpose.** Don't loosen these without re-checking that the same build captured twice gives 0 differences:
+  - Chrome runs with software rendering and full compositing before each frame (`CHROME_ARGS` in `capture.ts`).
+  - Every font face loads before capture, and each screenshot is retaken until two in a row match.
+  - The window is resized to the page height instead of using full-page capture, which repeats content on tall pages. Pages over 20,000px are captured in overlapping rows of tiles. The page is measured again after the resize: on small screens it grows with the window (`.shell` has `min-height: 100vh` and the top bar sits outside it), so the rows below the window are captured by scrolling down.
+  - Content wider than the window is captured in extra columns by scrolling sideways. Widening the window would change the layout under test.
+  - The mobile `.topbar` is pinned with `position: relative` during capture, because Chrome paints the sticky bar at stale positions in very tall windows.
+  - Channel differences of 2/255 or less are ignored: rounded corners of scrolling containers anti-alias slightly differently between captures.
 
 ## History
 

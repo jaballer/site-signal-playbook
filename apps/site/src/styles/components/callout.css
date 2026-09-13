@@ -1,0 +1,17 @@
+/* Bordered aside; `.warn` adds an amber rule on the left. */
+.callout {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 14px 16px;
+  border-radius: var(--r);
+  margin: 16px 0;
+
+  &.warn {
+    border-left: 3px solid var(--warn);
+  }
+
+  .cols & {
+    margin: 14px 0 0;
+    font-size: 0.9rem;
+  }
+}

@@ -1,5 +1,6 @@
 dist/
 .astro/
+.visual/
 package-lock.json
 # Content is written by people and tools (Claude, MCP, Figma); keep its formatting as authored.
 content/

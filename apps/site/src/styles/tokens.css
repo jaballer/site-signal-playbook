@@ -1,0 +1,37 @@
+/*
+ * Design tokens. Each theme color is defined once as light-dark(light, dark). The value follows
+ * `color-scheme`: the OS setting by default, or the theme toggle through `data-theme` on <html>.
+ */
+:root {
+  color-scheme: light dark;
+
+  --ink: light-dark(#1c2733, #e8edf2);
+  --ink-2: light-dark(#4a5a6a, #b4bfca);
+  --ink-3: light-dark(#7c8a98, #7f8c99);
+  --ground: light-dark(#f3f5f7, #12181e);
+  --surface: light-dark(#ffffff, #1a2129);
+  --surface-2: light-dark(#e9edf1, #232c36);
+  --line: light-dark(#d6dde4, #2f3a46);
+  --accent: light-dark(#12776c, #4fc0b2);
+  --accent-ink: light-dark(#0b5a51, #8adbd0);
+  --accent-soft: light-dark(#dcefec, #173a37);
+  --good: light-dark(#2e7d4f, #63be86);
+  --good-soft: light-dark(#e1f0e6, #193226);
+  --warn: light-dark(#b7791f, #e0a94b);
+  --warn-soft: light-dark(#f7ecd7, #3a2e16);
+  --crit: light-dark(#b23a48, #e07a87);
+  --crit-soft: light-dark(#f6e0e3, #3e1f26);
+
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  --r: 6px;
+
+  &[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  &[data-theme="dark"] {
+    color-scheme: dark;
+  }
+}

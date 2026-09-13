@@ -1,0 +1,10 @@
+/* RefPills.astro: a label followed by pill links to related entries. */
+.refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-top: 14px;
+  font-size: 0.84rem;
+  color: var(--ink-3);
+}
