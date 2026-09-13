@@ -1,5 +1,5 @@
 ---
-order: 11
+order: 12
 navLabel: Measurement
 eyebrow: Measurement foundations
 heading: The setup every engagement needs before month one

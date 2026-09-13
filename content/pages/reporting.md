@@ -1,5 +1,5 @@
 ---
-order: 8
+order: 9
 navLabel: Reporting
 eyebrow: Reporting model
 heading: What leadership sees, and how often

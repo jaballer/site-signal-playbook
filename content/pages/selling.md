@@ -20,7 +20,7 @@ blocks:
       - title: Qualify
         text: Check the criteria below. When one is missing, change what you offer, not just the price.
       - title: Sell the audit
-        text: "Send a one-page scope: the fixed fee, the two-week timeline, and the access needed to start. Once it's signed, hand the discovery notes to the account team, so the [Audit](phase:audit) kickoff confirms answers instead of asking them again."
+        text: "Send a one-page scope: the fixed fee, the two-week timeline, and the access needed to start. Once it's signed, hand the discovery notes to the account team, so the [kickoff](page:onboarding) confirms answers instead of asking them again."
       - title: Present the findings as the pitch
         text: A live working session with the budget holder in the room. The top ten findings, the opportunity model's range and the plays that fix them lead straight into the proposal, sent after the session.
       - title: Ask for the decision

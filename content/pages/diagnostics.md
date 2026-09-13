@@ -1,5 +1,5 @@
 ---
-order: 7
+order: 8
 navLabel: Diagnostics
 eyebrow: Diagnostic flows
 heading: When a number moves the wrong way
