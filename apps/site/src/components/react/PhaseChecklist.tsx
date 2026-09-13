@@ -29,9 +29,11 @@ export default function PhaseChecklist({ phases }: { phases: PhaseView[] }) {
   const [checks, setChecks] = useState<Checks>({});
 
   function selectPhase(index: number) {
+    const phase = phases[index];
+    if (!phase) return;
     setCurrent(index);
-    const hash = `#phase-${phases[index]?.id}`;
-    if (hash && location.hash !== hash) {
+    const hash = `#phase-${phase.id}`;
+    if (location.hash !== hash) {
       history.replaceState(null, "", hash);
     }
   }
