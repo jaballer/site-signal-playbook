@@ -91,6 +91,20 @@ export const offer = z.strictObject({
   leadsInto: Md,
 });
 
+export const term = z.strictObject({
+  /** The term as people say it, e.g. "CTR". */
+  term: Text,
+  /** What an acronym stands for, e.g. "click-through rate". */
+  expansion: Text.optional(),
+  /** Other names people use for the same thing. */
+  aliases: z.array(Text).min(1).optional(),
+  /** One or two plain sentences, answer first. */
+  definition: Md,
+  signals: Ids.optional(),
+  questions: Ids.optional(),
+  related: Ids.optional(),
+});
+
 const sectionHeading = { heading: Text.optional(), intro: Md.optional() };
 const titledText = z.strictObject({ title: Text, text: Md });
 
@@ -127,7 +141,15 @@ export const block = z.discriminatedUnion("type", [
   z.strictObject({
     type: z.literal("collection"),
     ...sectionHeading,
-    collection: z.enum(["questions", "audit", "plays", "diagnostics", "principles", "offers"]),
+    collection: z.enum([
+      "questions",
+      "audit",
+      "plays",
+      "diagnostics",
+      "principles",
+      "offers",
+      "glossary",
+    ]),
   }),
   z.strictObject({ type: z.literal("scorecard"), ...sectionHeading }),
   z.strictObject({ type: z.literal("phases"), ...sectionHeading }),
@@ -145,6 +167,8 @@ export const page = z.strictObject({
 });
 
 type BodyRule = { body: "none" } | { body: "required"; bodyMeaning: string };
+/** Entries sort by `order` when they have one, otherwise by `sortBy`, otherwise by id. */
+type CollectionDef = { schema: z.ZodType; sortBy?: string } & BodyRule;
 
 /**
  * Every collection is a folder in /content with one Markdown file per entry.
@@ -160,8 +184,14 @@ export const collections = {
   diagnostics: { schema: diagnostic, body: "none" },
   principles: { schema: principle, body: "required", bodyMeaning: "the principle itself" },
   offers: { schema: offer, body: "none" },
+  glossary: {
+    schema: term,
+    body: "required",
+    bodyMeaning: "why the term matters here",
+    sortBy: "term",
+  },
   pages: { schema: page, body: "none" },
-} as const satisfies Record<string, { schema: z.ZodType } & BodyRule>;
+} as const satisfies Record<string, CollectionDef>;
 
 export type CollectionName = keyof typeof collections;
 
@@ -175,6 +205,9 @@ export const references: ReadonlyArray<readonly [CollectionName, string, Collect
   ["questions", "pages", "pages"],
   ["plays", "moves", "signals"],
   ["audit", "signals", "signals"],
+  ["glossary", "signals", "signals"],
+  ["glossary", "questions", "questions"],
+  ["glossary", "related", "glossary"],
 ];
 
 /** Inline links in Markdown use `[text](type:id)`. Each consumer resolves them its own way. */
@@ -189,9 +222,15 @@ export const linkTypes = {
   layer: "layers",
   offer: "offers",
   principle: "principles",
+  term: "glossary",
 } as const satisfies Record<string, CollectionName>;
 
 export type LinkType = keyof typeof linkTypes;
+
+/** The link type for each collection, e.g. `glossary` → `term`. */
+export const linkTypeFor = Object.fromEntries(
+  Object.entries(linkTypes).map(([type, collection]) => [collection, type]),
+) as Record<CollectionName, LinkType>;
 
 type EntryOf<N extends CollectionName> = z.infer<(typeof collections)[N]["schema"]> & {
   id: string;
@@ -208,6 +247,7 @@ export type AuditPillar = EntryOf<"audit">;
 export type Diagnostic = EntryOf<"diagnostics">;
 export type Principle = EntryOf<"principles">;
 export type Offer = EntryOf<"offers">;
+export type Term = EntryOf<"glossary">;
 export type Page = EntryOf<"pages">;
 export type Block = z.infer<typeof block>;
 
@@ -224,5 +264,6 @@ export const playbookSchema = z.strictObject({
   diagnostics: z.array(diagnostic.extend(entryFields)),
   principles: z.array(principle.extend(entryFields)),
   offers: z.array(offer.extend(entryFields)),
+  glossary: z.array(term.extend(entryFields)),
   pages: z.array(page.extend(entryFields)),
 });

@@ -86,11 +86,14 @@ export function loadPlaybook(contentDir: string): Playbook {
       }
       entries[name].push({ id, ...(result.data as object), body: parsed.body });
     }
-    entries[name].sort((a, b) =>
-      typeof a.order === "number" && typeof b.order === "number"
-        ? a.order - b.order
-        : a.id.localeCompare(b.id),
-    );
+    const sortBy = "sortBy" in def ? def.sortBy : undefined;
+    entries[name].sort((a, b) => {
+      if (typeof a.order === "number" && typeof b.order === "number") return a.order - b.order;
+      if (sortBy) {
+        return String(a[sortBy]).localeCompare(String(b[sortBy]), "en", { sensitivity: "base" });
+      }
+      return a.id.localeCompare(b.id);
+    });
   }
 
   const ids = Object.fromEntries(
@@ -105,6 +108,24 @@ export function loadPlaybook(contentDir: string): Playbook {
         if (!ids[to].has(String(ref))) {
           issues.push(`${from}/${entry.id}.md: ${field} "${ref}" isn't a ${to} id`);
         }
+      }
+    }
+  }
+
+  // People look terms up by name, so a term, expansion or alias can belong to only one entry.
+  const glossaryNames = new Map<string, string>();
+  for (const entry of entries.glossary) {
+    const names = [
+      entry.term,
+      entry.expansion,
+      ...((entry.aliases as unknown[] | undefined) ?? []),
+    ];
+    for (const name of names) {
+      if (typeof name !== "string") continue;
+      const owner = glossaryNames.get(name.toLowerCase());
+      if (owner === undefined) glossaryNames.set(name.toLowerCase(), entry.id);
+      else if (owner !== entry.id) {
+        issues.push(`glossary/${entry.id}.md: "${name}" is already used by glossary/${owner}.md`);
       }
     }
   }

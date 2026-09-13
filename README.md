@@ -27,9 +27,10 @@ Everything lives in `content/`, one Markdown file per entry:
 | `phases/`                | Engagement phases, with checklists and deliverables                |
 | `layers/`                | Scorecard layers                                                   |
 | `offers/`, `principles/` | Offers and principles                                              |
+| `glossary/`              | Glossary terms: definition, aliases, and why each one matters      |
 | `pages/`                 | Chapter layouts, built from blocks                                 |
 
-Structured fields go in the frontmatter. Link to other entries with `[text](type:id)`, for example `[trust check](question:trust-the-numbers)`. Then run:
+Structured fields go in the frontmatter. Link to other entries with `[text](type:id)`, for example `[trust check](question:trust-the-numbers)` or `[SERP](term:serp)`. Then run:
 
 ```bash
 npm run validate

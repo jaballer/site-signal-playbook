@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
-import { loadPlaybook } from "@site-signal/playbook";
+import { linkTypes, loadPlaybook } from "@site-signal/playbook";
 import { defaultContentDir } from "@site-signal/playbook/paths";
 import { createPlaybookServer } from "../src/playbook-server.ts";
 
@@ -18,8 +18,7 @@ const TOOL_NAMES = [
   "search_playbook",
   "validate_content",
 ];
-const UNRESOLVED_LINK =
-  /\]\((question|play|signal|audit|diagnostic|page|phase|layer|offer|principle):/;
+const UNRESOLVED_LINK = new RegExp(`\\]\\((${Object.keys(linkTypes).join("|")}):`);
 
 async function connect(contentDir: string) {
   const server = createPlaybookServer({ contentDir });
@@ -219,6 +218,60 @@ describe("playbook MCP server", () => {
     });
     assert.deepEqual(ids.completion.values, ["win-cited-sources"]);
   });
+
+  it("reads a glossary term with its aliases and related entries", async () => {
+    const text = textOf(await call(client, "get_entry", { collection: "glossary", id: "geo" }));
+    assert.match(text, /^# Term: GEO \(generative engine optimization\)/);
+    assert.match(text, /\*\*Also called:\*\* AEO/);
+    assert.match(text, /## How we measure it[\s\S]*playbook:\/\/signals\/citation-share/);
+    assert.match(text, /## Related questions[\s\S]*playbook:\/\/questions\/ai-answers/);
+  });
+
+  it("finds glossary terms by alias", async () => {
+    assert.match(textOf(await call(client, "search_playbook", { query: "AEO" })), /glossary\/geo/);
+  });
+
+  it("lists glossary terms on the signals they point at", async () => {
+    const text = textOf(
+      await call(client, "get_entry", { collection: "signals", id: "ctr-by-position" }),
+    );
+    assert.match(text, /## Used in[\s\S]*playbook:\/\/glossary\/ctr/);
+  });
+});
+
+describe("with links to glossary terms", () => {
+  let dir: string;
+  let client: Client;
+  let close: () => Promise<void>;
+
+  before(async () => {
+    dir = mkdtempSync(join(tmpdir(), "playbook-content-"));
+    cpSync(defaultContentDir, dir, { recursive: true });
+    const file = join(dir, "questions", "traffic-drop.md");
+    const source = readFileSync(file, "utf8");
+    assert.ok(source.includes("new results-page features"), "fixture text is missing");
+    writeFileSync(
+      file,
+      source.replace("new results-page features", "new [SERP](term:serp) features"),
+    );
+    ({ client, close } = await connect(dir));
+  });
+  after(async () => {
+    await close();
+    rmSync(dir, { recursive: true, force: true });
+  });
+
+  it("resolves term links and lists where each term is used", async () => {
+    const question = textOf(
+      await call(client, "get_entry", { collection: "questions", id: "traffic-drop" }),
+    );
+    assert.match(question, /\[SERP\]\(playbook:\/\/glossary\/serp\)/);
+    const term = textOf(await call(client, "get_entry", { collection: "glossary", id: "serp" }));
+    assert.match(
+      term,
+      /## Used in\n\n- \[Why did organic traffic drop\?\]\(playbook:\/\/questions\/traffic-drop\)/,
+    );
+  });
 });
 
 describe("with invalid content", () => {
@@ -234,6 +287,12 @@ describe("with invalid content", () => {
       file,
       readFileSync(file, "utf8").replace("  - topic-coverage", "  - not-a-signal"),
     );
+    writeFileSync(
+      join(dir, "glossary", "aeo.md"),
+      "---\nterm: AEO\ndefinition: Answer engine optimization.\n---\n\nDuplicates an alias of GEO.\n",
+    );
+    const kpi = join(dir, "glossary", "kpi.md");
+    writeFileSync(kpi, `${readFileSync(kpi, "utf8").trimEnd()} See [ROI](term:not-a-term).\n`);
     ({ client, close } = await connect(dir));
   });
   after(async () => {
@@ -241,13 +300,13 @@ describe("with invalid content", () => {
     rmSync(dir, { recursive: true, force: true });
   });
 
-  it("reports the problem from validate_content", async () => {
+  it("reports the problems from validate_content", async () => {
     const result = await call(client, "validate_content");
     assert.ok(!result.isError);
-    assert.match(
-      textOf(result),
-      /plays\/topic-cluster\.md: moves "not-a-signal" isn't a signals id/,
-    );
+    const text = textOf(result);
+    assert.match(text, /plays\/topic-cluster\.md: moves "not-a-signal" isn't a signals id/);
+    assert.match(text, /"AEO" is already used by glossary\//);
+    assert.match(text, /glossary\/kpi\.md: link "term:not-a-term" doesn't match a glossary id/);
   });
 
   it("returns an error from reading tools instead of stale content", async () => {

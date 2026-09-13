@@ -1,6 +1,9 @@
 import {
+  linksTo,
   linkTypes,
   resolveLinks,
+  titleOf,
+  type AnyEntry,
   type AuditPillar,
   type Block,
   type CollectionName,
@@ -14,28 +17,14 @@ import {
   type Principle,
   type Question,
   type Signal,
+  type Term,
 } from "@site-signal/playbook";
-import { findEntry, type AnyEntry } from "./content.ts";
+import { findEntry } from "./content.ts";
 
 export const uriFor = (collection: CollectionName, id: string) => `playbook://${collection}/${id}`;
 
 /** Rewrites `[text](type:id)` links to playbook:// resource URIs. */
 export const md = (text: string) => resolveLinks(text, (type, id) => uriFor(linkTypes[type], id));
-
-export function titleOf(collection: CollectionName, entry: AnyEntry): string {
-  switch (collection) {
-    case "questions":
-      return (entry as Question).question;
-    case "layers":
-      return (entry as Layer).name;
-    case "offers":
-      return (entry as Offer).name;
-    case "pages":
-      return (entry as Page).navLabel;
-    default:
-      return (entry as { title: string }).title;
-  }
-}
 
 /** One line that tells a reader what the entry is for. */
 export function summaryOf(collection: CollectionName, entry: AnyEntry): string {
@@ -58,6 +47,8 @@ export function summaryOf(collection: CollectionName, entry: AnyEntry): string {
       return firstSentence(entry.body);
     case "offers":
       return (entry as Offer).includes;
+    case "glossary":
+      return (entry as Term).definition;
     case "pages":
       return (entry as Page).lede;
   }
@@ -113,6 +104,8 @@ export function renderEntry(
       return join([`# Principle: ${(entry as Principle).title}`, md(entry.body)]);
     case "offers":
       return renderOffer(entry as Offer);
+    case "glossary":
+      return renderTerm(playbook, entry as Term);
     case "pages":
       return renderPage(playbook, entry as Page);
   }
@@ -189,6 +182,9 @@ function renderSignal(playbook: Playbook, s: Signal) {
     ...playbook.audit
       .filter((a) => a.signals.includes(s.id))
       .map((a) => link(playbook, "audit", a.id)),
+    ...playbook.glossary
+      .filter((t) => t.signals?.includes(s.id))
+      .map((t) => link(playbook, "glossary", t.id)),
   ];
   return join([
     `# Signal: ${s.title}`,
@@ -239,6 +235,28 @@ function renderOffer(o: Offer) {
   ]);
 }
 
+function renderTerm(playbook: Playbook, t: Term) {
+  const listOf = (collection: CollectionName, ids: string[] | undefined) =>
+    (ids ?? []).map((id) => `- ${link(playbook, collection, id)}`).join("\n");
+  const measures = (t.signals ?? []).map((id) => {
+    const signal = findEntry(playbook, "signals", id) as Signal | undefined;
+    return `- ${link(playbook, "signals", id)}${signal ? `: ${md(signal.question)}` : ""}`;
+  });
+  const usedIn = linksTo(playbook, "term", t.id).map(
+    (ref) => `- ${link(playbook, ref.collection, ref.id)}`,
+  );
+  return join([
+    `# Term: ${titleOf("glossary", t)}`,
+    t.aliases && `**Also called:** ${t.aliases.join(", ")}`,
+    `**Definition:** ${md(t.definition)}`,
+    section("Why it matters here", md(t.body)),
+    section("How we measure it", measures.join("\n")),
+    section("Related questions", listOf("questions", t.questions)),
+    section("Related terms", listOf("glossary", t.related)),
+    section("Used in", usedIn.join("\n")),
+  ]);
+}
+
 function renderPage(playbook: Playbook, page: Page) {
   return join([
     `# ${page.heading}`,
@@ -254,6 +272,7 @@ const listCollections = [
   "diagnostics",
   "principles",
   "offers",
+  "glossary",
 ] as const;
 
 export function renderBlock(playbook: Playbook, block: Block): string {

@@ -1,6 +1,7 @@
 import {
   loadPlaybook,
   PlaybookError,
+  type AnyEntry,
   type CollectionName,
   type Playbook,
 } from "@site-signal/playbook";
@@ -35,8 +36,6 @@ export function createContentSource(contentDir: string): ContentSource {
     },
   };
 }
-
-export type AnyEntry = Playbook[CollectionName][number];
 
 export function findEntry(
   playbook: Playbook,

@@ -16,7 +16,7 @@ Gives Claude Desktop, Claude Code and any other MCP client read access to the pl
 
 **Resources:**
 
-- Every entry at `playbook://{collection}/{id}`, for example `playbook://plays/win-cited-sources`
+- Every entry at `playbook://{collection}/{id}`, for example `playbook://plays/win-cited-sources` or `playbook://glossary/serp`
 - `playbook://guide`: how the playbook is organized
 - `playbook://schema`: the JSON Schema
 

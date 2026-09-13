@@ -1,0 +1,59 @@
+---
+import { linksTo, linkTypeFor, titleOf } from "@site-signal/playbook";
+import Md from "../../components/Md.astro";
+import RefPills from "../../components/RefPills.astro";
+import Base from "../../layouts/Base.astro";
+import { hrefFor } from "../../lib/links.ts";
+import { getEntry, getPlaybook } from "../../lib/playbook.ts";
+
+export function getStaticPaths() {
+  return getPlaybook().glossary.map((t) => ({ params: { id: t.id } }));
+}
+
+const pb = getPlaybook();
+const term = getEntry("glossary", Astro.params.id as string);
+const usedIn = linksTo(pb, "term", term.id).map((ref) => ({
+  href: hrefFor(linkTypeFor[ref.collection], ref.id),
+  text: titleOf(ref.collection, getEntry(ref.collection, ref.id)),
+}));
+---
+
+<Base title={term.term} section="glossary">
+  <a class="back" href={hrefFor("page", "glossary")}>
+    ← Glossary
+  </a>
+  <header class="page-head">
+    <div class="eyebrow">Glossary</div>
+    <h1 class="title">
+      {term.term}
+      {term.expansion && <span class="expansion"> ({term.expansion})</span>}
+    </h1>
+    <p class="lede">
+      <Md text={term.definition} />
+    </p>
+  </header>
+  <div class="item">
+    {term.aliases && (
+      <p class="aliases">
+        <b>Also called:</b> {term.aliases.join(", ")}
+      </p>
+    )}
+    <div class="eyebrow">Why it matters here</div>
+    <div class="prose">
+      <Md text={term.body} block />
+    </div>
+    <RefPills label="How we measure it:" signals={term.signals} />
+    <RefPills label="Related questions:" questions={term.questions} />
+    <RefPills label="Related terms:" terms={term.related} />
+    {usedIn.length > 0 && (
+      <div class="refs">
+        <span>Used in:</span>
+        {usedIn.map((ref) => (
+          <a class="pill" href={ref.href}>
+            {ref.text}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</Base>

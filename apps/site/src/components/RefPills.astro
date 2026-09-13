@@ -10,6 +10,7 @@ interface Props {
   plays?: string[];
   audit?: string[];
   pages?: string[];
+  terms?: string[];
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   plays = [],
   audit = [],
   pages = [],
+  terms = [],
 } = Astro.props;
 
 // References are validated when content loads, so every id here exists.
@@ -52,6 +54,11 @@ const pills = [
   ...pages.map((id) => ({
     href: hrefFor("page", id),
     text: getEntry("pages", id).navLabel,
+    tone: "",
+  })),
+  ...terms.map((id) => ({
+    href: hrefFor("term", id),
+    text: getEntry("glossary", id).term,
     tone: "",
   })),
 ];

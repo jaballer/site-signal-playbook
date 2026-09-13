@@ -2,14 +2,17 @@ import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mc
 import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 import {
   collections,
+  linkTypes,
   playbookSchema,
+  titleOf,
+  type AnyEntry,
   type CollectionName,
   type Page,
   type Playbook,
 } from "@site-signal/playbook";
 import { z } from "zod";
-import { createContentSource, findEntry, type AnyEntry } from "./content.ts";
-import { md, renderBlock, renderEntry, summaryOf, titleOf, uriFor } from "./render.ts";
+import { createContentSource, findEntry } from "./content.ts";
+import { md, renderBlock, renderEntry, summaryOf, uriFor } from "./render.ts";
 import { searchPlaybook, suggestIds } from "./search.ts";
 
 const COLLECTION_NAMES = Object.keys(collections) as [CollectionName, ...CollectionName[]];
@@ -27,8 +30,10 @@ const COLLECTION_GUIDE: Record<CollectionName, string> = {
   layers: "Scorecard layers, each with a north-star metric, leading indicators and health checks",
   principles: "The principles behind the playbook",
   offers: "The agency's standard service offers",
+  glossary:
+    "Glossary: plain-language definitions of marketing and search terms, with aliases and what each means for the program",
   pages:
-    "Chapter pages that tie the collections together (overview, reporting, measurement, and more)",
+    "Chapter pages that tie the collections together (overview, reporting, measurement, glossary, and more)",
 };
 
 const INSTRUCTIONS = `Read-only access to the Site Signal Playbook, the operating playbook of an SEO and AI search agency.
@@ -91,7 +96,7 @@ export function createPlaybookServer({
     {
       title: "Search the playbook",
       description:
-        "Keyword search across the playbook: leader questions, plays, audit pillars, diagnostics, signals, phases, layers, principles, offers and chapter pages. Returns ranked matches with their collection, id and resource URI. Use get_entry to read a match in full.",
+        "Keyword search across the playbook: leader questions, plays, audit pillars, diagnostics, signals, phases, layers, principles, offers, glossary terms (including their aliases) and chapter pages. Returns ranked matches with their collection, id and resource URI. Use get_entry to read a match in full.",
       inputSchema: {
         query: z
           .string()
@@ -329,7 +334,11 @@ export function createPlaybookServer({
       const rows = COLLECTION_NAMES.map(
         (name) => `- **${name}** (${playbook[name].length}): ${COLLECTION_GUIDE[name]}`,
       ).join("\n");
-      const body = `# Site Signal Playbook\n\n${INSTRUCTIONS}\n\n## Collections\n\n${rows}\n\n## Links\n\nEntries link to each other with playbook://{collection}/{id} URIs. In the source Markdown files, links are written as [text](type:id), where type is the singular collection name (question, play, signal, audit, diagnostic, page, phase, layer, offer, principle).`;
+      const body = `# Site Signal Playbook\n\n${INSTRUCTIONS}\n\n## Collections\n\n${rows}\n\n## Links\n\nEntries link to each other with playbook://{collection}/{id} URIs. In the source Markdown files, links are written as [text](type:id). Link types and their collections: ${Object.entries(
+        linkTypes,
+      )
+        .map(([type, collection]) => `${type} (${collection})`)
+        .join(", ")}.`;
       return { contents: [{ uri: uri.href, mimeType: "text/markdown", text: body }] };
     },
   );

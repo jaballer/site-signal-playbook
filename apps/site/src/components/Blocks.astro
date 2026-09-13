@@ -344,5 +344,33 @@ const signalCards: SignalCard[] = [...pb.signals]
         </table>
       </div>
     )}
+
+    {b.type === "collection" && b.collection === "glossary" && (
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pb.glossary.map((t) => (
+              <tr>
+                <td>
+                  <a href={hrefFor("term", t.id)}>
+                    <b>{t.term}</b>
+                  </a>
+                  {t.expansion && <span class="expansion"> ({t.expansion})</span>}
+                </td>
+                <td>
+                  <Md text={t.definition} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
   </section>
 ))}

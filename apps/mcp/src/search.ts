@@ -1,6 +1,11 @@
-import { collections, type CollectionName, type Playbook } from "@site-signal/playbook";
-import type { AnyEntry } from "./content.ts";
-import { summaryOf, titleOf } from "./render.ts";
+import {
+  collections,
+  titleOf,
+  type AnyEntry,
+  type CollectionName,
+  type Playbook,
+} from "@site-signal/playbook";
+import { summaryOf } from "./render.ts";
 
 export type SearchHit = {
   collection: CollectionName;

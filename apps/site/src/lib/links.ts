@@ -25,6 +25,8 @@ export function hrefFor(type: LinkType, id: string): string {
       return `${base}/engagement/#offer-${id}`;
     case "principle":
       return `${base}/principles/#${id}`;
+    case "term":
+      return `${base}/glossary/${id}/`;
   }
 }
 

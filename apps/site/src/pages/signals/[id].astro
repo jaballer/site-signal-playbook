@@ -16,6 +16,7 @@ const usedIn = {
   questions: pb.questions.filter((q) => q.signals?.includes(signal.id)).map((q) => q.id),
   plays: pb.plays.filter((p) => p.moves.includes(signal.id)).map((p) => p.id),
   audit: pb.audit.filter((a) => a.signals.includes(signal.id)).map((a) => a.id),
+  terms: pb.glossary.filter((t) => t.signals?.includes(signal.id)).map((t) => t.id),
 };
 ---
 
@@ -67,6 +68,7 @@ const usedIn = {
       questions={usedIn.questions}
       plays={usedIn.plays}
       audit={usedIn.audit}
+      terms={usedIn.terms}
     />
   </div>
 </Base>
