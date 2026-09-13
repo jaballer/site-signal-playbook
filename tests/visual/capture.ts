@@ -52,9 +52,11 @@ const nextFrames = (page: Page) =>
 const pageHeight = (page: Page) =>
   page.evaluate(() => Math.max(document.documentElement.scrollHeight, document.body.scrollHeight));
 
+type Clip = { x: number; y: number; width: number; height: number };
+
 /** A capture right after a large resize can be partly redrawn, so capture until two in a row match. */
-async function stableScreenshot(page: Page, file: string) {
-  const shoot = () => page.screenshot({ animations: "disabled", caret: "hide" });
+async function stableScreenshot(page: Page, file: string, clip?: Clip) {
+  const shoot = () => page.screenshot({ animations: "disabled", caret: "hide", clip });
   let previous = await shoot();
   for (let attempt = 0; attempt < 6; attempt++) {
     await page.waitForTimeout(200);
@@ -147,28 +149,35 @@ export async function capturePage(
     // position, so it's pinned in place for capture.
     await page.addStyleTag({ content: ".topbar { position: relative !important; }" });
     await nextFrames(page);
-    // Measure once at the normal window size, then resize to fit. Resizing again never settles on
-    // mobile: .shell has min-height: 100vh and the top bar sits outside it.
-    const height = await pageHeight(page);
-    const windowHeight = Math.min(height, MAX_HEIGHT);
+    // Size the window to the page, then measure again. On small screens the page grows with the window
+    // (.shell has min-height: 100vh and the top bar sits outside it), so it never fits, and the rows below
+    // the window are captured by scrolling down.
+    const windowHeight = Math.min(await pageHeight(page), MAX_HEIGHT);
     await page.setViewportSize({ width, height: windowHeight });
     await nextFrames(page);
+    const height = await pageHeight(page);
     const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
 
     let tiles = 0;
     let columns = 0;
-    for (let y = 0; ; y += windowHeight - TILE_OVERLAP) {
+    let capturedTo = 0;
+    for (let row = 0; capturedTo < height; row++) {
+      // Rows overlap by TILE_OVERLAP. The last row can only scroll as far as the page ends, so it keeps
+      // just the rows not captured yet, plus the overlap.
+      const top = Math.min(row * (windowHeight - TILE_OVERLAP), Math.max(0, height - windowHeight));
+      const skip = row ? Math.max(0, capturedTo - TILE_OVERLAP - top) : 0;
+      const clip = skip ? { x: 0, y: skip, width, height: windowHeight - skip } : undefined;
       // Content wider than the window is captured by scrolling sideways. Widening the window instead
       // would change the layout being tested.
       columns = 0;
-      for (let x = 0; ; x += width) {
-        await page.evaluate((position) => window.scrollTo(position), { left: x, top: y });
+      for (let left = 0; ; left += width) {
+        await page.evaluate((position) => window.scrollTo(position), { left, top });
         await nextFrames(page);
-        await stableScreenshot(page, `${fileBase}.${tiles++}.png`);
+        await stableScreenshot(page, `${fileBase}.${tiles++}.png`, clip);
         columns++;
-        if (x + width >= scrollWidth) break;
+        if (left + width >= scrollWidth) break;
       }
-      if (y + windowHeight >= height) break;
+      capturedTo = top + windowHeight;
     }
     return { width: scrollWidth, height, tiles, columns };
   } finally {

@@ -130,7 +130,7 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 - **Captures are deterministic on purpose.** Don't loosen these without re-checking that the same build captured twice gives 0 differences:
   - Chrome runs with software rendering and full compositing before each frame (`CHROME_ARGS` in `capture.ts`).
   - Every font face loads before capture, and each screenshot is retaken until two in a row match.
-  - The window is resized to the page height instead of using full-page capture, which repeats content on tall pages. Pages over 20,000px are captured in overlapping rows of tiles.
+  - The window is resized to the page height instead of using full-page capture, which repeats content on tall pages. Pages over 20,000px are captured in overlapping rows of tiles. The page is measured again after the resize: on small screens it grows with the window (`.shell` has `min-height: 100vh` and the top bar sits outside it), so the rows below the window are captured by scrolling down.
   - Content wider than the window is captured in extra columns by scrolling sideways. Widening the window would change the layout under test.
   - The mobile `.topbar` is pinned with `position: relative` during capture, because Chrome paints the sticky bar at stale positions in very tall windows.
   - Channel differences of 2/255 or less are ignored: rounded corners of scrolling containers anti-alias slightly differently between captures.
