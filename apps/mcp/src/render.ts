@@ -1,6 +1,9 @@
 import {
+  effortLabel,
+  firstSignalLabel,
   linksTo,
   linkTypes,
+  ownerLabel,
   resolveLinks,
   titleOf,
   type AnyEntry,
@@ -32,7 +35,7 @@ export function summaryOf(collection: CollectionName, entry: AnyEntry): string {
     case "questions":
       return (entry as Question).askedBy;
     case "plays":
-      return `Run it when: ${(entry as Play).when}`;
+      return `${ownerLabel[(entry as Play).owner]} · effort ${(entry as Play).effort} · run it when: ${(entry as Play).when}`;
     case "audit":
       return (entry as AuditPillar).question;
     case "diagnostics":
@@ -93,7 +96,7 @@ export function renderEntry(
     case "audit":
       return renderAudit(playbook, entry as AuditPillar);
     case "diagnostics":
-      return renderDiagnostic(entry as Diagnostic);
+      return renderDiagnostic(playbook, entry as Diagnostic);
     case "signals":
       return renderSignal(playbook, entry as Signal);
     case "phases":
@@ -117,6 +120,7 @@ function renderQuestion(playbook: Playbook, q: Question) {
       `- Signals: ${q.signals.map((id) => link(playbook, "signals", id)).join(", ")}`,
     q.diagnostics?.length &&
       `- Diagnostics: ${q.diagnostics.map((id) => link(playbook, "diagnostics", id)).join(", ")}`,
+    q.plays?.length && `- Plays: ${q.plays.map((id) => link(playbook, "plays", id)).join(", ")}`,
     q.related?.length &&
       `- Related questions: ${q.related.map((id) => link(playbook, "questions", id)).join(", ")}`,
     q.pages?.length && `- Chapters: ${q.pages.map((id) => link(playbook, "pages", id)).join(", ")}`,
@@ -138,12 +142,26 @@ function renderPlay(playbook: Playbook, p: Play) {
     const signal = findEntry(playbook, "signals", id) as Signal | undefined;
     return `- ${link(playbook, "signals", id)}${signal ? `: ${md(signal.question)}` : ""}`;
   });
+  const sequence = [
+    p.dependsOn?.length &&
+      `- Ship first: ${p.dependsOn.map((id) => link(playbook, "plays", id)).join(", ")}`,
+    p.related?.length &&
+      `- Runs well with: ${p.related.map((id) => link(playbook, "plays", id)).join(", ")}`,
+  ].filter(Boolean);
   return join([
     `# Play: ${p.title}`,
-    `Effort ${p.effort} · First signal: ${p.firstSignal}`,
+    [
+      `- **Effort:** ${effortLabel[p.effort]}`,
+      `- **First signal:** ${firstSignalLabel[p.firstSignal]}`,
+      `- **Led by:** ${ownerLabel[p.owner]}`,
+      p.timing && `- **Timing:** ${md(p.timing)}`,
+    ]
+      .filter(Boolean)
+      .join("\n"),
     section("Run it when", md(p.when)),
     section("What we do", numbered(p.steps)),
     section("What it should move", moves.join("\n")),
+    sequence.length > 0 && section("Sequence", sequence.join("\n")),
     section("Watch out", md(p.watchOut)),
   ]);
 }
@@ -153,14 +171,27 @@ function renderAudit(playbook: Playbook, a: AuditPillar) {
     `# Audit pillar ${a.order}: ${a.title}`,
     md(a.question),
     table(
-      ["Check", "How to check", "Fail looks like"],
-      a.checks.map((c) => [c.check, c.how, c.fail]),
+      ["Check", "How to check", "Fail looks like", "Fixed by"],
+      a.checks.map((c) => [
+        c.check,
+        c.how,
+        c.fail,
+        c.plays.map((id) => link(playbook, "plays", id)).join(", "),
+      ]),
     ),
     section("Signals", a.signals.map((id) => `- ${link(playbook, "signals", id)}`).join("\n")),
   ]);
 }
 
-function renderDiagnostic(d: Diagnostic) {
+function renderDiagnostic(playbook: Playbook, d: Diagnostic) {
+  const related = [
+    d.plays?.length &&
+      `- Once you know the cause: ${d.plays.map((id) => link(playbook, "plays", id)).join(", ")}`,
+    d.signals?.length &&
+      `- Signals: ${d.signals.map((id) => link(playbook, "signals", id)).join(", ")}`,
+    d.questions?.length &&
+      `- Leader questions: ${d.questions.map((id) => link(playbook, "questions", id)).join(", ")}`,
+  ].filter(Boolean);
   return join([
     `# Diagnostic: ${d.title}`,
     section("What this looks like in the field", md(d.inTheField)),
@@ -168,6 +199,7 @@ function renderDiagnostic(d: Diagnostic) {
       "Checks, in order",
       d.steps.map((s, i) => `${i + 1}. **${s.title}**: ${md(s.detail)}`).join("\n"),
     ),
+    related.length > 0 && section("Related", related.join("\n")),
   ]);
 }
 
@@ -179,6 +211,9 @@ function renderSignal(playbook: Playbook, s: Signal) {
     ...playbook.plays
       .filter((p) => p.moves.includes(s.id))
       .map((p) => link(playbook, "plays", p.id)),
+    ...playbook.diagnostics
+      .filter((d) => d.signals?.includes(s.id))
+      .map((d) => link(playbook, "diagnostics", d.id)),
     ...playbook.audit
       .filter((a) => a.signals.includes(s.id))
       .map((a) => link(playbook, "audit", a.id)),

@@ -13,19 +13,34 @@ checks:
   - check: Topic coverage
     how: Map priority topics by buyer stage to existing pages
     fail: No page for comparison, alternatives, pricing or integration topics
+    plays:
+      - topic-cluster
+      - definition-pages
   - check: Cannibalization
     how: Search Console queries with more than one ranking URL
     fail: Two or more pages trading positions on priority terms
+    plays:
+      - consolidate-cannibalization
   - check: Content decay
     how: Clicks per page against the same period last year
     fail: Priority pages losing a large share of clicks, with no refresh planned
+    plays:
+      - refresh-decaying-pages
   - check: Experience and expertise
     how: Score priority pages for named expert authors, original data or examples, sources and update dates
     fail: Anonymous, generic pages on topics where competitors publish original data
+    plays:
+      - author-expertise
+      - original-data
   - check: Answer-first structure
     how: Read the first screen of each priority page as a buyer asking the target question
     fail: The answer is buried under marketing copy, or sits in tabs or images
+    plays:
+      - answer-first-pages
+      - definition-pages
   - check: Internal links
     how: Crawl for internal links into priority pages
     fail: Money pages linked only from the navigation
+    plays:
+      - internal-linking
 ---

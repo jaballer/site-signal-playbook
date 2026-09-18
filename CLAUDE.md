@@ -10,7 +10,7 @@ It covers:
 
 - the questions leadership asks, with step-by-step answers
 - the engagement model and offers
-- a six-pillar audit and a play library
+- a six-pillar audit and a play library, where every failed check names the play that fixes it
 - diagnostics, reporting, a signal catalog, measurement setup, and principles
 
 The content is plain Markdown files, so several tools can read it: the Astro site, the MCP server (for Claude Desktop, Claude Code and other clients), and later Figma and Playwright.
@@ -50,7 +50,7 @@ tests/visual/       screenshot comparison of the built site against a git ref
 Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loadPlaybook(contentDir)` reads every collection, validates frontmatter with strict schemas, and checks cross-references. It throws a `PlaybookError` listing every problem at once.
 
 - **Collections, schemas and references live in `packages/playbook/src/schema.ts`.** That covers `collections`, `references`, `linkTypes` and the page `block` union. To add a field or collection, change it there, then update the site component that renders it.
-- **Shared helpers:** `titleOf` (a readable title for any entry) and `linksTo` (every entry whose text links to a given entry) live in the package, so the site and the MCP server agree.
+- **Shared helpers:** `titleOf` (a readable title for any entry), `linksTo` (every entry whose text links to a given entry) and the play enum labels (`effortLabel`, `firstSignalLabel`, `ownerLabel`) live in the package, so the site and the MCP server agree.
 - **The package runs as TypeScript directly on Node** (type stripping), with no build step:
   - Relative imports must use `.ts` extensions.
   - Only erasable syntax is allowed: no enums, no parameter properties (`erasableSyntaxOnly` is set).
@@ -66,7 +66,7 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 - **Markdown only, never HTML.** The loader rejects HTML tags.
 - **Links between entries:**
   - In prose, use inline links of the form `[text](type:id)`, where type is `question`, `play`, `signal`, `audit`, `diagnostic`, `page`, `phase`, `layer`, `offer`, `principle` or `term` (a glossary entry). Each tool resolves them itself: the site through `hrefFor()` in `apps/site/src/lib/links.ts`.
-  - In structured fields, reference other entries by id in frontmatter (`layer`, `phases`, `signals`, `moves`, `diagnostics`, `questions`, `related`, `pages`). These are validated; `references` in `schema.ts` is the full list.
+  - In structured fields, reference other entries by id in frontmatter (`layer`, `phases`, `signals`, `moves`, `plays`, `dependsOn`, `diagnostics`, `questions`, `related`, `pages`). These are validated; `references` in `schema.ts` is the full list. A reference field may take one dotted step through a list of objects, as `audit`'s `checks.plays` does.
 - **Glossary** (`content/glossary/*.md`): one file per term.
   - The id is a short kebab-case form of the term (`ctr`, `branded-search`). Terms are listed alphabetically by `term`.
   - A term, expansion or alias can belong to only one entry; duplicates fail validation.
@@ -80,6 +80,8 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 
 - **Writing level:** write for marketers, executives and account strategists. Use plain procedural steps with menu paths in GA4, Search Console and standard SEO tools. Don't write API request bodies, dimension or metric field names, or SQL unless asked. Don't invent statistics. Name tools as examples ("Ahrefs, Semrush or similar").
 - **The Overview names the chapter count in words** ("Ten chapters"). Update it when pages change.
+- **Everything routes to a play.** Every audit check names the plays that fix it (`checks.plays`), and diagnostics and leader questions name theirs. A new play needs at least one entry pointing at it, or it can only be found by browsing the Plays chapter.
+- **Plays are sortable.** `effort` (S/M/L), `firstSignal` (immediate/days/weeks/months) and `owner` are enums, so the roadmap can be ranked and `list_entries` can filter on them. Nuance the buckets flatten goes in the optional `timing` line, not back into the enum.
 
 ## Site (apps/site)
 
@@ -108,7 +110,7 @@ Every tool that uses the playbook goes through `@site-signal/playbook`. Its `loa
 
 - **Structure:** `src/server.ts` is the stdio entrypoint. `createPlaybookServer({ contentDir })` in `src/playbook-server.ts` registers everything, and tests connect to it in-process.
 - **Surface:**
-  - Five read-only tools: `search_playbook`, `get_entry`, `list_entries`, `get_audit_checklist`, `validate_content`.
+  - Five read-only tools: `search_playbook`, `get_entry`, `list_entries`, `get_audit_checklist`, `validate_content`. `list_entries` filters signals by layer or phase, and plays by effort, first signal or owner. `get_audit_checklist` carries a "fixed by" column from each check's `plays`.
   - Resources: every entry at `playbook://{collection}/{id}`, plus `playbook://guide` and `playbook://schema`.
   - Four prompts: `answer_leader_question`, `run_audit`, `diagnose`, `plan_roadmap`.
 - **Rendering:** `src/render.ts` turns entries into Markdown for LLMs and rewrites `[text](type:id)` links to `playbook://` URIs.

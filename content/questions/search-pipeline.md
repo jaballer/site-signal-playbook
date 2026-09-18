@@ -20,6 +20,12 @@ signals:
   - search-pipeline
   - landing-performance
   - buyer-stage
+diagnostics:
+  - leads-down-traffic-flat
+plays:
+  - measurement-foundations
+  - answer-first-pages
+  - internal-linking
 related:
   - search-value
 ---

@@ -17,4 +17,18 @@ steps:
     detail: Indexing status, canonicals, noindex tags, rendering and internal links on the pages that fell.
   - title: Report the components, then the plan
     detail: Present the drop as its parts, each with an owner and a response, rather than one number and one explanation.
+plays:
+  - unblock-crawling
+  - refresh-decaying-pages
+  - answer-first-pages
+  - measurement-foundations
+signals:
+  - nb-clicks
+  - branded-demand
+  - ctr-by-position
+  - index-coverage
+  - change-log
+questions:
+  - traffic-drop
+  - trust-the-numbers
 ---

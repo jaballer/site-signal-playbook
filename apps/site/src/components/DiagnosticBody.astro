@@ -1,6 +1,7 @@
 ---
 import type { Diagnostic } from "@site-signal/playbook";
 import Md from "./Md.astro";
+import RefPills from "./RefPills.astro";
 
 interface Props {
   diagnostic: Diagnostic;
@@ -22,3 +23,5 @@ const { diagnostic: d } = Astro.props;
     </div>
   ))}
 </div>
+<RefPills label="Once you know the cause:" plays={d.plays} />
+<RefPills signals={d.signals} questions={d.questions} />

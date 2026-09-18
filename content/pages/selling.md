@@ -167,7 +167,7 @@ blocks:
         - "Show the play timings: measurement fixes show immediately, crawl fixes in days to weeks, page refreshes in weeks, new content in months. The roadmap puts quick wins first, and every play has its first-signal date written down before work starts."
       - - "\"Isn't SEO dead now that AI answers everything?\""
         - Fear that search is shrinking, or doubt that AI visibility is real
-        - Both front doors depend on the same foundations, pages engines can crawl, understand and trust, and we report both side by side. Show them the prompt results for their category from your call preparation.
+        - Both front doors depend on the same foundations, pages engines can crawl, understand and trust, and we report [search](term:seo) and [AI answers](term:geo) side by side. Show them the prompt results for their category from your call preparation.
       - - "\"Our last agency didn't deliver.\""
         - They bought commodity SEO, with traffic reports and keyword lists but no pipeline
         - Ask what the last reports showed and what decisions they led to. Walk through the commodity and revenue-grade comparison on the [Overview](page:overview), and offer the audit as an independent second opinion.
@@ -182,13 +182,13 @@ blocks:
         - Put the fee next to the opportunity model's expected case. If it still doesn't make sense, reduce the scope, not the rate.
       - - "\"How will we know it's working?\""
         - Past reports showed traffic, never pipeline
-        - Name the [attribution ceiling](principle:name-the-attribution-ceiling-on-day-one) now. Show the monthly report's chain from visibility to pipeline, and if the CRM doesn't record lead source, show that fixing it is in the first 90 days.
+        - Name the [attribution ceiling](term:attribution-ceiling) now, as the [principle](principle:name-the-attribution-ceiling-on-day-one) says. Show the monthly report's chain from visibility to pipeline, and if the CRM doesn't record lead source, show that fixing it is in the first 90 days.
       - - "\"Let's wait until after the redesign.\""
         - They think search is a post-launch job
-        - Before launch is the worst time to wait. A migration without a benchmark and a redirect map can lose rankings that take months to recover. Sell migration protection now, and the audit after launch.
+        - Before launch is the worst time to wait. A [migration](term:migration) without a benchmark and a [redirect map](term:redirect-map) can lose rankings that take months to recover. Sell migration protection now, and the audit after launch.
       - - "\"Can't we just use AI to write more content?\""
         - Content volume is cheap now
-        - Volume isn't what's missing. AI engines cite original data, named experts and clear facts, and summarize generic pages away. AI can speed up production; subject-matter input is what makes pages worth citing.
+        - Volume isn't what's missing. AI engines cite original data, [named experts](term:eeat) and clear facts, and [summarize generic pages away](principle:be-the-source-ai-can-quote). AI can speed up production; subject-matter input is what makes pages worth citing.
       - - "\"Just send us a proposal.\""
         - They're comparing agencies on price
         - A program proposal without a diagnosis is a guess. Send the audit's fixed scope and fee, which they can compare, and explain that the program proposal comes from its findings.

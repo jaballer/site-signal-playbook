@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 4
 title: Leads fell, traffic didn't
 inTheField: "Leadership arrives with one total: organic leads down while traffic is flat. Split by form and landing page, a newly added popup is growing while two embedded forms fall away. Meanwhile, conversion-event volume spiked on exactly the days the tag container was published. Neither fact is visible in the total, and both change what to fix."
 steps:
@@ -15,4 +15,16 @@ steps:
     detail: If the number of people submitting any form is flat, a new form or popup is taking submissions from the old ones.
   - title: Only then check speed, form errors and CRM sync
     detail: All real causes, and all rarely the first one.
+plays:
+  - measurement-foundations
+  - answer-first-pages
+signals:
+  - organic-leads
+  - duplicate-tags
+  - key-events
+  - buyer-stage
+  - landing-performance
+questions:
+  - search-pipeline
+  - trust-the-numbers
 ---

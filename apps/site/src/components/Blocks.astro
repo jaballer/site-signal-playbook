@@ -1,5 +1,5 @@
 ---
-import type { Block } from "@site-signal/playbook";
+import { firstSignalLabel, ownerLabel, type Block } from "@site-signal/playbook";
 import { hrefFor } from "../lib/links.ts";
 import { getPlaybook } from "../lib/playbook.ts";
 import AuditBody from "./AuditBody.astro";
@@ -258,7 +258,8 @@ const signalCards: SignalCard[] = [...pb.signals]
             subtitle={p.when}
             badges={[
               { text: `Effort ${p.effort}` },
-              { text: `First signal: ${p.firstSignal}`, tone: "acc" },
+              { text: ownerLabel[p.owner] },
+              { text: `First signal: ${firstSignalLabel[p.firstSignal]}`, tone: "acc" },
             ]}
           >
             <PlayBody play={p} />

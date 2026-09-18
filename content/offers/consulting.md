@@ -25,7 +25,7 @@ steps:
   - title: Deliver
     text: Search work runs through the phases on the [Engagement model](page:engagement). Projects run to the agreed scope, and every change goes through the client's release process.
   - title: Review each quarter
-    text: Ongoing work is reviewed live each quarter, with results against targets and the case to renew, expand or change the scope.
+    text: Ongoing work is reviewed live each quarter, with results against targets and the case to renew, expand or change the scope, following [Renewal](page:renewal).
 clientProvides:
   - A marketing leader who sets priorities and approves the scope
   - Developer time and a release process for website changes
@@ -37,4 +37,5 @@ pages:
   - onboarding
   - deliverables
   - reporting
+  - renewal
 ---

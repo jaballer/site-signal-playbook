@@ -25,4 +25,9 @@ signals:
   - structured-data
 diagnostics:
   - deindexed-pages
+  - post-migration-drop
+plays:
+  - unblock-crawling
+  - ai-crawler-policy
+  - site-speed
 ---

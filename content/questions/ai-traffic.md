@@ -19,4 +19,8 @@ signals:
   - ai-referrals
   - landing-performance
   - citation-share
+plays:
+  - measurement-foundations
+  - ai-crawler-policy
+  - answer-first-pages
 ---

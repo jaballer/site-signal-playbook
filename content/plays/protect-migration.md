@@ -1,9 +1,11 @@
 ---
-order: 13
+order: 18
 title: Protect a migration
 when: A redesign, replatform or URL change is planned.
 effort: M
-firstSignal: Immediate; recovery over 1–3 months
+firstSignal: immediate
+owner: technical
+timing: Immediately at launch. Recovering a bad migration takes one to three months.
 steps:
   - Crawl and benchmark rankings, traffic and leads before launch
   - Build a complete old-to-new redirect map

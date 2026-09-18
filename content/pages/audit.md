@@ -3,7 +3,7 @@ order: 6
 navLabel: Audit
 eyebrow: Audit framework
 heading: Six pillars, scored with evidence
-lede: "The audit answers one question: what's stopping this site from being the answer buyers find, in search results and in AI assistants, and what is fixing it worth? Every check is scored Pass, Watch or Fail with evidence. The fails then become a short, ranked list of findings with revenue attached."
+lede: "The audit answers one question: what's stopping this site from being the answer buyers find, in search results and in [AI assistants](term:geo), and what is fixing it worth? Every check is scored Pass, Watch or Fail with evidence. The fails then become a short, ranked list of findings with revenue attached."
 blocks:
   - type: table
     columns:
@@ -19,7 +19,7 @@ blocks:
         - What would turn it into a fail, and when to re-check
       - - "**Fail**"
         - Blocks visibility, traffic or trustworthy measurement on priority pages
-        - Evidence, affected pages, revenue at stake, and the play that fixes it
+        - Evidence, affected pages, revenue at stake, and the [play](page:plays) that fixes it
   - type: collection
     collection: audit
   - type: flow
@@ -33,7 +33,7 @@ blocks:
       - title: Rate confidence and effort
         text: How sure is the diagnosis, and what does the fix take across agency and client?
       - title: Rank and cut to ten
-        text: Blockers first, then by revenue at stake × confidence ÷ effort. Everything else goes in an appendix.
+        text: "[Blockers first](principle:unblock-before-you-build), then by revenue at stake × confidence ÷ effort. Everything else goes in an appendix."
       - title: Name the play and the owner
-        text: Each finding maps to a play, an owner and a first step. That mapping is the bridge from audit to proposal.
+        text: Each failed check already names the [plays](page:plays) that fix it, and every play names the team that leads it. That mapping is the bridge from audit to proposal.
 ---

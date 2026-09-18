@@ -22,6 +22,10 @@ signals:
   - key-events
   - internal-traffic
   - brand-list
+diagnostics:
+  - numbers-look-wrong
+plays:
+  - measurement-foundations
 pages:
   - measurement
 ---

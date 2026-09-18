@@ -46,4 +46,10 @@ const { question: q } = Astro.props;
   </p>
   <CopyButton client:visible text={q.script} />
 </div>
-<RefPills signals={q.signals} diagnostics={q.diagnostics} questions={q.related} pages={q.pages} />
+<RefPills
+  signals={q.signals}
+  diagnostics={q.diagnostics}
+  plays={q.plays}
+  questions={q.related}
+  pages={q.pages}
+/>

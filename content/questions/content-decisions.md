@@ -22,4 +22,10 @@ signals:
   - cannibalization
   - content-quality
   - extractability
+plays:
+  - refresh-decaying-pages
+  - consolidate-cannibalization
+  - topic-cluster
+  - definition-pages
+  - author-expertise
 ---

@@ -1,4 +1,13 @@
-import type { CollectionName, Layer, Offer, Page, Playbook, Question, Term } from "./schema.ts";
+import type {
+  CollectionName,
+  Layer,
+  Offer,
+  Page,
+  Play,
+  Playbook,
+  Question,
+  Term,
+} from "./schema.ts";
 
 export type AnyEntry = Playbook[CollectionName][number];
 
@@ -21,3 +30,28 @@ export function titleOf(collection: CollectionName, entry: AnyEntry): string {
       return (entry as { title: string }).title;
   }
 }
+
+/**
+ * Labels for the play enums. Both the site and the MCP server read them from here,
+ * so a play reads the same way wherever it's shown.
+ */
+export const effortLabel = {
+  S: "S, under a week",
+  M: "M, one to four weeks",
+  L: "L, over a month",
+} as const satisfies Record<Play["effort"], string>;
+
+export const firstSignalLabel = {
+  immediate: "Immediately",
+  days: "Days to weeks",
+  weeks: "Weeks",
+  months: "Months",
+} as const satisfies Record<Play["firstSignal"], string>;
+
+export const ownerLabel = {
+  strategy: "Strategy",
+  content: "Content",
+  technical: "Technical",
+  "off-site": "Off-site",
+  analytics: "Analytics",
+} as const satisfies Record<Play["owner"], string>;

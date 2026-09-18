@@ -1,5 +1,5 @@
 ---
-import type { Play } from "@site-signal/playbook";
+import { ownerLabel, type Play } from "@site-signal/playbook";
 import Md from "./Md.astro";
 import RefPills from "./RefPills.astro";
 
@@ -27,10 +27,19 @@ const { play: p, showWhen = false } = Astro.props;
         </li>
       ))}
     </ol>
+    {p.timing && (
+      <p class="timing">
+        <b>Timing:</b> <Md text={p.timing} />
+      </p>
+    )}
   </div>
   <div>
     <div class="eyebrow">What it should move</div>
     <RefPills label="" signals={p.moves} />
+    <div class="eyebrow">Who leads it</div>
+    <p class="owner">{ownerLabel[p.owner]}</p>
+    {p.dependsOn && <RefPills label="Ship these first:" plays={p.dependsOn} />}
+    {p.related && <RefPills label="Runs well with:" plays={p.related} />}
     <div class="callout warn">
       <b>Watch out:</b> <Md text={p.watchOut} />
     </div>

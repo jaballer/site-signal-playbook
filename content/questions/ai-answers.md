@@ -22,6 +22,11 @@ signals:
   - cited-sources
 diagnostics:
   - ai-visibility-drop
+plays:
+  - win-cited-sources
+  - review-program
+  - correct-ai-answers
+  - definition-pages
 related:
   - competitors
 ---

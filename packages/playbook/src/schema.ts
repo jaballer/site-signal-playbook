@@ -48,18 +48,33 @@ export const question = z.strictObject({
   script: Md,
   signals: Ids.optional(),
   diagnostics: Ids.optional(),
+  plays: Ids.optional(),
   related: Ids.optional(),
   pages: Ids.optional(),
 });
+
+/** Effort across agency and client: S under a week, M one to four weeks, L more than a month. */
+export const Effort = z.enum(["S", "M", "L"]);
+/** How long before the first signal shows. The same four buckets as the engagement model. */
+export const FirstSignal = z.enum(["immediate", "days", "weeks", "months"]);
+/** Which side of the "who does what" table leads the play. */
+export const Owner = z.enum(["strategy", "content", "technical", "off-site", "analytics"]);
 
 export const play = z.strictObject({
   order: Order,
   title: Text,
   when: Md,
-  effort: Text,
-  firstSignal: Text,
+  effort: Effort,
+  firstSignal: FirstSignal,
+  /** The team that leads it, so every finding can name a play and an owner. */
+  owner: Owner,
+  /** The detail the effort and first-signal buckets flatten, where that matters. */
+  timing: Md.optional(),
   steps: z.array(Md).min(1),
   moves: Ids.min(1),
+  /** Plays that should ship first, because this one is capped until they do. */
+  dependsOn: Ids.optional(),
+  related: Ids.optional(),
   watchOut: Md,
 });
 
@@ -68,7 +83,8 @@ export const auditPillar = z.strictObject({
   title: Text,
   question: Md,
   signals: Ids.min(1),
-  checks: z.array(z.strictObject({ check: Text, how: Md, fail: Md })).min(1),
+  /** Each check names the plays that fix it, so a fail carries its own remedy. */
+  checks: z.array(z.strictObject({ check: Text, how: Md, fail: Md, plays: Ids.min(1) })).min(1),
 });
 
 export const diagnostic = z.strictObject({
@@ -76,6 +92,10 @@ export const diagnostic = z.strictObject({
   title: Text,
   inTheField: Md,
   steps: z.array(z.strictObject({ title: Text, detail: Md })).min(1),
+  /** What to run once the cause is found. */
+  plays: Ids.optional(),
+  signals: Ids.optional(),
+  questions: Ids.optional(),
 });
 
 export const principle = z.strictObject({
@@ -209,16 +229,26 @@ export const collections = {
 
 export type CollectionName = keyof typeof collections;
 
-/** Frontmatter fields that must name an existing entry in another collection. */
+/**
+ * Frontmatter fields that must name an existing entry in another collection.
+ * A dotted field reads through a list of objects, e.g. `checks.plays`.
+ */
 export const references: ReadonlyArray<readonly [CollectionName, string, CollectionName]> = [
   ["signals", "layer", "layers"],
   ["signals", "phases", "phases"],
   ["questions", "signals", "signals"],
   ["questions", "diagnostics", "diagnostics"],
+  ["questions", "plays", "plays"],
   ["questions", "related", "questions"],
   ["questions", "pages", "pages"],
   ["plays", "moves", "signals"],
+  ["plays", "dependsOn", "plays"],
+  ["plays", "related", "plays"],
   ["audit", "signals", "signals"],
+  ["audit", "checks.plays", "plays"],
+  ["diagnostics", "plays", "plays"],
+  ["diagnostics", "signals", "signals"],
+  ["diagnostics", "questions", "questions"],
   ["offers", "pages", "pages"],
   ["glossary", "signals", "signals"],
   ["glossary", "questions", "questions"],

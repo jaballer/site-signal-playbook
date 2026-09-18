@@ -20,4 +20,10 @@ signals:
   - topic-coverage
   - referring-domains
   - cited-sources
+diagnostics:
+  - competitor-overtook-us
+plays:
+  - comparison-pages
+  - topic-cluster
+  - win-cited-sources
 ---
