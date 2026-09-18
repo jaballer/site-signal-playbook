@@ -21,6 +21,13 @@ signals:
   - serp-features
   - ctr-by-position
   - branded-demand
+diagnostics:
+  - ai-overview-ctr-drop
+  - competitor-overtook-us
+plays:
+  - answer-first-pages
+  - definition-pages
+  - internal-linking
 related:
   - ai-answers
 ---

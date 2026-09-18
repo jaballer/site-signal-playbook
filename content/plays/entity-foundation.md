@@ -1,9 +1,11 @@
 ---
-order: 8
+order: 12
 title: Establish the entity foundation
 when: Facts about the company conflict across profiles, or Organization and author schema are missing.
-effort: S–M
-firstSignal: 1–3 months
+effort: M
+firstSignal: months
+owner: technical
+timing: One to three months.
 steps:
   - Write a one-page fact sheet and get it approved
   - Add Organization schema with sameAs links to real profiles

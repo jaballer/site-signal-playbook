@@ -102,9 +102,7 @@ export function loadPlaybook(contentDir: string): Playbook {
 
   for (const [from, field, to] of references) {
     for (const entry of entries[from]) {
-      const value = entry[field];
-      const refs = value === undefined ? [] : Array.isArray(value) ? value : [value];
-      for (const ref of refs) {
+      for (const ref of refsAt(entry, field)) {
         if (!ids[to].has(String(ref))) {
           issues.push(`${from}/${entry.id}.md: ${field} "${ref}" isn't a ${to} id`);
         }
@@ -168,4 +166,16 @@ export function loadPlaybook(contentDir: string): Playbook {
 
   if (issues.length) throw new PlaybookError(issues);
   return entries as unknown as Playbook;
+}
+
+/** Reads a reference field, following one dotted step through a list of objects. */
+function refsAt(entry: Record<string, unknown>, field: string): unknown[] {
+  const [head, tail] = field.split(".");
+  const value = entry[head];
+  const list = value === undefined ? [] : Array.isArray(value) ? value : [value];
+  if (!tail) return list;
+  return list.flatMap((item) => {
+    const nested = (item as Record<string, unknown> | null)?.[tail];
+    return nested === undefined ? [] : Array.isArray(nested) ? nested : [nested];
+  });
 }

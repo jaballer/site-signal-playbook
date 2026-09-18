@@ -15,4 +15,4 @@ deliverables:
   - Renewal or expansion proposal
 ---
 
-The quarterly review resets the plan with leadership. It's where the program is renewed, expanded or corrected, so it's argued in pipeline and competitive position, not tasks completed.
+The quarterly review resets the plan with leadership. It's where the program is renewed, expanded or corrected, so it's argued in pipeline and competitive position, not tasks completed. How to prepare and run it, and the signs an account is drifting before anyone says so, are in [Renewal](page:renewal).

@@ -48,3 +48,17 @@
     font-weight: 700;
   }
 }
+
+/* PlayBody.astro: the detail the effort and first-signal buckets flatten, and who leads it. */
+.timing,
+.owner {
+  margin: 6px 0 0;
+  font: var(--type-body-small);
+  color: var(--text-secondary);
+  max-width: none;
+}
+
+/* The "what it should move" column stacks several labelled groups. */
+.cols .eyebrow:not(:first-child) {
+  margin-top: var(--space-sm);
+}

@@ -8,3 +8,9 @@
   font: var(--type-body-small);
   color: var(--text-muted);
 }
+
+/* AuditBody.astro: the "fixed by" plays sit inside a table cell, so they carry no label. */
+.refs.inline {
+  margin-top: 0;
+  gap: 4px;
+}

@@ -1,9 +1,11 @@
 ---
-order: 12
+order: 17
 title: Fix internal linking to money pages
 when: Priority pages are weakly linked, or linked only from the navigation.
 effort: S
-firstSignal: 2–8 weeks
+firstSignal: weeks
+owner: content
+timing: Two to eight weeks.
 steps:
   - List the pages with the most traffic and the most referring domains
   - Add descriptive, contextual links from them to relevant money pages

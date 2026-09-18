@@ -19,6 +19,8 @@ script: Search could add [low]–[high] leads a quarter within [timeframe], wort
 signals:
   - opportunity-value
   - search-pipeline
+plays:
+  - measurement-foundations
 pages:
   - plays
   - reporting

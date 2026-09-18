@@ -1,9 +1,11 @@
 ---
-order: 4
+order: 6
 title: Consolidate cannibalized content
 when: Several of the client's pages compete for the same priority queries.
-effort: S–M
-firstSignal: 4–12 weeks
+effort: M
+firstSignal: weeks
+owner: content
+timing: Four to twelve weeks.
 steps:
   - Pick the strongest URL for each query group
   - Merge the unique content from the others into it

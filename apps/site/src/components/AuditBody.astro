@@ -1,5 +1,7 @@
 ---
 import type { AuditPillar } from "@site-signal/playbook";
+import { hrefFor } from "../lib/links.ts";
+import { getEntry } from "../lib/playbook.ts";
 import Md from "./Md.astro";
 import RefPills from "./RefPills.astro";
 
@@ -17,6 +19,7 @@ const { pillar } = Astro.props;
         <th>Check</th>
         <th>How to check</th>
         <th>Fail looks like</th>
+        <th>Fixed by</th>
       </tr>
     </thead>
     <tbody>
@@ -30,6 +33,15 @@ const { pillar } = Astro.props;
           </td>
           <td>
             <Md text={c.fail} />
+          </td>
+          <td>
+            <div class="refs inline">
+              {c.plays.map((id) => (
+                <a class="pill acc" href={hrefFor("play", id)}>
+                  {getEntry("plays", id).title}
+                </a>
+              ))}
+            </div>
           </td>
         </tr>
       ))}

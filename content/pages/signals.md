@@ -1,5 +1,5 @@
 ---
-order: 11
+order: 12
 navLabel: Signal catalog
 eyebrow: Signal catalog
 heading: Every signal we track, and how to read it

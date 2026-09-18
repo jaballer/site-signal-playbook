@@ -1,5 +1,5 @@
 ---
-order: 10
+order: 11
 navLabel: Deliverables
 eyebrow: Deliverables
 heading: What every deliverable contains

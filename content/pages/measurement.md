@@ -1,5 +1,5 @@
 ---
-order: 12
+order: 13
 navLabel: Measurement
 eyebrow: Measurement foundations
 heading: The setup every engagement needs before month one
@@ -17,22 +17,22 @@ blocks:
       - - "**AI assistants channel**"
         - Separates AI referrals from Referral and Direct so they can be reported and compared
         - In GA4 Admin → Channel groups, copy the default group and add an "AI assistants" channel matching known assistant sources (chatgpt, perplexity, gemini, copilot, claude and others), placed above Referral. Channel groups apply to past data too.
-      - - "**Key events**"
+      - - "**[Key events](term:key-event)**"
         - Lead counts and conversion rates only mean something if only real conversions count
         - Mark form submissions and demo bookings as key events; keep clicks and scrolls as ordinary events. Marking isn't retroactive, so do it in week one.
       - - "**Brand-term list**"
         - Splits branded from non-branded search, the core of honest SEO reporting
-        - A regex of brand names, product names and common misspellings, reviewed quarterly and versioned in the engagement record
-      - - "**Content groups by buyer stage**"
+        - A regex of brand names, product names and common misspellings, reviewed quarterly and versioned in the engagement record. It's what splits [branded from non-branded](term:branded-search) search.
+      - - "**Content groups by [buyer stage](term:buyer-stage)**"
         - Lets traffic and conversion be reported by problem, solution, comparison, brand and customer stage
         - Set the content group from the CMS taxonomy or URL rules in the tag manager, using the topic coverage map
-      - - "**Keyword set and prompt set**"
-        - The fixed denominators for share of voice and citation share
+      - - "**[Keyword set](term:keyword-set) and [prompt set](term:prompt-set)**"
+        - The [fixed denominators](principle:freeze-the-denominators) for share of voice and citation share
         - Grouped by topic and buyer stage, signed off by the client, changed only as dated revisions
       - - "**Change log**"
-        - Lets every movement be explained and every win credited
+        - Lets [every movement be explained and every win credited](principle:ship-in-sequence-and-log-everything)
         - One shared log of releases, content shipped, tag publishes and Google updates, mirrored as GA4 annotations
-      - - "**CRM original source and landing page**"
+      - - "**[CRM](term:crm) original source and landing page**"
         - The only way to connect search to pipeline
         - Hidden form fields populated with first-touch source and landing page; confirm they're filled on recent leads
       - - "**Internal traffic exclusion**"

@@ -1,4 +1,5 @@
 ---
+import { effortLabel, firstSignalLabel } from "@site-signal/playbook";
 import PlayBody from "../../components/PlayBody.astro";
 import Base from "../../layouts/Base.astro";
 import { hrefFor } from "../../lib/links.ts";
@@ -17,7 +18,7 @@ const play = getEntry("plays", Astro.params.id as string);
   </a>
   <header class="page-head">
     <div class="eyebrow">
-      Play · Effort {play.effort} · First signal: {play.firstSignal}
+      Play · Effort {effortLabel[play.effort]} · First signal: {firstSignalLabel[play.firstSignal]}
     </div>
     <h1 class="title">{play.title}</h1>
   </header>

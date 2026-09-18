@@ -2,7 +2,10 @@ import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mc
 import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 import {
   collections,
+  Effort,
+  FirstSignal,
   linkTypes,
+  Owner,
   playbookSchema,
   titleOf,
   type AnyEntry,
@@ -21,9 +24,11 @@ const COLLECTION_GUIDE: Record<CollectionName, string> = {
   questions:
     "Leader questions: step-by-step procedures for what executives ask, with a script for the report",
   plays:
-    "Standard plays: when to run each, the steps, the signals it moves, and time to first signal",
-  audit: "Audit pillars, each with checks, how to check, and what a fail looks like",
-  diagnostics: "Diagnostic flows: ordered checks for when a number moves the wrong way",
+    "Standard plays: when to run each, the steps, who leads it, the signals it moves, effort and time to first signal. Every audit check and diagnostic names the plays that fix it",
+  audit:
+    "Audit pillars, each with checks, how to check, what a fail looks like, and the plays that fix it",
+  diagnostics:
+    "Diagnostic flows: ordered checks for when a number moves the wrong way, ending in the plays to run",
   signals:
     "Signal catalog: every metric tracked, with definition, source, capture and reading guidance",
   phases: "Engagement phases from audit to renewal, with checklists and deliverables",
@@ -159,18 +164,27 @@ export function createPlaybookServer({
     {
       title: "List a collection",
       description:
-        "Lists every entry in one collection with its id, title and a one-line summary. For signals, optionally filter by scorecard layer or engagement phase.",
+        "Lists every entry in one collection with its id, title and a one-line summary. For signals, optionally filter by scorecard layer or engagement phase. For plays, filter by effort, time to first signal or the team that leads it.",
       inputSchema: {
         collection: z.enum(COLLECTION_NAMES),
         layer: z.string().optional().describe('Signals only: a layer id, e.g. "ai-visibility"'),
         phase: z.string().optional().describe('Signals only: a phase id, e.g. "audit"'),
+        effort: Effort.optional().describe("Plays only: S, M or L"),
+        firstSignal: FirstSignal.optional().describe("Plays only: how soon the first signal shows"),
+        owner: Owner.optional().describe("Plays only: the team that leads the play"),
       },
       annotations: READ_ONLY,
     },
-    ({ collection, layer, phase }) =>
+    ({ collection, layer, phase, effort, firstSignal, owner }) =>
       withPlaybook((playbook) => {
         if ((layer || phase) && collection !== "signals") {
           return text("The layer and phase filters only apply to the signals collection.", true);
+        }
+        if ((effort || firstSignal || owner) && collection !== "plays") {
+          return text(
+            "The effort, firstSignal and owner filters only apply to the plays collection.",
+            true,
+          );
         }
         if (layer && !findEntry(playbook, "layers", layer)) {
           return text(
@@ -190,7 +204,21 @@ export function createPlaybookServer({
             (s) => (!layer || s.layer === layer) && (!phase || s.phases.includes(phase)),
           );
         }
-        const filters = [layer && `layer ${layer}`, phase && `phase ${phase}`]
+        if (collection === "plays") {
+          entries = playbook.plays.filter(
+            (p) =>
+              (!effort || p.effort === effort) &&
+              (!firstSignal || p.firstSignal === firstSignal) &&
+              (!owner || p.owner === owner),
+          );
+        }
+        const filters = [
+          layer && `layer ${layer}`,
+          phase && `phase ${phase}`,
+          effort && `effort ${effort}`,
+          firstSignal && `first signal ${firstSignal}`,
+          owner && `led by ${owner}`,
+        ]
           .filter(Boolean)
           .join(", ");
         const lines = entries.map(
@@ -507,9 +535,14 @@ export function renderAuditWorksheet(
       "",
       md(a.question),
       "",
-      "| Check | How to check | Fail looks like | Score | Evidence |",
-      "| --- | --- | --- | --- | --- |",
-      ...a.checks.map((c) => `| ${escape(c.check)} | ${escape(c.how)} | ${escape(c.fail)} |  |  |`),
+      "| Check | How to check | Fail looks like | Score | Evidence | Fixed by |",
+      "| --- | --- | --- | --- | --- | --- |",
+      ...a.checks.map(
+        (c) =>
+          `| ${escape(c.check)} | ${escape(c.how)} | ${escape(c.fail)} |  |  | ${c.plays
+            .map((id) => escape(titleOf("plays", findEntry(playbook, "plays", id) as AnyEntry)))
+            .join(", ")} |`,
+      ),
     ].join("\n"),
   );
   const body = [

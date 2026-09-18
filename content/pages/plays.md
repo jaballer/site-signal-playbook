@@ -3,12 +3,12 @@ order: 7
 navLabel: Plays
 eyebrow: Play library
 heading: The standard plays, and how to choose between them
-lede: Every roadmap is built from the same plays. Each lists when to run it, what we do, which signals it should move, and how long before the first signal shows. Candidates are ranked with the model below, so the roadmap is argued in revenue rather than best practice.
+lede: Every roadmap is built from the same plays. Each lists when to run it, what we do, who leads it, which signals it should move, and how long before the first signal shows. Candidates are ranked with the model below, so the [roadmap is argued in revenue](principle:argue-the-roadmap-in-revenue) rather than best practice.
 blocks:
   - type: thesis
     mark: ×
     title: Priority = revenue at stake × confidence ÷ effort.
-    text: Blockers to crawling, indexing or honest measurement go first regardless of score, because they cap the return on everything else.
+    text: "[Blockers to crawling, indexing or honest measurement go first](principle:unblock-before-you-build) regardless of score, because they cap the return on everything else. A play that lists others under *ship these first* is capped until they do."
   - type: panels
     items:
       - eyebrow: Revenue at stake

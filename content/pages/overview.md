@@ -14,11 +14,11 @@ blocks:
         title: The four questions every SEO buyer asks
         text: Are we visible where buyers look? Are we beating competitors there? Is it producing pipeline? What should we do next, and what will it return?
       - eyebrow: What's in it
-        title: Thirteen chapters
-        text: Leader questions with step-by-step answers, how we sell, kickoff and onboarding, the engagement model and offers, a six-pillar audit, a play library, diagnostic flows, the reporting model, deliverable outlines, a signal catalog, measurement foundations, the principles behind all of it, and a glossary.
+        title: Fourteen chapters
+        text: Leader questions with step-by-step answers, how we sell, kickoff and onboarding, the engagement model and offers, a six-pillar audit, a play library, diagnostic flows, the reporting model, how accounts are renewed and when they shouldn't be, deliverable outlines, a signal catalog, measurement foundations, the principles behind all of it, and a glossary.
   - type: strip
     heading: The value chain
-    intro: Every engagement works the same chain, in order. When a number moves, it's diagnosed in the link where it moved, not blamed on "SEO".
+    intro: Every engagement works the same chain, in order. When a number moves, it's [diagnosed in the link where it moved](principle:visibility-then-traffic-then-pipeline), not blamed on "SEO".
     items:
       - title: Foundations
         text: Can Google and AI crawlers reach, render and understand the site?
@@ -33,11 +33,11 @@ blocks:
     footnote: "**Integrity** sits under all five: can every number in the report be trusted this month?"
   - type: thesis
     mark: “
-    title: Clicks are no longer a complete measure of search performance.
-    text: When an AI answer resolves a question on the results page, the brand it cites still wins the buyer's attention, and the brand it leaves out loses it without a trace in analytics. A program that measures only clicks will under-report its wins and miss its losses.
+    title: "[Clicks are no longer a complete measure](principle:clicks-are-no-longer-a-complete-measure) of search performance."
+    text: When an [AI answer](term:ai-overviews) resolves a question on the results page, the brand it cites still wins the buyer's attention, and the brand it leaves out loses it without a trace in analytics. A program that measures only clicks will under-report its wins and miss its losses.
   - type: scorecard
     heading: The scorecard
-    intro: Seven layers, each with one north-star metric. Leading indicators show whether the work is landing before the north star moves; health checks catch problems before they reach the report.
+    intro: Seven layers, each with one [north-star metric](term:north-star). Leading indicators show whether the work is landing before the north star moves; health checks catch problems before they reach the report.
   - type: ledger
     heading: Commodity SEO or a revenue-grade program
     intro: Clients have usually bought the first kind before. The second is what this playbook exists to deliver, and the difference is visible in the first month.
@@ -57,11 +57,11 @@ blocks:
         - Reports the whole chain from visibility to pipeline, with AI answers next to results pages
         - Maps every priority topic to a page, a buyer stage and a competitor benchmark
         - Puts content where demand exists and competitors are beatable
-        - Measures citation share on a fixed prompt set, monthly, against competitors
+        - Measures [citation share](term:citation-share) on a fixed [prompt set](term:prompt-set), monthly, against competitors
         - Ties landing pages to leads and opportunities
         - Ships in sequenced sprints, with the expected impact written down first
         - Starts every report with an integrity check
   - type: markdown
     heading: How to use this
-    text: "**New prospect:** follow [Selling](page:selling) from the first call to a signed offer. That's usually the audit, run from [Audit](page:audit); Selling says when to lead with migration protection or a program instead. [Leader questions](page:questions) frame the conversation. **Won the deal:** start with [Onboarding](page:onboarding), then work through the [Engagement model](page:engagement). **Choosing what to do:** rank candidates with [Plays](page:plays). **A number moved unexpectedly:** open [Diagnostics](page:diagnostics) before anyone opens a ticket. **Month end:** [Reporting](page:reporting) is the shape of the deliverable. **Building any other deliverable:** start from its outline in [Deliverables](page:deliverables). The [Signal catalog](page:signals), [Measurement](page:measurement) and [Glossary](page:glossary) are the reference underneath all of it."
+    text: "**New prospect:** follow [Selling](page:selling) from the first call to a signed offer. That's usually the audit, run from [Audit](page:audit); Selling says when to lead with migration protection or a program instead. [Leader questions](page:questions) frame the conversation. **Won the deal:** start with [Onboarding](page:onboarding), then work through the [Engagement model](page:engagement). **Choosing what to do:** rank candidates with [Plays](page:plays). **A number moved unexpectedly:** open [Diagnostics](page:diagnostics) before anyone opens a ticket. **Month end:** [Reporting](page:reporting) is the shape of the deliverable. **Quarter end, or an account going quiet:** [Renewal](page:renewal). **Building any other deliverable:** start from its outline in [Deliverables](page:deliverables). The [Signal catalog](page:signals), [Measurement](page:measurement) and [Glossary](page:glossary) are the reference underneath all of it."
 ---

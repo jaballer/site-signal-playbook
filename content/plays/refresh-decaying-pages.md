@@ -1,9 +1,11 @@
 ---
-order: 3
+order: 5
 title: Refresh decaying pages
 when: Pages that used to earn clicks are declining but still match what searchers want.
-effort: S per page
-firstSignal: 2–8 weeks
+effort: S
+firstSignal: weeks
+owner: content
+timing: Two to eight weeks. Effort is S per page, so scale it by how many pages are decaying.
 steps:
   - Update facts, examples, data and dates
   - Put the answer first, and use question-style headings

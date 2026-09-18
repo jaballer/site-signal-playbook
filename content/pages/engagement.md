@@ -27,19 +27,19 @@ blocks:
         - Fund the 90-day program, change its scope, or stop with the findings. The budget holder decides, by a date agreed in the presentation.
       - - "**Baseline** · program weeks 1–2"
         - A baseline scorecard, numbers they can trust, and a record of how measurement is set up
-        - Sign off the keyword and prompt sets, and agree the attribution rule in writing
+        - Sign off the [keyword](term:keyword-set) and [prompt](term:prompt-set) sets, and agree the [attribution](term:attribution) rule in writing
       - - "**Plan** · program weeks 3–4"
-        - The 90-day roadmap, with target ranges and owners on both sides
+        - The 90-day roadmap, with [target ranges written before work starts](principle:write-the-expected-impact-first) and owners on both sides
         - Approve the roadmap and targets, and commit the approvals, expert time and developer releases it depends on
       - - "**Execute** · from program month 2"
-        - Work shipped in sprints, a note for each sprint, and a log of every change
+        - Work [shipped in sprints, with a note for each and a log of every change](principle:ship-in-sequence-and-log-everything)
         - Approvals, expert input and releases by the dates in each sprint note. Work that's waiting is held, not shipped.
       - - "**Report** · monthly"
         - The monthly report, with a 20-minute walkthrough
         - The one decision each report asks for, usually next month's priorities, recorded in the decisions log
       - - "**Review & renew** · each quarter, from the end of the program"
         - "The quarterly review, presented live: results against targets, competitive position, the re-baselined opportunity, and next quarter's roadmap"
-        - Renew, expand or correct the scope, with the revenue case for each proposed change
+        - Renew, expand or correct the scope, with the revenue case for each proposed change. How that conversation is run is in [Renewal](page:renewal).
     after: "Migration protection, also part of consulting, runs on its own clock, set by the launch date. Its deliverables are the migration pack in [Deliverables](page:deliverables)."
   - type: strip
     heading: When results show
@@ -53,7 +53,7 @@ blocks:
         text: Weeks.
       - title: New content and off-site work
         text: Months.
-    footnote: "**The first quarter** is judged on leading indicators, such as index coverage, non-branded impressions and mention share, not on the [scorecard's](page:overview) north-star metrics like search-sourced pipeline."
+    footnote: "**The first quarter** is judged on leading indicators, such as index coverage, non-branded impressions and mention share, not on the [scorecard's](page:overview) [north-star metrics](term:north-star) like search-sourced pipeline."
   - type: table
     heading: Who does what
     intro: Results depend on both sides. When work waits on an approval, expert input or a developer release, it's held rather than shipped, and shows as held in the roadmap and the sprint notes.

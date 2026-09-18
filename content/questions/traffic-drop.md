@@ -25,5 +25,12 @@ signals:
   - change-log
 diagnostics:
   - organic-traffic-drop
+  - ai-overview-ctr-drop
   - deindexed-pages
+  - core-update-hit
+  - post-migration-drop
+plays:
+  - unblock-crawling
+  - refresh-decaying-pages
+  - answer-first-pages
 ---
