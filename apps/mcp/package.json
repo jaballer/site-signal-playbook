@@ -10,7 +10,7 @@
     "check": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@modelcontextprotocol/sdk": "^1.32.0",
     "@site-signal/playbook": "*",
     "zod": "^4.6.3"
   },
